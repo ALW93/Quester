@@ -1,8 +1,6 @@
 from .db import db, c
 
-class Habit_Category(db.Model):
-    __tablename__ = "habit_categories"
-
-    id = c(db.Integer, primary_key = True)
-    habit_id = c(db.Integer, db.ForeignKey('habit.id'), nullable=False)
-    category_id = c(db.Integer, db.ForeignKey('category.id'), nullable=False)
+habit_categories = db.Table('habit_categories',
+                           c('habit_id', db.Integer, db.ForeignKey('tasks.id'), primary_key=True),
+                           c('category_id', db.Integer, db.ForeignKey('categories.id'), primary_key=True)
+                           )

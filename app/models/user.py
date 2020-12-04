@@ -18,6 +18,11 @@ class User(db.Model, UserMixin):
   top = c(db.String(50), nullable = True)
   bottom = c(db.String(50), nullable = True)
   stats = db.relationship('Stat', backref="user", lazy=True)
+  categories = db.relationship('Category', backref="user", lazy=True)
+  checks = db.relationship('Check', backref="user", lazy=True)
+  groups = db.relationship('Group', backref="user", lazy=True)
+  habits = db.relationship('Habit', backref="user", lazy=True)
+  tasks = db.relationship('Task', backref="user", lazy=True)
 
   @property
   def password(self):
