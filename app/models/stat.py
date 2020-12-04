@@ -4,7 +4,7 @@ class Stat(db.Model):
   __tablename__ = "stats"
 
   id = c(db.Integer, primary_key = True)
-  user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  avatar_id = c(db.Integer, db.ForeignKey('avatars.id'), nullable=False)
   name = c(db.String(50), nullable = False)
   custom = c(db.Boolean, nullable = False)
   icon = c(db.String(50), nullable = False)

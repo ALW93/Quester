@@ -7,14 +7,11 @@ def seed_users():
 
     userObjects = [
         User(username='Admin', email='admin@aa.io',
-             password='password', currency=1000, exp=100,
-             hair="pink", face="type-1", body="type-1"),
+             password='password', currency=1000),
         User(username='Berber', email='berber@catmail.com',
-             password='password', currency=1000, exp=100,
-             hair="brown", face="type-2", body="type-2"),
+             password='password', currency=1000),
         User(username='Wahlu', email='wahlu@canada.net',
-             password='password', currency=1000, exp=100,
-             hair="black", face="type-3", body="type-3")]
+             password='password', currency=1000)]
 
     db.session.bulk_save_objects(userObjects)
     db.session.commit()
