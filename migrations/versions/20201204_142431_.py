@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: fca45f45081f
-Revises: 
+Revises:
 Create Date: 2020-12-04 14:24:31.814402
 
 """

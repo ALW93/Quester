@@ -1,4 +1,4 @@
-from app.models import db, Avatar, Stat
+from app.models import db, Avatar, Stat, Category
 
 
 # Adds a demo user, you can add other users here if you want
@@ -24,8 +24,19 @@ def seed_avatars():
         Stat(avatar_id=3, name="Intelligence", custom=False, icon="/int.png", points=23)
     ]
 
-    db.session.bulk_save_objects(statObjects)
+    categoryObjects = [
+        Category(user_id=1, stat_id=1, name="Workout"),
+        Category(user_id=1, stat_id=2, name="Painting"),
+        Category(user_id=1, stat_id=2, name="Socializing"),
+        Category(user_id=1, stat_id=3, name="Coding"),
+        Category(user_id=2, stat_id=4, name="Running"),
+        Category(user_id=3, stat_id=7, name="Biking"),
+        Category(user_id=3, stat_id=9, name="IOS")
+     ]
+
     db.session.bulk_save_objects(avatarObjects)
+    db.session.bulk_save_objects(statObjects)
+    db.session.bulk_save_objects(categoryObjects)
     db.session.commit()
 
 
