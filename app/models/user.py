@@ -8,24 +8,24 @@ friendship = db.Table(
                                 db.ForeignKey('users.id'),
                                 primary_key=True),
                       db.Column('friend_b_id', db.Integer,
-                                ForeignKey('users.id'),
+                                db.ForeignKey('users.id'),
                                 primary_key=True)
                       )
 
-class Message(db.Model):
-  __tablename__ = "messages"
 
-  id = c(db.Integer, primary_key = True)
-  user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-  sender_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-  type = c(db.String(50), nullable = False)
-  message = c(db.String(255), nullable = False)
-
-  def to_dict(self):
-    return {
-      "id": self.id,
-      "message": self.message
-    }
+message = db.Table(
+                   'messages',
+                   db.Column('receiver_id', db.Integer,
+                             db.ForeignKey('users.id'),
+                             primary_key=True),
+                   db.Column('sender_id', db.Integer,
+                             db.ForeignKey('users.id'),
+                             primary_key=True),
+                   db.Column('type', db.String(50),
+                             nullable=False),
+                   db.Column('message', db.String(255),
+                             nullable=False)
+                   )
 
 
 class User(db.Model, UserMixin):
@@ -41,10 +41,12 @@ class User(db.Model, UserMixin):
     groups = db.relationship('Group', backref="user", lazy=True)
     habits = db.relationship('Habit', backref="user", lazy=True)
     tasks = db.relationship('Task', backref="user", lazy=True)
-    messages = db.relationship('Message', backref="user", lazy=True)
+    messages = db.relationship("User", secondary=message,
+                               primaryjoin=id == message.c.receiver_id,
+                               secondaryjoin=id == message.c.sender_id)
     friends = db.relationship("User", secondary=friendship,
-                           primaryjoin=id==friendship.c.friend_a_id,
-                           secondaryjoin=id==friendship.c.friend_b_id)
+                              primaryjoin=id == friendship.c.friend_a_id,
+                              secondaryjoin=id == friendship.c.friend_b_id)
 
     @property
     def password(self):
