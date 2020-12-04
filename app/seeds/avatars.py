@@ -11,7 +11,7 @@ def seed_avatars():
         Avatar(user_id=2, name='sirBerber', exp=100,
                hair="brown", face="type-2", body="type-2"),
         Avatar(user_id=3, name='momatomimumu', exp=100,
-               hair="black", face="type-3", body="type-3"),]
+               hair="black", face="type-3", body="type-3")]
 
     db.session.bulk_save_objects(avatarObjects)
     db.session.commit()

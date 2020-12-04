@@ -1,5 +1,6 @@
 from .db import db
 from .user import User
+from .avatar import Avatar
 from .message import Message
 from .friend import friends
 from .stat import Stat
