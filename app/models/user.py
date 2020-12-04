@@ -33,9 +33,7 @@ class User(db.Model, UserMixin):
     groups = db.relationship('Group', backref="user", lazy=True)
     habits = db.relationship('Habit', backref="user", lazy=True)
     tasks = db.relationship('Task', backref="user", lazy=True)
-    messages = db.relationship("User", secondary=message,
-                               primaryjoin=id == message.c.receiver_id,
-                               secondaryjoin=id == message.c.sender_id)
+    messages = db.relationship("Message", backref="user", lazy=True)
     friends = db.relationship("Friend", backref="user", lazy=True)
 
     @property
