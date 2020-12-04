@@ -1,8 +1,6 @@
 from .db import db
-from .user import User
+from .user import User, Message
 from .avatar import Avatar
-from .message import Message
-from .friend import friends
 from .stat import Stat
 from .category import Category
 from .habit import Habit
