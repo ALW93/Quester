@@ -4,8 +4,8 @@ class Message(db.Model):
   __tablename__ = "messages"
 
   id = c(db.Integer, primary_key = True)
-  user_id = c(db.Integer, db.ForeignKey('user.id'), nullable=False)
-  sender_id = c(db.Integer, db.ForeignKey('user.id'), nullable=False)
+  user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  sender_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
   type = c(db.String(50), nullable = False)
   message = c(db.String(255), nullable = False)
 

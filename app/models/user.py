@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
   groups = db.relationship('Group', backref="user", lazy=True)
   habits = db.relationship('Habit', backref="user", lazy=True)
   tasks = db.relationship('Task', backref="user", lazy=True)
+  friends = db.relationship('Friend', secondary="friends", lazy='subquery', backref=db.backref("user", lazy=True))
 
   @property
   def password(self):
