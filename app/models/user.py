@@ -15,6 +15,9 @@ friendship = db.Table(
 
 message = db.Table(
                    'messages',
+                   db.Column('id', db.Integer,
+                             db.ForeignKey('users.id'),
+                             primary_key=True),
                    db.Column('receiver_id', db.Integer,
                              db.ForeignKey('users.id'),
                              primary_key=True),
