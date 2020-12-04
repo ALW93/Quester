@@ -2,35 +2,22 @@ from .db import db, c
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-friendship = db.Table(
-                      'friendships',
-                      db.Column('friend_a_id', db.Integer,
-                                db.ForeignKey('users.id'),
-                                primary_key=True),
-                      db.Column('friend_b_id', db.Integer,
-                                db.ForeignKey('users.id'),
-                                primary_key=True),
-                      c("created_at", db.Date, nullable=False)
-                      )
 
+class Friend(db.Model):
+    __tablename__ = "friends"
+    id = c(db.Integer, primary_key=True)
+    friend_a_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    friend_b_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = c(db.Date, nullable=False)
 
-message = db.Table(
-                   'messages',
-                   db.Column('id', db.Integer,
-                             db.ForeignKey('users.id'),
-                             primary_key=True),
-                   db.Column('receiver_id', db.Integer,
-                             db.ForeignKey('users.id')),
-                   db.Column('sender_id', db.Integer,
-                             db.ForeignKey('users.id'),
-                             primary_key=True),
-                   db.Column('type', db.String(50),
-                             nullable=False),
-                   db.Column('message', db.String(255),
-                             nullable=False),
-                   c("created_at", db.Date, nullable=False)
-                   )
-
+class Message(db.Model):
+    __tablename__ = "messages"
+    id = c(db.Integer, primary_key=True)
+    receiver_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    sender_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    type = c(db.String(50), nullable=False)
+    message= c(db.String(255), nullable=False)
+    created_at = c(db.Date, nullable=False)
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -49,9 +36,7 @@ class User(db.Model, UserMixin):
     messages = db.relationship("User", secondary=message,
                                primaryjoin=id == message.c.receiver_id,
                                secondaryjoin=id == message.c.sender_id)
-    friends = db.relationship("User", secondary=friendship,
-                              primaryjoin=id == friendship.c.friend_a_id,
-                              secondaryjoin=id == friendship.c.friend_b_id)
+    friends = db.relationship("Friend", backref="user", lazy=True)
 
     @property
     def password(self):

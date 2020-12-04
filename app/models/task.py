@@ -12,3 +12,11 @@ class Task(db.Model):
     deadline = c(db.Date, nullable=True)
     frequency = c(db.String(255), nullable=False)
     status = c(db.String(50), nullable=False)
+
+task_categories = db.Table('task_categories',
+                           c('task_id', db.Integer, db.ForeignKey('tasks.id'), primary_key=True),
+                           c('cateory_id', db.Integer, db.ForeignKey('categories.id'), primary_key=True)
+                          )
+
+class Task_Category(db.Model):
+    __tablename__ = "task_categories"

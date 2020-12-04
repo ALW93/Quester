@@ -10,3 +10,9 @@ class Habit(db.Model):
     name = c(db.String(50), nullable=False, unique=True)
     frequency = c(db.String(50), nullable=False)
     checks = db.relationship('Check', backref="habits", lazy=True)
+
+
+habit_categories = db.Table('habit_categories',
+                          c('habit_id', db.Integer, db.ForeignKey('tasks.id'), primary_key=True),
+                          c('category_id', db.Integer, db.ForeignKey('categories.id'), primary_key=True)
+                          )
