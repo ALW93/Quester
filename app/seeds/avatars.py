@@ -45,5 +45,5 @@ def seed_avatars():
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
 def undo_avatars():
-    db.session.execute('TRUNCATE users;')
+    db.session.execute('TRUNCATE avatars;')
     db.session.commit()

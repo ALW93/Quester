@@ -9,7 +9,8 @@ friendship = db.Table(
                                 primary_key=True),
                       db.Column('friend_b_id', db.Integer,
                                 db.ForeignKey('users.id'),
-                                primary_key=True)
+                                primary_key=True),
+                      c("created_at", db.Date, nullable=False)
                       )
 
 
@@ -26,7 +27,8 @@ message = db.Table(
                    db.Column('type', db.String(50),
                              nullable=False),
                    db.Column('message', db.String(255),
-                             nullable=False)
+                             nullable=False),
+                   c("created_at", db.Date, nullable=False)
                    )
 
 
@@ -34,6 +36,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = c(db.Integer, primary_key=True)
+    created_at = c(db.Date, nullable=False)
     username = c(db.String(40), nullable=False, unique=True)
     email = c(db.String(255), nullable=False, unique=True)
     hashed_password = c(db.String(255), nullable=False)
