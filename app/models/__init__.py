@@ -1,6 +1,6 @@
 from datetime import date
 from .db import db
-from .user import User, Friend, Message
+from .user import User
 from .avatar import Avatar
 from .stat import Stat
 from .category import Category

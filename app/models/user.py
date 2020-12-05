@@ -28,6 +28,7 @@ friends = db.Table('friends', c("id", db.Integer, primary_key=True),
                    c("friend_a_id", db.Integer, db.ForeignKey("users.id")),
                    c("friend_b_id", db.Integer, db.ForeignKey("users.id")))
 
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -44,8 +45,8 @@ class User(db.Model, UserMixin):
     habits = db.relationship('Habit', backref="user", lazy=True)
     checks = db.relationship('Check', backref="user", lazy=True)
 
-    friends = db.relationship('User', secondary=friends, primaryjoin=id == friends.c.friend_a_id, secondaryjoin=id == friends.c.friend_b_id, backref=backref('friends'))
-    messages = db.relationship('User', secondary=messages, primaryjoin=id == messages.c.receiver_id, secondaryjoin=id == messages.c.sender_id, backref=backref('messages'))
+    friends = db.relationship('User', secondary=friends, primaryjoin=id == friends.c.friend_a_id, secondaryjoin=id == friends.c.friend_b_id)
+    messages = db.relationship('User', secondary=messages, primaryjoin=id == messages.c.receiver_id, secondaryjoin=id == messages.c.sender_id)
 
     @property
     def password(self):

@@ -20,4 +20,4 @@ class Task_Category(db.Model):
     __tablename__ = "task_categories"
     id = c(db.Integer, primary_key=True)
     task_id = c(db.Integer, db.ForeignKey('tasks.id'), nullable=False)
-    category_id = c(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    category_id = c(db.Integer, db.ForeignKey('categories.id'), nullable=False)
