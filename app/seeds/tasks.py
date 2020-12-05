@@ -1,5 +1,6 @@
 from app.models import db, Task, Group, Task_Category, time
 
+
 def seed_tasks():
     groupObjects = [
       Group(user_id=1, name="Sunday Afternoon"),
@@ -8,13 +9,13 @@ def seed_tasks():
     ]
 
     taskObjects = [
-      Task(user_id=1, group_id=1, name="Make Tea",
+      Task(user_id=1, created_at=time, group_id=1, name="Make Tea",
            description="Chamomile in the upper cupboard",
            deadline=time, frequency="Once", status="pending"),
-      Task(user_id=1, name="Run 5 Miles", frequency="Daily", status="complete"),
-      Task(user_id=2, name="Pander for Snack", description="Grandma gives the most snacks!",
+      Task(user_id=1, created_at=time, name="Run 5 Miles", frequency="Daily", status="complete"),
+      Task(user_id=2, created_at=time, group_id=2, name="Pander for Snack", description="Grandma gives the most snacks!",
            frequency="Daily", status="pending"),
-      Task(user_id=3, name="Bike 15 Miles", frequency="Weekly", status="expired"),
+      Task(user_id=3, created_at=time, group_id=3, name="Bike 15 Miles", frequency="Weekly", status="expired"),
     ]
 
     task_categoriesObjects = [
