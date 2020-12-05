@@ -1,4 +1,4 @@
-from app.models import db, friendship, message
+from app.models import db, friends, messages
 
 def seed_social():
   pass
