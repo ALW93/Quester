@@ -9,6 +9,7 @@ class Stat(db.Model):
   custom = c(db.Boolean, nullable = False)
   icon = c(db.String(50), nullable = False)
   points = c(db.String(50), nullable = False)
+
   categories = db.relationship('Category', backref="stat", lazy=True)
 
   def to_dict(self):

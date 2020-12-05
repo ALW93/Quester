@@ -9,11 +9,12 @@ class Habit(db.Model):
     name = c(db.String(50), nullable=False, unique=True)
     frequency = c(db.String(50), nullable=False)
     checks = db.relationship('Check', backref="habit", lazy=True)
-    categories = db.relationship('Habit_Category', backref="habit", lazy=True, primaryjoin=id == habit_id)
+
+    categories = db.relationship('Habit_Category', backref="habit", lazy=True)
 
 
 class Habit_Category(db.Model):
     __tablename__ = "habit_categories"
     id = c(db.Integer, primary_key=True)
-    habit_id = c(db.Integer, db.ForeignKey('habits.id'), primary_key=True)
-    category_id = c(db.Integer, db.ForeignKey('category.id'), primary_key=True)
+    habit_id = c(db.Integer, db.ForeignKey('habits.id'), nullable=False)
+    category_id = c(db.Integer, db.ForeignKey('category.id'), nullable=False)

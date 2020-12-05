@@ -8,5 +8,6 @@ class Category(db.Model):
     user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
     stat_id = c(db.Integer, db.ForeignKey('stats.id'), nullable=True)
     name = c(db.String(50), nullable = False)
-    habits = db.relationship('Habit_Category', backref="category", lazy=True, primaryjoin=id == category_id)
+
     tasks = db.relationship('Task_Category', backref="category", lazy=True)
+    habits = db.relationship('Habit_Category', backref="category", lazy=True)
