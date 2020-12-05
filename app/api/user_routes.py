@@ -17,3 +17,9 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/avatar')
+@login_required
+def avatar(id):
+    avatar = Avatar.query.filter(Avatar.user_id == id).all()

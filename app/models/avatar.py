@@ -15,3 +15,8 @@ class Avatar(db.Model):
     top = c(db.String(50), nullable=True)
     bottom = c(db.String(50), nullable=True)
     stats = db.relationship('Stat', backref="user", lazy=True)
+
+    def to_dict():
+        return {
+            pass
+        }
