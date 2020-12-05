@@ -17,12 +17,12 @@ from flask_login import UserMixin
 #     receiver_id = c(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 #     sender_id = c(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
-# messages = db.Table('messages', c("id", db.Integer, primary_key=True),
-#                     c("created_at", db.Date, nullable=False),
-#                     c("type", db.String(50), nullable=False),
-#                     c("message", db.String(255), nullable=False),
-#                     c("receiver_id", db.Integer, db.ForeignKey("users.id")),
-#                     c("sender_id", db.Integer, db.ForeignKey("users.id")))
+messages = db.Table('messages', c("id", db.Integer, primary_key=True),
+                    c("created_at", db.Date, nullable=False),
+                    c("type", db.String(50), nullable=False),
+                    c("message", db.String(255), nullable=False),
+                    c("receiver_id", db.Integer, db.ForeignKey("users.id")),
+                    c("sender_id", db.Integer, db.ForeignKey("users.id")))
 
 friends = db.Table('friends', c("id", db.Integer, primary_key=True),
                    c("friend_a_id", db.Integer, db.ForeignKey("users.id")),
@@ -45,9 +45,7 @@ class User(db.Model, UserMixin):
     checks = db.relationship('Check', backref="user", lazy=True)
 
     friends = db.relationship('User', secondary=friends, primaryjoin=id == friends.c.friend_a_id, secondaryjoin=id == friends.c.friend_b_id, backref=backref('friends'))
-
-    # message_to = db.relationship('Message', backref='to', foreign_keys=[Message.receiver_id], primaryjoin=id == Message.receiver_id)
-    # message_from = db.relationship('Message', backref='from', foreign_keys=[Message.sender_id], primaryjoin=id == Message.sender_id )
+    messages = db.relationship('User', secondary=messages, primaryjoin=id == messages.c.receiver_id, secondaryjoin=id == messages.c.sender_id, backref=backref('messages'))
 
     @property
     def password(self):
