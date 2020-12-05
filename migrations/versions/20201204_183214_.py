@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5c225a4f31c9
-Revises:
-Create Date: 2020-12-04 17:03:11.224383
+Revision ID: 9ae6843c7dd4
+Revises: 
+Create Date: 2020-12-04 18:32:14.229233
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5c225a4f31c9'
+revision = '9ae6843c7dd4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,13 +43,14 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('friendships',
+    op.create_table('friends',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('friend_a_id', sa.Integer(), nullable=False),
     sa.Column('friend_b_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.Date(), nullable=False),
     sa.ForeignKeyConstraint(['friend_a_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['friend_b_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('friend_a_id', 'friend_b_id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('groups',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -59,17 +60,43 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
+    op.create_table('habits',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.Date(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('frequency', sa.String(length=50), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
+    )
     op.create_table('messages',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('receiver_id', sa.Integer(), nullable=True),
+    sa.Column('receiver_id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
     sa.Column('type', sa.String(length=50), nullable=False),
     sa.Column('message', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.Date(), nullable=False),
-    sa.ForeignKeyConstraint(['id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['receiver_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id', 'sender_id')
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('check',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('date', sa.Date(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('habit_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['habit_id'], ['habits.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('habit_categories',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('habit_id', sa.Integer(), nullable=False),
+    sa.Column('category_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['category_id'], ['habits.id'], ),
+    sa.ForeignKeyConstraint(['habit_id'], ['habits.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('stats',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -104,40 +131,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('habit_categories',
-    sa.Column('habit_id', sa.Integer(), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
-    sa.ForeignKeyConstraint(['habit_id'], ['tasks.id'], ),
-    sa.PrimaryKeyConstraint('habit_id', 'category_id')
-    )
-
-    op.create_table('habits',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.Date(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('frequency', sa.String(length=50), nullable=False),
-    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
-    )
     op.create_table('task_categories',
-    sa.Column('task_id', sa.Integer(), nullable=False),
-    sa.Column('cateory_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['cateory_id'], ['categories.id'], ),
-    sa.ForeignKeyConstraint(['task_id'], ['tasks.id'], ),
-    sa.PrimaryKeyConstraint('task_id', 'cateory_id')
-    )
-    op.create_table('check',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('date', sa.Date(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('habit_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['habit_id'], ['habits.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.Column('task_id', sa.Integer(), nullable=False),
+    sa.Column('category_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['category_id'], ['tasks.id'], ),
+    sa.ForeignKeyConstraint(['task_id'], ['tasks.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -145,16 +144,16 @@ def upgrade():
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_table('check')
     op.drop_table('task_categories')
-    op.drop_table('habits')
-    op.drop_table('habit_categories')
     op.drop_table('categories')
     op.drop_table('tasks')
     op.drop_table('stats')
+    op.drop_table('habit_categories')
+    op.drop_table('check')
     op.drop_table('messages')
+    op.drop_table('habits')
     op.drop_table('groups')
-    op.drop_table('friendships')
+    op.drop_table('friends')
     op.drop_table('avatars')
     op.drop_table('users')
     # ### end Alembic commands ###

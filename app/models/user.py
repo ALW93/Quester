@@ -5,19 +5,19 @@ from flask_login import UserMixin
 
 class Friend(db.Model):
     __tablename__ = "friends"
-    id = c(db.Integer, primary_key=True)
-    friend_a_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    friend_b_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    friend_a_id = c(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    friend_b_id = c(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     created_at = c(db.Date, nullable=False)
+
 
 class Message(db.Model):
     __tablename__ = "messages"
     id = c(db.Integer, primary_key=True)
-    receiver_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    sender_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    type = c(db.String(50), nullable=False)
-    message= c(db.String(255), nullable=False)
     created_at = c(db.Date, nullable=False)
+    type = c(db.String(50), nullable=False)
+    message = c(db.String(255), nullable=False)
+    receiver_id = c(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    sender_id = c(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -33,8 +33,12 @@ class User(db.Model, UserMixin):
     groups = db.relationship('Group', backref="user", lazy=True)
     habits = db.relationship('Habit', backref="user", lazy=True)
     tasks = db.relationship('Task', backref="user", lazy=True)
-    messages = db.relationship("Message", backref="user", lazy=True)
-    friends = db.relationship("Friend", backref="user", lazy=True)
+
+    friend_to = db.relationship('Friend', backref='to', foreign_keys=[Friend.friend_a_id],  primaryjoin=id == Friend.friend_a_id)
+    friend_from = db.relationship('Friend', backref='from', foreign_keys=[Friend.friend_b_id], primaryjoin=id == Friend.friend_b_id )
+
+    message_to = db.relationship('Message', backref='to', foreign_keys=[Message.receiver_id], primaryjoin=id == Message.receiver_id)
+    message_from = db.relationship('Message', backref='from', foreign_keys=[Message.sender_id], primaryjoin=id == Message.sender_id )
 
     @property
     def password(self):
