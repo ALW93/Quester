@@ -26,8 +26,8 @@ const LoginForm = () => {
     }
   };
 
-  const showSignup = () => {
-    dispatch(showForm(true));
+  const showSignup = (open) => {
+    dispatch(showForm(open));
   };
 
   const updateEmail = (e) => {
@@ -46,7 +46,7 @@ const LoginForm = () => {
     <>
       <h1>Quester</h1>
       {form ? (
-        <SignUpForm />
+        <SignUpForm showSignup={showSignup} />
       ) : (
         <>
           <form onSubmit={onLogin}>
@@ -80,7 +80,7 @@ const LoginForm = () => {
             </div>
           </form>
           <div>
-            Sign up Here <DoubleArrowIcon onClick={showSignup} />
+            Sign up Here <DoubleArrowIcon onClick={() => showSignup(true)} />
           </div>
         </>
       )}

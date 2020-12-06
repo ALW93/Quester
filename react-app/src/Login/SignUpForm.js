@@ -3,12 +3,15 @@ import { Redirect } from "react-router-dom";
 import { signUp } from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../store/actions/auth";
+import { TextField, Button } from "@material-ui/core";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
-const SignUpForm = () => {
+const SignUpForm = ({ showSignup }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const authorized = useSelector((state) => state.auth.auth);
 
@@ -18,7 +21,11 @@ const SignUpForm = () => {
       const user = await signUp(username, email, password);
       if (!user.errors) {
         dispatch(setAuth(true));
+      } else {
+        setErrors(user.errors);
       }
+    } else {
+      setErrors(["Passwords do not match!"]);
     }
   };
 
@@ -43,46 +50,56 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <>
+      <h2>Sign Up</h2>
+      {errors.map((error) => (
+        <div>{error}</div>
+      ))}
+      <form onSubmit={onSignUp}>
+        <div>
+          <TextField
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={updateUsername}
+            value={username}
+          />
+        </div>
+        <div>
+          <TextField
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={updateEmail}
+            value={email}
+          />
+        </div>
+        <div>
+          <TextField
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={updatePassword}
+            value={password}
+          />
+        </div>
+        <div>
+          <TextField
+            type="password"
+            name="repeat_password"
+            placeholder="Confirm Password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+          />
+        </div>
+        <Button type="submit">Sign Up</Button>
+      </form>
       <div>
-        <label>User Name</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
+        Return to Login
+        <DoubleArrowIcon onClick={() => showSignup(false)} />
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    </>
   );
 };
 
