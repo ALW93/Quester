@@ -26,8 +26,9 @@ def avatar(id):
     """
     Loads User's Avatar
     """
-    avatar = Avatar.query.filter(Avatar.user_id == id).all()
+    avatar = Avatar.query.get(id)
     return avatar.to_dict()
+
 
 @user_routes.route('/<int:id>/avatar', methods=['POST'])
 @login_required

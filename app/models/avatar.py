@@ -13,7 +13,7 @@ class Avatar(db.Model):
     top = c(db.String(50), nullable=True)
     bottom = c(db.String(50), nullable=True)
 
-    def to_dict():
+    def to_dict(self):
         return {
             "base": {
                 "hair": self.hair,

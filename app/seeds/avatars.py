@@ -10,15 +10,15 @@ def seed_avatars():
         Avatar(user_id=3, hair="black", face="type-3", body="type-3")]
 
     statObjects = [
-        Stat(user_id=1, name="Strength", custom=False, icon="/str.png", points=10),
-        Stat(user_id=1, name="Magic", custom=False, icon="/ap.png", points=20),
-        Stat(user_id=1, name="Intelligence", custom=False, icon="/int.png", points=23),
-        Stat(user_id=2, name="Strength", custom=False, icon="/str.png", points=30),
-        Stat(user_id=2, name="Magic", custom=False, icon="/ap.png", points=50),
-        Stat(user_id=2, name="Intelligence", custom=False, icon="/int.png", points=3),
-        Stat(user_id=3, name="Strength", custom=False, icon="/str.png", points=30),
-        Stat(user_id=3, name="Magic", custom=False, icon="/ap.png", points=15),
-        Stat(user_id=3, name="Intelligence", custom=False, icon="/int.png", points=23)
+        Stat(user_id=1, name="Strength", custom=False, icon="/str.png", points=10),  # noqa
+        Stat(user_id=1, name="Magic", custom=False, icon="/ap.png", points=20),  # noqa
+        Stat(user_id=1, name="Intelligence", custom=False, icon="/int.png", points=23),  # noqa
+        Stat(user_id=2, name="Strength", custom=False, icon="/str.png", points=30),  # noqa
+        Stat(user_id=2, name="Magic", custom=False, icon="/ap.png", points=50),  # noqa
+        Stat(user_id=2, name="Intelligence", custom=False, icon="/int.png", points=3),  # noqa
+        Stat(user_id=3, name="Strength", custom=False, icon="/str.png", points=30),  # noqa
+        Stat(user_id=3, name="Magic", custom=False, icon="/ap.png", points=15),  # noqa
+        Stat(user_id=3, name="Intelligence", custom=False, icon="/int.png", points=23)  # noqa
     ]
 
     categoryObjects = [

@@ -9,10 +9,25 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
-        raise ValidationError("User is already registered.")
+        raise ValidationError("Email is already registered.")
+
+
+def unique_name(form, field):
+    print("Checking if unique username", field.data)
+    name = field.data
+    username = User.query.filter(User.username == name).first()
+    if username:
+        raise ValidationError("Username already taken.")
+
+
+def check_pass(form, field):
+    print("Checking Password", field.data)
+    password = field.data
+    if len(password) < 6:
+        raise ValidationError("Password must be greater than 6 characters long.")
 
 
 class SignUpForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired()])
+    username = StringField('username', validators=[DataRequired(), unique_name])
     email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+    password = StringField('password', validators=[DataRequired(), check_pass])
