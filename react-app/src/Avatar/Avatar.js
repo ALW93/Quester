@@ -10,8 +10,8 @@ const Avatar = () => {
     <>
       <div>
         {info.username} lv.{parseLevel(info.exp)}
-        currency: {info.currency}
       </div>
+      <div>currency: {info.currency}</div>
       <div>
         <h2>Avatar</h2>
         Hair: {avatar.hair}, Face: {avatar.face}, Body: {avatar.body}
@@ -25,6 +25,7 @@ const Avatar = () => {
           {info.health}/100 HP
         </div>
       </div>
+      <div>{info.exp} exp</div>
     </>
   );
 };

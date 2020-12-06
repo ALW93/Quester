@@ -1,7 +1,7 @@
 import React from "react";
 import "./Homepage.css";
 import Avatar from "../Avatar/Avatar";
-
+import QuestLog from "../QuestLog/QuestLog";
 import LogoutButton from "../Shared/LogoutButton";
 
 const Homepage = () => {
@@ -16,7 +16,9 @@ const Homepage = () => {
         <div className="homepage__bottom-left">
           <Avatar />
         </div>
-        <div className="homepage__bottom-right"></div>
+        <div className="homepage__bottom-right">
+          <QuestLog />
+        </div>
       </div>
     </>
   );
