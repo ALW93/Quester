@@ -1,21 +1,16 @@
-from app.models import db, Task, Group, Task_Category, time
+from app.models import db, Task, Task_Category, time
 
 
 def seed_tasks():
-    groupObjects = [
-      Group(user_id=1, name="Sunday Afternoon"),
-      Group(user_id=2, name="Acquire Snacks"),
-      Group(user_id=3, name="Canadian Activities")
-    ]
 
     taskObjects = [
-      Task(user_id=1, created_at=time, group_id=1, name="Make Tea",
+      Task(user_id=1, created_at=time, name="Make Tea",
            description="Chamomile in the upper cupboard",
            deadline=time, frequency="Once", status="pending"),
       Task(user_id=1, created_at=time, name="Run 5 Miles", frequency="Daily", status="complete"),
-      Task(user_id=2, created_at=time, group_id=2, name="Pander for Snack", description="Grandma gives the most snacks!",
+      Task(user_id=2, created_at=time, name="Pander for Snack", description="Grandma gives the most snacks!",
            frequency="Daily", status="pending"),
-      Task(user_id=3, created_at=time, group_id=3, name="Bike 15 Miles", frequency="Weekly", status="expired"),
+      Task(user_id=3, created_at=time, name="Bike 15 Miles", frequency="Weekly", status="expired"),
     ]
 
     task_categoriesObjects = [
@@ -24,7 +19,7 @@ def seed_tasks():
       Task_Category(task_id=4, category_id=6)
     ]
 
-    db.session.bulk_save_objects(groupObjects)
+
     db.session.bulk_save_objects(taskObjects)
     db.session.bulk_save_objects(task_categoriesObjects)
     db.session.commit()

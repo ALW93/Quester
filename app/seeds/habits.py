@@ -3,11 +3,11 @@ from app.models import db, Habit, Check, Habit_Category, time
 
 def seed_habits():
     habitObjects = [
-      Habit(user_id=1, name="Morning Yoga", frequency="Daily", created_at=time),
-      Habit(user_id=1, name="Call Mom", frequency="Weekly", created_at=time),
-      Habit(user_id=2, name="Snack Tantrum", frequency="Daily", created_at=time),
-      Habit(user_id=3, name="Morning Bike Ride", frequency="Bi-Weekly", created_at=time),
-      Habit(user_id=3, name="Daily Kotlin Coding", frequency="Daily", created_at=time),
+      Habit(user_id=1, name="Morning Yoga", created_at=time),
+      Habit(user_id=1, name="Call Mom", created_at=time),
+      Habit(user_id=2, name="Snack Tantrum", created_at=time),
+      Habit(user_id=3, name="Morning Bike Ride", created_at=time),
+      Habit(user_id=3, name="Daily Kotlin Coding", created_at=time),
     ]
 
     habit_categoriesObjects = [

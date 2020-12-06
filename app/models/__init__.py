@@ -6,7 +6,6 @@ from .stat import Stat
 from .category import Category
 from .habit import Habit, Habit_Category
 from .check import Check
-from .group import Group
 from .task import Task, Task_Category
 
 time = date.today()
