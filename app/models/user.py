@@ -25,6 +25,8 @@ class User(db.Model, UserMixin):
     currency = c(db.Integer, nullable=False)
     exp = c(db.Integer, nullable=False)
     health = c(db.Integer, nullable=False)
+
+
     stats = db.relationship('Stat', backref="user", lazy=True)
 
     categories = db.relationship('Category', backref="user", lazy=True)
@@ -53,5 +55,5 @@ class User(db.Model, UserMixin):
           "email": self.email,
           "currency": self.currency,
           "exp": self.exp,
-
+          "health": self.health
         }

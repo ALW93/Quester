@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db
+from datetime import date
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -61,12 +62,17 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
+    created = date.today()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            created_at=created,
+            currency=100,
+            exp=0,
+            health=100
         )
         db.session.add(user)
         db.session.commit()

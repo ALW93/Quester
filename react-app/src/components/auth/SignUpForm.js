@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth } from "../../store/actions/auth";
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = ({ authenticated, setAuthenticated }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const dispatch = useDispatch();
+  const authorized = useSelector(state => state.auth.auth)
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -14,6 +18,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       const user = await signUp(username, email, password);
       if (!user.errors) {
         setAuthenticated(true);
+        dispatch(setAuth(true));
       }
     }
   };
@@ -34,7 +39,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
     setRepeatPassword(e.target.value);
   };
 
-  if (authenticated) {
+  if (authorized) {
     return <Redirect to="/" />;
   }
 
