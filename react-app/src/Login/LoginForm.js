@@ -22,7 +22,6 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await login(email, password);
     const avatar = await getAvatar(user.id);
-    console.log(avatar);
 
     if (!user.errors) {
       dispatch(setAuth(true));

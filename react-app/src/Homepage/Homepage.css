@@ -1,0 +1,21 @@
+.homepage__topbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: beige;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.homepage__bottom {
+  display: flex;
+}
+
+.homepage__bottom-left {
+  border: 1px solid red;
+  width: 35%;
+}
+
+.homepage__bottom-right {
+  border: 1px solid blue;
+  width: 65%;
+}

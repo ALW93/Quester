@@ -47,11 +47,13 @@ const CreateAvatar = () => {
       <h1>Create Your Character</h1>
       <div>
         {info.username} lv.{parseLevel(info.exp)}
-        <LinearProgress
-          color="secondary"
-          variant="determinate"
-          value={info.health}
-        />
+        <div className="progress">
+          <div
+            className="progress-bar bg-success"
+            role="progressbar"
+            style={{ width: `${info.health}%` }}
+          ></div>
+        </div>
       </div>
       <form onSubmit={createChar}>
         <Select value={hair} onChange={updateHair}>
