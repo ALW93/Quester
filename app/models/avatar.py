@@ -6,7 +6,6 @@ class Avatar(db.Model):
 
     id = c(db.Integer, primary_key=True)
     user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    name = c(db.String(50), nullable=False)
     exp = c(db.Integer, nullable=False)
     hair = c(db.String(50), nullable=False)
     face = c(db.String(50), nullable=False)
@@ -18,5 +17,5 @@ class Avatar(db.Model):
 
     def to_dict():
         return {
-            pass
+
         }

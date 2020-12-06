@@ -1,12 +1,14 @@
 from .db import db, c
 
+
 class Task(db.Model):
     __tablename__ = "tasks"
 
-    id = c(db.Integer, primary_key = True)
+    id = c(db.Integer, primary_key=True)
     created_at = c(db.Date, nullable=False)
     user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = c(db.String(50), nullable=False)
+    difficult = c(db.Integer, nullable=False)
     deadline = c(db.Date, nullable=True)
     frequency = c(db.String(255), nullable=False)
     status = c(db.String(50), nullable=False)
