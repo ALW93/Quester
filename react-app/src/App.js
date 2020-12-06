@@ -5,9 +5,10 @@ import SignUpForm from "./Login/SignUpForm";
 import NavBar from "./Shared/NavBar";
 import ProtectedRoute from "./services/ProtectedRoute";
 import User from "./Profile/User";
+import CreateAvatar from "./Avatar/CreateAvatar";
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
-import { setAuth } from "./store/actions/auth";
+import { setAuth, setId, setUser } from "./store/actions/auth";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -18,6 +19,8 @@ function App() {
       const user = await authenticate();
       if (!user.errors) {
         dispatch(setAuth(true));
+        dispatch(setId(user.id));
+        dispatch(setUser(user));
       }
       setLoaded(true);
     })();
@@ -34,6 +37,9 @@ function App() {
       </Route>
       <Route path="/sign-up" exact={true}>
         <SignUpForm />
+      </Route>
+      <Route path="/create-avatar">
+        <CreateAvatar />
       </Route>
       <ProtectedRoute path="/users/:userId" exact={true}>
         <User />

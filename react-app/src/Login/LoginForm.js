@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { login } from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth } from "../store/actions/auth";
+import { setAuth, setId, setUser } from "../store/actions/auth";
 import { showForm } from "../store/actions/utility";
 import { TextField, Button } from "@material-ui/core";
 import SignUpForm from "./SignUpForm";
@@ -21,6 +21,8 @@ const LoginForm = () => {
     const user = await login(email, password);
     if (!user.errors) {
       dispatch(setAuth(true));
+      dispatch(setId(user.id));
+      dispatch(setUser(user));
     } else {
       setErrors(user.errors);
     }
@@ -79,8 +81,8 @@ const LoginForm = () => {
               </Button>
             </div>
           </form>
-          <div>
-            Sign up Here <DoubleArrowIcon onClick={() => showSignup(true)} />
+          <div onClick={() => showSignup(true)}>
+            Sign up Here <DoubleArrowIcon />
           </div>
         </>
       )}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth } from "../store/actions/auth";
+import { setAuth, setId, setUser } from "../store/actions/auth";
 import { TextField, Button } from "@material-ui/core";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
@@ -21,6 +21,8 @@ const SignUpForm = ({ showSignup }) => {
       const user = await signUp(username, email, password);
       if (!user.errors) {
         dispatch(setAuth(true));
+        dispatch(setId(user.id));
+        dispatch(setUser(user));
       } else {
         setErrors(user.errors);
       }
@@ -95,9 +97,9 @@ const SignUpForm = ({ showSignup }) => {
         </div>
         <Button type="submit">Sign Up</Button>
       </form>
-      <div>
+      <div onClick={() => showSignup(false)}>
         Return to Login
-        <DoubleArrowIcon onClick={() => showSignup(false)} />
+        <DoubleArrowIcon />
       </div>
     </>
   );
