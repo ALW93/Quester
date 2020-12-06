@@ -26,7 +26,6 @@ class User(db.Model, UserMixin):
     currency = c(db.Integer, nullable=False)
 
     categories = db.relationship('Category', backref="user", lazy=True)
-    groups = db.relationship('Group', backref="user", lazy=True)
     tasks = db.relationship('Task', backref="user", lazy=True)
     habits = db.relationship('Habit', backref="user", lazy=True)
     checks = db.relationship('Check', backref="user", lazy=True)
