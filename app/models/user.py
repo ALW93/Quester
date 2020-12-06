@@ -17,13 +17,15 @@ friends = db.Table('friends', c("id", db.Integer, primary_key=True),
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-
     id = c(db.Integer, primary_key=True)
     created_at = c(db.Date, nullable=False)
     username = c(db.String(40), nullable=False, unique=True)
     email = c(db.String(255), nullable=False, unique=True)
     hashed_password = c(db.String(255), nullable=False)
     currency = c(db.Integer, nullable=False)
+    exp = c(db.Integer, nullable=False)
+    health = c(db.Integer, nullable=False)
+    stats = db.relationship('Stat', backref="user", lazy=True)
 
     categories = db.relationship('Category', backref="user", lazy=True)
     tasks = db.relationship('Task', backref="user", lazy=True)
@@ -51,14 +53,5 @@ class User(db.Model, UserMixin):
           "email": self.email,
           "currency": self.currency,
           "exp": self.exp,
-          "base": {
-            "hair": self.hair,
-            "face": self.face,
-            "body": self.body,
-          },
-          "equip": {
-            "helmet": self.helmet,
-            "top": self.top,
-            "bottom": self.bottom
-          }
+
         }

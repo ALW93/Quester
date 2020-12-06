@@ -9,7 +9,7 @@ class Task(db.Model):
     user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = c(db.String(50), nullable=False)
     difficult = c(db.Integer, nullable=False)
-    deadline = c(db.Date, nullable=True)
+    deadline = c(db.DateTime, nullable=True)
     frequency = c(db.String(255), nullable=False)
     status = c(db.String(50), nullable=False)
 

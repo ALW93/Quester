@@ -6,11 +6,11 @@ def seed_users():
 
     userObjects = [
         User(username='Admin', email='admin@aa.io',
-             password='password', currency=1000, created_at=time),
+             password='password', currency=1000, exp=100, health=100, created_at=time),
         User(username='Berber', email='berber@catmail.com',
-             password='password', currency=1000, created_at=time),
+             password='password', currency=1000, exp=100, health=80, created_at=time),
         User(username='Wahlu', email='wahlu@canada.net',
-             password='password', currency=1000, created_at=time)]
+             password='password', currency=1000, exp=100, health=95, created_at=time)]
 
     db.session.bulk_save_objects(userObjects)
     db.session.commit()

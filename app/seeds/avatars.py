@@ -5,12 +5,9 @@ from app.models import db, Avatar, Stat, Category
 def seed_avatars():
 
     avatarObjects = [
-        Avatar(user_id=1, name='spookychu', exp=100,
-               hair="pink", face="type-1", body="type-1"),
-        Avatar(user_id=2, name='sirBerber', exp=100,
-               hair="brown", face="type-2", body="type-2"),
-        Avatar(user_id=3, name='momatomimumu', exp=100,
-               hair="black", face="type-3", body="type-3")]
+        Avatar(user_id=1, hair="pink", face="type-1", body="type-1"),
+        Avatar(user_id=2, hair="brown", face="type-2", body="type-2"),
+        Avatar(user_id=3, hair="black", face="type-3", body="type-3")]
 
     statObjects = [
         Stat(avatar_id=1, name="Strength", custom=False, icon="/str.png", points=10),
