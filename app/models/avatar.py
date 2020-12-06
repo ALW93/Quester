@@ -15,9 +15,7 @@ class Avatar(db.Model):
 
     def to_dict(self):
         return {
-            "base": {
-                "hair": self.hair,
-                "face": self.face,
-                "body": self.body,
-            }
+            "hair": self.hair,
+            "face": self.face,
+            "body": self.body,
         }

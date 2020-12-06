@@ -7,6 +7,8 @@ import { showForm } from "../store/actions/utility";
 import { TextField, Button } from "@material-ui/core";
 import SignUpForm from "./SignUpForm";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import { setAvatar } from "../store/actions/avatar";
+import { getAvatar } from "../services/avatar";
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -19,10 +21,14 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await login(email, password);
+    const avatar = await getAvatar(user.id);
+    console.log(avatar);
+
     if (!user.errors) {
       dispatch(setAuth(true));
       dispatch(setId(user.id));
       dispatch(setUser(user));
+      dispatch(setAvatar(avatar));
     } else {
       setErrors(user.errors);
     }

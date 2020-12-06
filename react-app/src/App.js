@@ -5,10 +5,13 @@ import SignUpForm from "./Login/SignUpForm";
 import NavBar from "./Shared/NavBar";
 import ProtectedRoute from "./services/ProtectedRoute";
 import User from "./Profile/User";
+import Homepage from "./Homepage/Homepage";
 import CreateAvatar from "./Avatar/CreateAvatar";
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setAuth, setId, setUser } from "./store/actions/auth";
+import { getAvatar } from "./services/avatar";
+import { setAvatar } from "./store/actions/avatar";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -17,10 +20,12 @@ function App() {
   useEffect(() => {
     (async () => {
       const user = await authenticate();
-      if (!user.errors) {
+      const avatar = await getAvatar(user.id);
+      if (!user.errors && avatar) {
         dispatch(setAuth(true));
         dispatch(setId(user.id));
         dispatch(setUser(user));
+        dispatch(setAvatar(avatar));
       }
       setLoaded(true);
     })();
@@ -46,7 +51,7 @@ function App() {
       </ProtectedRoute>
       <ProtectedRoute path="/" exact={true}>
         <NavBar />
-        <h1>My Home Page</h1>
+        <Homepage />
       </ProtectedRoute>
     </BrowserRouter>
   );

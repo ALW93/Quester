@@ -10,7 +10,7 @@ const ProtectedRoute = (props) => {
     return <Redirect to="/login" />;
   }
 
-  if (!avatar) {
+  if (!avatar.hair) {
     return <Redirect to="/create-avatar" />;
   }
 
