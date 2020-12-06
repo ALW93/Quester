@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 653401911700
+Revision ID: 5efd0f2b519e
 Revises: 
-Create Date: 2020-12-04 20:58:10.738980
+Create Date: 2020-12-05 20:57:42.976453
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '653401911700'
+revision = '5efd0f2b519e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,6 +25,8 @@ def upgrade():
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('currency', sa.Integer(), nullable=False),
+    sa.Column('exp', sa.Integer(), nullable=False),
+    sa.Column('health', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -32,8 +34,6 @@ def upgrade():
     op.create_table('avatars',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('exp', sa.Integer(), nullable=False),
     sa.Column('hair', sa.String(length=50), nullable=False),
     sa.Column('face', sa.String(length=50), nullable=False),
     sa.Column('body', sa.String(length=50), nullable=False),
@@ -51,20 +51,11 @@ def upgrade():
     sa.ForeignKeyConstraint(['friend_b_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('groups',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=50), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
-    )
     op.create_table('habits',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.Date(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('frequency', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
@@ -78,6 +69,18 @@ def upgrade():
     sa.Column('sender_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['receiver_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['sender_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('tasks',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.Date(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('difficult', sa.Integer(), nullable=False),
+    sa.Column('deadline', sa.DateTime(), nullable=True),
+    sa.Column('frequency', sa.String(length=255), nullable=False),
+    sa.Column('status', sa.String(length=50), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('check',
@@ -97,20 +100,6 @@ def upgrade():
     sa.Column('icon', sa.String(length=50), nullable=False),
     sa.Column('points', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['avatar_id'], ['avatars.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_table('tasks',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.Date(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('group_id', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=True),
-    sa.Column('deadline', sa.Date(), nullable=True),
-    sa.Column('frequency', sa.String(length=255), nullable=False),
-    sa.Column('status', sa.String(length=50), nullable=False),
-    sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('categories',
@@ -146,12 +135,11 @@ def downgrade():
     op.drop_table('task_categories')
     op.drop_table('habit_categories')
     op.drop_table('categories')
-    op.drop_table('tasks')
     op.drop_table('stats')
     op.drop_table('check')
+    op.drop_table('tasks')
     op.drop_table('messages')
     op.drop_table('habits')
-    op.drop_table('groups')
     op.drop_table('friends')
     op.drop_table('avatars')
     op.drop_table('users')
