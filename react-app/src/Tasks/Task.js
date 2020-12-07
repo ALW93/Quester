@@ -4,14 +4,14 @@ import Category from "../Shared/Category";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
-  const [stats, setStats] = useState([]);
+  console.log(categories);
 
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/tasks/${t.id}/cat`);
-      const data = await response.json();
-      setCategories(data.categories);
-    })();
+    fetch(`/api/tasks/${t.id}/cat`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data.categories);
+      });
   }, []);
 
   return (
