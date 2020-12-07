@@ -1,26 +1,113 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import "./Tasks.css";
+import Category from "../Shared/Category";
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  Checkbox,
+  FormControl,
+} from "@material-ui/core";
 
-const TaskForm = () => {
+const TaskForm = ({ setTaskForm }) => {
+  const id = useSelector((state) => state.auth.userId);
+  const user = useSelector((state) => state.auth.user);
+  const [categories, setCategories] = useState([]);
+  const [name, setName] = useState(`${user.username}'s New Task`);
+  const [difficulty, setDifficulty] = useState(1);
+  const [deadline, setDeadline] = useState("");
+  const [frequency, setFrequency] = useState("Once");
+  const [taskcat, setTaskCat] = useState(new Set());
+
+  const taskSubmit = (e) => {
+    e.preventDefault();
+    const new_task = {
+      //
+    };
+  };
+
+  const updateName = (e) => {
+    setName(e.target.value);
+  };
+
+  const updateDifficulty = (e) => {
+    setDifficulty(e.target.value);
+  };
+
+  const updateDeadline = (e) => {
+    setDeadline(e.target.value);
+  };
+
+  const updateFrequency = (e) => {
+    setFrequency(e.target.value);
+  };
+
+  const updateTaskCat = (e) => {
+    let arr = [...taskcat, e.target.value];
+    if (taskcat.has(e.target.value)) {
+      taskcat.delete(e.target.value);
+      arr = [...taskcat];
+    }
+    setTaskCat(new Set(arr));
+  };
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`/api/users/${id}/categories`);
+      const data = await response.json();
+      setCategories(data.cats);
+    })();
+  }, []);
+
   return (
     <>
-      <h1>TASK FORM</h1>
-      <form>
-        <div>
-          <TextField placeholder="Title" />
-        </div>
-        <div>
-          <TextField placeholder="Difficulty" />
-        </div>
-        <div>
-          <TextField placeholder="Deadline" />
-        </div>
-        <div>
-          <TextField placeholder="Frequency" />
-        </div>
-        <Button>Submit</Button>
-        <Button>Cancel</Button>
-      </form>
+      <div className="taskform__new">
+        <form onSubmit={taskSubmit}>
+          <div>
+            <TextField placeholder={name} onChange={updateName} />
+          </div>
+          <div>
+            <Select onChange={updateDifficulty}>
+              <MenuItem value={1}>⭐</MenuItem>
+              <MenuItem value={2}>⭐ ⭐ </MenuItem>
+              <MenuItem value={3}>⭐ ⭐ ⭐ </MenuItem>
+              <MenuItem value={4}>⭐ ⭐ ⭐ ⭐ </MenuItem>
+              <MenuItem value={5}>⭐ ⭐ ⭐ ⭐ ⭐ </MenuItem>
+            </Select>
+          </div>
+          <div>
+            <TextField type="datetime-local" onChange={updateDeadline} />
+          </div>
+          <div>
+            <div>Frequency</div>
+            <Select onChange={updateFrequency} value={frequency}>
+              <MenuItem value={"Once"}>Once</MenuItem>
+              <MenuItem value={"Daily"}>Daily</MenuItem>
+              <MenuItem value={"Every Other Day"}>Every Other Day</MenuItem>
+              <MenuItem value={"Weekly"}>Weekly</MenuItem>
+            </Select>
+          </div>
+          <div>
+            <FormControl>
+              {categories &&
+                categories.map((c) => {
+                  return (
+                    <>
+                      <div>
+                        <Checkbox value={c.id} onChange={updateTaskCat} />{" "}
+                        <Category data={c} />
+                      </div>
+                    </>
+                  );
+                })}
+            </FormControl>
+          </div>
+          <Button>Submit</Button>
+          <Button onClick={() => setTaskForm(false)}>Cancel</Button>
+        </form>
+      </div>
     </>
   );
 };

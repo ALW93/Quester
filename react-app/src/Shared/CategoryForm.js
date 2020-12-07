@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Category from "./Category";
 
 const CategoryForm = () => {
   const id = useSelector((state) => state.auth.userId);
@@ -21,7 +22,7 @@ const CategoryForm = () => {
         categories.map((c) => {
           return (
             <li>
-              {c.name}, {c.stat_id}
+              <Category data={c} />
             </li>
           );
         })}

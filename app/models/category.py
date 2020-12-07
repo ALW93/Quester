@@ -14,6 +14,7 @@ class Category(db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "user_id": self.user_id,
             "stat_id": self.stat_id,
             "name": self.name,

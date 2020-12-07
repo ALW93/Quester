@@ -9,14 +9,13 @@ import CategoryForm from "../Shared/CategoryForm";
 const Tasks = () => {
   const id = useSelector((state) => state.auth.userId);
   const [tasks, setTasks] = useState([]);
-  const [taskForm, setTaskForm] = useState(false);
+  const [taskForm, setTaskForm] = useState(true);
   const [catForm, setCatForm] = useState(false);
 
   useEffect(() => {
     (async () => {
       const response = await fetch(`/api/users/${id}/tasks`);
       const data = await response.json();
-      console.log(data);
       setTasks(data.tasks);
     })();
   }, []);
@@ -62,7 +61,7 @@ const Tasks = () => {
           Edit Categories
         </Button>
       </div>
-      {taskForm ? <TaskForm /> : null}
+      {taskForm ? <TaskForm setTaskForm={setTaskForm} /> : null}
       {catForm ? <CategoryForm /> : null}
       <div>{renderTasks}</div>
     </>

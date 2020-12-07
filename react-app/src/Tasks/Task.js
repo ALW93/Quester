@@ -4,7 +4,6 @@ import Category from "../Shared/Category";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
-  console.log(categories);
 
   useEffect(() => {
     fetch(`/api/tasks/${t.id}/cat`)
@@ -20,6 +19,7 @@ const Task = ({ t }) => {
       <li>difficulty: {t.difficulty}</li>
       <li>frequency: {t.frequency}</li>
       <li>status: {t.status}</li>
+      {t.deadline ? <li>deadline: {t.deadline}</li> : <li>No Deadline</li>}
       {categories &&
         categories.map((c) => {
           return <Category data={c} />;
