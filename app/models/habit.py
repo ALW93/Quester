@@ -10,7 +10,7 @@ class Habit(db.Model):
     name = c(db.String(50), nullable=False, unique=True)
     checks = db.relationship('Check', backref="habit", lazy=True)
 
-    categories = db.relationship('Habit_Category', backref="habit", lazy=True)
+    categories = db.relationship('Habit_Category', backref="habit", lazy="joined")
 
 
 class Habit_Category(db.Model):

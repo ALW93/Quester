@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, User, Avatar
-from sqlalchemy.exc import SQLAlchemyError
+from app.models import db, User, Avatar, Task, Category, Task_Category
+
 
 user_routes = Blueprint('users', __name__)
 
@@ -50,3 +50,18 @@ def create_avatar(id):
         db.session.add(new_avatar)
         db.session.commit()
         return new_avatar.to_dict()
+
+
+@user_routes.route('/<int:id>/tasks')
+@login_required
+def get_tasks(id):
+    """
+    Load all Tasks for a User
+    """
+    tasks = Task.query.filter(Task.user_id == id).all()
+    task_dicts = [task.to_dict() for task in tasks]
+    task_json = jsonify({'tasks': task_dicts})
+    return task_json
+
+
+# select * from tasks left join task_categories on tasks.id = task_categories.task_id where user_id = 1

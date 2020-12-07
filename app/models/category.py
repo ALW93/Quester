@@ -11,3 +11,10 @@ class Category(db.Model):
 
     tasks = db.relationship('Task_Category', backref="category", lazy=True)
     habits = db.relationship('Habit_Category', backref="category", lazy=True)
+
+    def to_dict(self):
+        return {
+            "user_id": self.user_id,
+            "stat_id": self.stat_id,
+            "name": self.name,
+        }

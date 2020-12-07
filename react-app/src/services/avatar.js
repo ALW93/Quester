@@ -2,7 +2,6 @@
 export const getAvatar = async (id) => {
   const response = await fetch(`/api/users/${id}/avatar`);
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
