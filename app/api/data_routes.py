@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Task_Category, Category
+from app.models import db, Stat
 from flask_login import login_required
 
-task_routes = Blueprint('tasks', __name__)
+data_routes = Blueprint('data', __name__)
 
 
-@task_routes.route('/<int:id>/cat')
+@data_routes.route('/stat/<int:id>')
 @login_required
 def taskCats(id):
     taskCats = Category.query.filter(Task_Category.task_id == id, Task_Category.category_id == Category.id).all()

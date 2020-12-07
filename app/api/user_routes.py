@@ -65,3 +65,14 @@ def get_tasks(id):
 
 
 # select * from tasks left join task_categories on tasks.id = task_categories.task_id where user_id = 1
+
+@user_routes.route('/<int:id>/categories')
+@login_required
+def get_categories(id):
+    """
+    Load all Categories for a User
+    """
+    cats = Category.query.filter(Category.user_id == id).all()
+    cats_dicts = [cat.to_dict() for cat in cats]
+    cats_json = jsonify({'cats': cats_dicts})
+    return cats_json
