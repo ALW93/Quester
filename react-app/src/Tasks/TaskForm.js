@@ -17,16 +17,37 @@ const TaskForm = ({ setTaskForm }) => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState(`${user.username}'s New Task`);
   const [difficulty, setDifficulty] = useState(1);
-  const [deadline, setDeadline] = useState("");
+  const [deadline, setDeadline] = useState(null);
   const [frequency, setFrequency] = useState("Once");
   const [taskcat, setTaskCat] = useState(new Set());
+  const [newtask, setNewTask] = useState({});
 
   const taskSubmit = (e) => {
     e.preventDefault();
     const new_task = {
-      //
+      name: name,
+      difficulty: parseInt(difficulty),
+      deadline: deadline,
+      frequency: frequency,
+      status: "pending",
+      categories: Array.from(taskcat),
     };
+    console.log(new_task);
+    // setNewTask(new_task);
   };
+
+  useEffect(() => {
+    console.log(newtask);
+    fetch(`/api/users/${id}/tasks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newtask),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, [newtask]);
 
   const updateName = (e) => {
     setName(e.target.value);
@@ -104,7 +125,7 @@ const TaskForm = ({ setTaskForm }) => {
                 })}
             </FormControl>
           </div>
-          <Button>Submit</Button>
+          <Button type="submit">Submit</Button>
           <Button onClick={() => setTaskForm(false)}>Cancel</Button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Avatar, Task, Category, Task_Category
-
+from datetime import date
 
 user_routes = Blueprint('users', __name__)
 
@@ -52,19 +52,7 @@ def create_avatar(id):
         return new_avatar.to_dict()
 
 
-@user_routes.route('/<int:id>/tasks')
-@login_required
-def get_tasks(id):
-    """
-    Load all Tasks for a User
-    """
-    tasks = Task.query.filter(Task.user_id == id).all()
-    task_dicts = [task.to_dict() for task in tasks]
-    task_json = jsonify({'tasks': task_dicts})
-    return task_json
 
-
-# select * from tasks left join task_categories on tasks.id = task_categories.task_id where user_id = 1
 
 @user_routes.route('/<int:id>/categories')
 @login_required
@@ -76,3 +64,41 @@ def get_categories(id):
     cats_dicts = [cat.to_dict() for cat in cats]
     cats_json = jsonify({'cats': cats_dicts})
     return cats_json
+
+
+@user_routes.route('/<int:id>/tasks', methods=['POST'])
+@login_required
+def create_task(id):
+    """
+    Post a New Task
+    """
+    data = request.json
+    created = date.today()
+    if data:
+        new_task = Task(
+            user_id=id,
+            created_at=created,
+            name=data["name"],
+            difficulty=data["difficulty"],
+            deadline=data["deadline"],
+            frequency=data["frequency"],
+            status=data["status"],
+        )
+        for cat in data.categories:
+            new_cat = Task_Category(
+
+            )
+        db.session.add(new_task)
+        db.session.commit()
+        return new_task.to_dict()
+
+@user_routes.route('/<int:id>/tasks')
+@login_required
+def get_tasks(id):
+    """
+    Load all Tasks for a User
+    """
+    tasks = Task.query.filter(Task.user_id == id).all()
+    task_dicts = [task.to_dict() for task in tasks]
+    task_json = jsonify({'tasks': task_dicts})
+    return task_json
