@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import LoginForm from "./Login/LoginForm";
 import SignUpForm from "./Login/SignUpForm";
-import NavBar from "./Shared/NavBar";
 import ProtectedRoute from "./services/ProtectedRoute";
 import User from "./Profile/User";
 import Homepage from "./Homepage/Homepage";
 import CreateAvatar from "./Avatar/CreateAvatar";
-import { authenticate } from "./services/auth";
-import { useDispatch } from "react-redux";
-import { setAuth, setId, setUser } from "./store/actions/auth";
-import { getAvatar } from "./services/avatar";
-import { setAvatar } from "./store/actions/avatar";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserInfo, authenticate } from "./store/actions/auth";
+import { getAvatar } from "./store/actions/avatar";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -19,14 +16,8 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const user = await authenticate();
-      const avatar = await getAvatar(user.id);
-      if (!user.errors && avatar) {
-        dispatch(setAuth(true));
-        dispatch(setId(user.id));
-        dispatch(setUser(user));
-        dispatch(setAvatar(avatar));
-      }
+      const user = await dispatch(authenticate());
+      dispatch([setUserInfo(), getAvatar(user.id)]);
       setLoaded(true);
     })();
   }, []);

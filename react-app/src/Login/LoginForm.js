@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { login } from "../services/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth, setId, setUser } from "../store/actions/auth";
+import { setAuth, setId, setUser, login } from "../store/actions/auth";
 import { showForm } from "../store/actions/utility";
 import { TextField, Button } from "@material-ui/core";
 import SignUpForm from "./SignUpForm";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
-import { setAvatar } from "../store/actions/avatar";
-import { getAvatar } from "../services/avatar";
+import { setAvatar, getAvatar } from "../store/actions/avatar";
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);

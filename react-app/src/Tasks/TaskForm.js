@@ -12,8 +12,7 @@ import {
 } from "@material-ui/core";
 
 const TaskForm = ({ setTaskForm }) => {
-  const id = useSelector((state) => state.auth.userId);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.session.user);
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState(`${user.username}'s New Task`);
   const [difficulty, setDifficulty] = useState(1);
@@ -33,12 +32,11 @@ const TaskForm = ({ setTaskForm }) => {
       categories: Array.from(taskcat),
     };
     console.log(new_task);
-    // setNewTask(new_task);
+    setNewTask(new_task);
   };
 
   useEffect(() => {
-    console.log(newtask);
-    fetch(`/api/users/${id}/tasks`, {
+    fetch(`/api/users/${user.id}/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +74,7 @@ const TaskForm = ({ setTaskForm }) => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`/api/users/${id}/categories`);
+      const response = await fetch(`/api/users/${user.id}/categories`);
       const data = await response.json();
       setCategories(data.cats);
     })();

@@ -3,16 +3,16 @@ import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ProtectedRoute = (props) => {
-  const authorized = useSelector((state) => state.auth.auth);
+  const authorized = useSelector((state) => state.session.auth);
   const avatar = useSelector((state) => state.avatar.avatar);
 
   if (!authorized) {
     return <Redirect to="/login" />;
   }
 
-  if (!avatar.hair) {
-    return <Redirect to="/create-avatar" />;
-  }
+  // if (!avatar.hair) {
+  //   return <Redirect to="/create-avatar" />;
+  // }
 
   return <Route {...props} />;
 };

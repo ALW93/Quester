@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { parseLevel } from "../services/levels";
 
 const Avatar = () => {
-  const info = useSelector((state) => state.auth.user);
+  const info = useSelector((state) => state.session.user);
   const avatar = useSelector((state) => state.avatar.avatar);
 
   return (

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { createAvatar } from "../services/avatar";
 import { parseLevel } from "../services/levels";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { LinearProgress, Select, MenuItem, Button } from "@material-ui/core";
-import { setAvatar } from "../store/actions/avatar";
+import { Select, MenuItem, Button } from "@material-ui/core";
+import { setAvatar, createAvatar } from "../store/actions/avatar";
 
 const CreateAvatar = () => {
   const info = useSelector((state) => state.auth.user);

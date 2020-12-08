@@ -5,19 +5,16 @@ import Task from "./Task";
 import TaskForm from "./TaskForm";
 import "./Tasks.css";
 import CategoryForm from "../Shared/CategoryForm";
+import { useDispatch } from "react-redux";
 
 const Tasks = () => {
-  const id = useSelector((state) => state.auth.userId);
+  const user = useSelector((state) => state.session.user);
   const [tasks, setTasks] = useState([]);
   const [taskForm, setTaskForm] = useState(true);
   const [catForm, setCatForm] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/users/${id}/tasks`);
-      const data = await response.json();
-      setTasks(data.tasks);
-    })();
+    (async () => {})();
   }, []);
 
   const showTaskForm = (open) => {
