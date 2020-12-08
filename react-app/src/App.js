@@ -11,6 +11,7 @@ import { setUserInfo, authenticate } from "./store/actions/authReducer";
 import { getAvatar } from "./store/actions/avatarReducer";
 import { getTasks } from "./store/actions/tasksReducer";
 import { getCategories } from "./store/actions/categoryReducer";
+import { getHabits } from "./store/actions/habitReducer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,6 +25,7 @@ function App() {
         getAvatar(user.id),
         getTasks(user.id),
         getCategories(user.id),
+        getHabits(user.id),
       ]);
       setLoaded(true);
     })();

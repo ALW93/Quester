@@ -11,9 +11,9 @@ const Task = ({ t }) => {
   useEffect(() => {
     (async () => {
       const cats = await dispatch(getTaskCategory(t.id));
-      setCategories(cats);
+      await setCategories(cats);
     })();
-  }, []);
+  }, [t]);
 
   return (
     <>

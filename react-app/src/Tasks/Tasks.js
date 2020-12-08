@@ -47,7 +47,9 @@ const Tasks = () => {
           Edit Categories
         </Button>
       </div>
-      {taskForm ? <TaskForm setTaskForm={setTaskForm} /> : null}
+      {taskForm ? (
+        <TaskForm setTaskForm={setTaskForm} setTasks={setTasks} />
+      ) : null}
       {catForm ? <CategoryForm /> : null}
       {tasks &&
         tasks.map((t) => {
