@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import Category from "../Shared/Category";
+import { useDispatch } from "react-redux";
+import { getTaskCategory } from "../store/actions/tasks";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`/api/tasks/${t.id}/cat`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategories(data.categories);
-      });
+    (async () => {
+      const cats = await dispatch(getTaskCategory(t.id));
+      setCategories(cats);
+    })();
   }, []);
 
   return (

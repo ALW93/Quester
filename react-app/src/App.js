@@ -6,9 +6,10 @@ import ProtectedRoute from "./services/ProtectedRoute";
 import User from "./Profile/User";
 import Homepage from "./Homepage/Homepage";
 import CreateAvatar from "./Avatar/CreateAvatar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserInfo, authenticate } from "./store/actions/auth";
 import { getAvatar } from "./store/actions/avatar";
+import { getTasks } from "./store/actions/tasks";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -17,7 +18,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const user = await dispatch(authenticate());
-      dispatch([setUserInfo(), getAvatar(user.id)]);
+      dispatch([setUserInfo(), getAvatar(user.id), getTasks(user.id)]);
       setLoaded(true);
     })();
   }, []);

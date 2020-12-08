@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./Tasks.css";
 import Category from "../Shared/Category";
@@ -10,16 +10,20 @@ import {
   Checkbox,
   FormControl,
 } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { getCategories, newTask } from "../store/actions/tasks";
 
 const TaskForm = ({ setTaskForm }) => {
   const user = useSelector((state) => state.session.user);
+  console.log(user);
   const [categories, setCategories] = useState([]);
-  const [name, setName] = useState(`${user.username}'s New Task`);
+  const [name, setName] = useState("");
   const [difficulty, setDifficulty] = useState(1);
   const [deadline, setDeadline] = useState(null);
   const [frequency, setFrequency] = useState("Once");
   const [taskcat, setTaskCat] = useState(new Set());
   const [newtask, setNewTask] = useState({});
+  const dispatch = useDispatch();
 
   const taskSubmit = (e) => {
     e.preventDefault();
@@ -36,15 +40,16 @@ const TaskForm = ({ setTaskForm }) => {
   };
 
   useEffect(() => {
-    fetch(`/api/users/${user.id}/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newtask),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    (async () => {
+      await dispatch(getCategories(user.id));
+      setName(`${user.username}'s New Task`);
+    })();
+  }, [user]);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(newTask(user.id, newtask));
+    })();
   }, [newtask]);
 
   const updateName = (e) => {
@@ -71,14 +76,6 @@ const TaskForm = ({ setTaskForm }) => {
     }
     setTaskCat(new Set(arr));
   };
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(`/api/users/${user.id}/categories`);
-      const data = await response.json();
-      setCategories(data.cats);
-    })();
-  }, []);
 
   return (
     <>

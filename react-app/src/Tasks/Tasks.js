@@ -5,17 +5,16 @@ import Task from "./Task";
 import TaskForm from "./TaskForm";
 import "./Tasks.css";
 import CategoryForm from "../Shared/CategoryForm";
-import { useDispatch } from "react-redux";
 
 const Tasks = () => {
-  const user = useSelector((state) => state.session.user);
+  const data = useSelector((state) => state.tasks.allTasks);
   const [tasks, setTasks] = useState([]);
   const [taskForm, setTaskForm] = useState(true);
   const [catForm, setCatForm] = useState(false);
 
   useEffect(() => {
-    (async () => {})();
-  }, []);
+    setTasks(data);
+  }, [data]);
 
   const showTaskForm = (open) => {
     setTaskForm(open);
@@ -24,16 +23,6 @@ const Tasks = () => {
   const showCatForm = (open) => {
     setCatForm(open);
   };
-
-  const renderTasks = tasks.map((t) => {
-    return (
-      <>
-        <ul className="task">
-          <Task t={t} />
-        </ul>
-      </>
-    );
-  });
 
   return (
     <>
@@ -60,7 +49,14 @@ const Tasks = () => {
       </div>
       {taskForm ? <TaskForm setTaskForm={setTaskForm} /> : null}
       {catForm ? <CategoryForm /> : null}
-      <div>{renderTasks}</div>
+      {tasks &&
+        tasks.map((t) => {
+          return (
+            <div className="task">
+              <Task t={t} />
+            </div>
+          );
+        })}
     </>
   );
 };
