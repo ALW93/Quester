@@ -15,7 +15,6 @@ import { getCategories, newTask } from "../store/actions/tasks";
 
 const TaskForm = ({ setTaskForm }) => {
   const user = useSelector((state) => state.session.user);
-  console.log(user);
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [difficulty, setDifficulty] = useState(1);
@@ -41,7 +40,8 @@ const TaskForm = ({ setTaskForm }) => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getCategories(user.id));
+      const categories = await dispatch(getCategories(user.id));
+      setCategories(categories);
       setName(`${user.username}'s New Task`);
     })();
   }, [user]);

@@ -29,8 +29,7 @@ export const newTask = (id, payload) => async (dispatch) => {
 export const getCategories = (id) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}/categories`);
   const data = await response.json();
-  console.log(data);
-  return data;
+  return data.cats;
 };
 
 // Get Categories Associated with a Task
