@@ -25,6 +25,9 @@ class Task(db.Model):
             "status": self.status,
         }
 
+    def return_id(self):
+        return self.id
+
 
 class Task_Category(db.Model):
     __tablename__ = "task_categories"

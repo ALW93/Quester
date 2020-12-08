@@ -84,13 +84,20 @@ def create_task(id):
             frequency=data["frequency"],
             status=data["status"],
         )
-        for cat in data.categories:
-            new_cat = Task_Category(
 
-            )
         db.session.add(new_task)
         db.session.commit()
+
+        latest = Task.query.filter(Task.user_id == id).order_by(Task.id.desc()).first()
+        for cat in data["categories"]:
+            new_cat = Task_Category(
+                task_id=latest.id,
+                category_id=cat
+            )
+            db.session.add(new_cat)
+            db.session.commit()
         return new_task.to_dict()
+
 
 @user_routes.route('/<int:id>/tasks')
 @login_required
