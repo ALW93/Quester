@@ -4,7 +4,7 @@ from flask_login import login_required
 
 
 task_routes = Blueprint('tasks', __name__)
-user_routes = Blueprint('users', __name__)
+
 
 @task_routes.route('/<int:id>/cat')
 @login_required

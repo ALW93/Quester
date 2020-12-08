@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, User, Avatar, Task, Category, Task_Category
+from app.models import db, User, Avatar, Task, Category, Task_Category, Habit
 from datetime import date
 
 user_routes = Blueprint('users', __name__)
@@ -84,13 +84,20 @@ def create_task(id):
             frequency=data["frequency"],
             status=data["status"],
         )
-        for cat in data.categories:
-            new_cat = Task_Category(
 
-            )
         db.session.add(new_task)
         db.session.commit()
+
+        latest = Task.query.filter(Task.user_id == id).order_by(Task.id.desc()).first()
+        for cat in data["categories"]:
+            new_cat = Task_Category(
+                task_id=latest.id,
+                category_id=cat
+            )
+            db.session.add(new_cat)
+            db.session.commit()
         return new_task.to_dict()
+
 
 @user_routes.route('/<int:id>/tasks')
 @login_required
@@ -102,3 +109,13 @@ def get_tasks(id):
     task_dicts = [task.to_dict() for task in tasks]
     task_json = jsonify({'tasks': task_dicts})
     return task_json
+
+
+@user_routes.route('/<int:id>/habits')
+@login_required
+def get_habits(id):
+    """Load all Habits for a User"""
+    habits = Habit.query.filter(Habit.user_id == id).all()
+    habit_dicts = [habit.to_dict() for habit in habits]
+    habit_json = jsonify({'habits': habit_dicts})
+    return habit_json

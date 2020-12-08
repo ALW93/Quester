@@ -11,11 +11,11 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { getCategories, newTask } from "../store/actions/tasks";
+import { newTask, getTasks } from "../store/actions/tasksReducer";
 
-const TaskForm = ({ setTaskForm }) => {
+const TaskForm = ({ setTaskForm, setTasks }) => {
   const user = useSelector((state) => state.session.user);
-  console.log(user);
+  const cats = useSelector((state) => state.categories.categories);
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [difficulty, setDifficulty] = useState(1);
@@ -35,20 +35,20 @@ const TaskForm = ({ setTaskForm }) => {
       status: "pending",
       categories: Array.from(taskcat),
     };
-    console.log(new_task);
     setNewTask(new_task);
   };
 
   useEffect(() => {
     (async () => {
-      await dispatch(getCategories(user.id));
+      setCategories(cats);
       setName(`${user.username}'s New Task`);
     })();
-  }, [user]);
+  }, [user, cats]);
 
   useEffect(() => {
     (async () => {
       await dispatch(newTask(user.id, newtask));
+      await setTasks(dispatch(getTasks(user.id)));
     })();
   }, [newtask]);
 

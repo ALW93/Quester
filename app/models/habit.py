@@ -12,6 +12,13 @@ class Habit(db.Model):
 
     categories = db.relationship('Habit_Category', backref="habit", lazy="joined")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "createdAt": self.created_at,
+            "userId": self.user_id,
+            "name": self.name,
+        }
 
 class Habit_Category(db.Model):
     __tablename__ = "habit_categories"

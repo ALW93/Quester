@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setAuth, logout } from "../store/actions/auth";
+import { setAuth, logout } from "../store/actions/authReducer";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const LogoutButton = () => {

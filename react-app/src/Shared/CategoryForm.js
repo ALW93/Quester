@@ -3,17 +3,14 @@ import { useSelector } from "react-redux";
 import Category from "./Category";
 
 const CategoryForm = () => {
-  const id = useSelector((state) => state.auth.userId);
+  const cats = useSelector((state) => state.categories.categories);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`/api/users/${id}/categories`);
-      const data = await response.json();
-      console.log(data);
-      setCategories(data.cats);
+      setCategories(cats);
     })();
-  }, []);
+  }, [cats]);
 
   return (
     <>
