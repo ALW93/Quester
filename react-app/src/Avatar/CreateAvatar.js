@@ -3,7 +3,7 @@ import { parseLevel } from "../services/levels";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Select, MenuItem, Button } from "@material-ui/core";
-import { setAvatar, createAvatar } from "../store/actions/avatar";
+import { setAvatar, createAvatar } from "../store/actions/avatarReducer";
 
 const CreateAvatar = () => {
   const info = useSelector((state) => state.auth.user);

@@ -11,7 +11,7 @@ import {
   FormControl,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { getCategories, newTask } from "../store/actions/tasks";
+import { getCategories, newTask } from "../store/actions/tasksReducer";
 
 const TaskForm = ({ setTaskForm }) => {
   const user = useSelector((state) => state.session.user);

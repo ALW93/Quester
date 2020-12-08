@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import Category from "../Shared/Category";
 import { useDispatch } from "react-redux";
-import { getTaskCategory } from "../store/actions/tasks";
+import { getTaskCategory } from "../store/actions/tasksReducer";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);

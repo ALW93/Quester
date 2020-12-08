@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth, setId, setUser, signUp } from "../store/actions/auth";
+import { setAuth, setId, setUser, signUp } from "../store/actions/authReducer";
 import { TextField, Button } from "@material-ui/core";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
