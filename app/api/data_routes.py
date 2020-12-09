@@ -7,6 +7,6 @@ data_routes = Blueprint('data', __name__)
 
 @data_routes.route('/stat/<int:id>')
 @login_required
-def taskCats(id):
+def getStats(id):
     stat = Stat.query.get(id)
     return stat.to_dict()
