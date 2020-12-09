@@ -53,11 +53,7 @@ const Tasks = () => {
       {catForm ? <CategoryForm /> : null}
       {tasks &&
         tasks.map((t) => {
-          return (
-            <div className="task">
-              <Task t={t} />
-            </div>
-          );
+          return <Task t={t} />;
         })}
     </>
   );

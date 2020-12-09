@@ -8,7 +8,7 @@ export const addHabit = (habit) => ({ type: ADD_HABIT, habit });
 export const getHabits = (id) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}/habits`);
   const data = await response.json();
-  if (data) {
+  if (data.habits) {
     await dispatch(setHabits(data.habits));
   }
   return data.habits;
