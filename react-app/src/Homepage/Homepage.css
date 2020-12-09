@@ -13,6 +13,7 @@
 .homepage__bottom-left {
   border: 1px solid red;
   width: 35%;
+  overflow: scroll;
 }
 
 .homepage__bottom-right {

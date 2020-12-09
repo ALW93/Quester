@@ -1,21 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { parseLevel } from "../services/levels";
+import { useSelector } from "react-redux";
+import Avatar from "./Avatar";
+import Stats from "./Stats";
 
-const Avatar = () => {
+const User = () => {
   const info = useSelector((state) => state.session.user);
-  const avatar = useSelector((state) => state.avatar.avatar);
-
   return (
     <>
       <div>
         {info.username} lv.{parseLevel(info.exp)}
       </div>
       <div>currency: {info.currency}</div>
-      <div>
-        <h2>Avatar</h2>
-        Hair: {avatar.hair}, Face: {avatar.face}, Body: {avatar.body}
-      </div>
+      <Avatar />
       <div className="progress">
         <div
           className="progress-bar bg-success"
@@ -26,8 +23,10 @@ const Avatar = () => {
         </div>
       </div>
       <div>{info.exp} exp</div>
+
+      <Stats />
     </>
   );
 };
 
-export default Avatar;
+export default User;

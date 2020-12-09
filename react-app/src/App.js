@@ -5,13 +5,14 @@ import SignUpForm from "./Login/SignUpForm";
 import ProtectedRoute from "./services/ProtectedRoute";
 import User from "./Profile/User";
 import Homepage from "./Homepage/Homepage";
-import CreateAvatar from "./Avatar/CreateAvatar";
+import CreateAvatar from "./User/CreateAvatar";
 import { useDispatch } from "react-redux";
 import { setUserInfo, authenticate } from "./store/actions/authReducer";
 import { getAvatar } from "./store/actions/avatarReducer";
 import { getTasks } from "./store/actions/tasksReducer";
 import { getCategories } from "./store/actions/categoryReducer";
 import { getHabits } from "./store/actions/habitReducer";
+import { getStats } from "./store/actions/statReducer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,6 +27,7 @@ function App() {
         getTasks(user.id),
         getCategories(user.id),
         getHabits(user.id),
+        getStats(user.id),
       ]);
       setLoaded(true);
     })();
