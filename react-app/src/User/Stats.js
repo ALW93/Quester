@@ -9,10 +9,10 @@ const Stats = () => {
     <>
       <h1>Stats</h1>
       {stats &&
-        stats.map((stat) => {
+        stats.map((stat, i) => {
           return (
             <>
-              <div>
+              <div key={`${i}${stat.name}`}>
                 <li>{stat.name}</li>
                 Points: {stat.points} {parseStatLevel(stat.points)}
               </div>

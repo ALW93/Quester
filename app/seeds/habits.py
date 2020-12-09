@@ -1,13 +1,17 @@
-from app.models import db, Habit, Check, Habit_Category, time
+from app.models import db, Habit, Check, Habit_Category
+from datetime import datetime, timedelta, date
+
+dt = datetime.strptime(str(date.today()), '%Y-%m-%d')
+tomorrow = dt + timedelta(days=1)
 
 
 def seed_habits():
     habitObjects = [
-      Habit(user_id=1, name="Morning Yoga", created_at=time),
-      Habit(user_id=1, name="Call Mom", created_at=time),
-      Habit(user_id=2, name="Snack Tantrum", created_at=time),
-      Habit(user_id=3, name="Morning Bike Ride", created_at=time),
-      Habit(user_id=3, name="Daily Kotlin Coding", created_at=time),
+      Habit(user_id=1, name="Morning Yoga", created_at=dt),
+      Habit(user_id=1, name="Call Mom", created_at=dt),
+      Habit(user_id=2, name="Snack Tantrum", created_at=dt),
+      Habit(user_id=3, name="Morning Bike Ride", created_at=dt),
+      Habit(user_id=3, name="Daily Kotlin Coding", created_at=dt),
     ]
 
     habit_categoriesObjects = [
@@ -20,9 +24,10 @@ def seed_habits():
     ]
 
     checkObjects = [
-      Check(date=time, user_id=1, habit_id=1),
-      Check(date=time, user_id=2, habit_id=3),
-      Check(date=time, user_id=3, habit_id=4),
+      Check(date=dt, user_id=1, habit_id=1),
+      Check(date=tomorrow, user_id=1, habit_id=1),
+      Check(date=dt, user_id=2, habit_id=3),
+      Check(date=dt, user_id=3, habit_id=4),
     ]
 
     db.session.bulk_save_objects(habitObjects)

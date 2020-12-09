@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 269b51a39211
-Revises: 
+Revises:
 Create Date: 2020-12-06 18:34:57.739483
 
 """
@@ -104,7 +104,7 @@ def upgrade():
     )
     op.create_table('check',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('date', sa.Date(), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('habit_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['habit_id'], ['habits.id'], ),
