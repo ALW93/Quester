@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { CircleLoading } from "react-loadingg";
 
 const Category = ({ data }) => {
   const [stat, setStat] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getStat = async () => {
@@ -12,7 +14,12 @@ const Category = ({ data }) => {
       setStat(info);
     };
     getStat();
-  }, []);
+    setLoaded(true);
+  }, [data]);
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <>

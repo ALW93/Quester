@@ -11,12 +11,11 @@
 }
 
 .homepage__bottom-left {
-  border: 1px solid red;
   width: 35%;
   overflow: scroll;
+  text-align: center;
 }
 
 .homepage__bottom-right {
-  border: 1px solid blue;
   width: 65%;
 }
