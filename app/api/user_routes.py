@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, User, Avatar, Task, Category, Task_Category, Habit
+from app.models import db, User, Avatar, Task, Category, Task_Category, Habit, Stat
 from datetime import date
 
 user_routes = Blueprint('users', __name__)
@@ -50,8 +50,6 @@ def create_avatar(id):
         db.session.add(new_avatar)
         db.session.commit()
         return new_avatar.to_dict()
-
-
 
 
 @user_routes.route('/<int:id>/categories')
@@ -119,3 +117,13 @@ def get_habits(id):
     habit_dicts = [habit.to_dict() for habit in habits]
     habit_json = jsonify({'habits': habit_dicts})
     return habit_json
+
+
+@user_routes.route('/<int:id>/stats')
+@login_required
+def get_stats(id):
+    """Load all Stats for a User"""
+    stats = Stat.query.filter(Stat.user_id == id).all()
+    stat_dicts = [stat.to_dict() for stat in stats]
+    stat_json = jsonify({"stats": stat_dicts})
+    return stat_json

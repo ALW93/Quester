@@ -8,7 +8,7 @@ task_routes = Blueprint('tasks', __name__)
 
 @task_routes.route('/<int:id>/cat')
 @login_required
-def taskCats(id):
+def task_categories(id):
     """
     Get Categories for a Specific Task
     """
