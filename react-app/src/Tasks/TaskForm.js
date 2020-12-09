@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Tasks.css";
-import Category from "../Shared/Category";
+import CategorySelector from "../Shared/CategorySelector";
+
 import {
   TextField,
   Button,
@@ -10,7 +11,6 @@ import {
   Checkbox,
   FormControl,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 import { newTask, getTasks } from "../store/actions/tasksReducer";
 
 const TaskForm = ({ setTaskForm, setTasks }) => {
@@ -68,7 +68,7 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
     setFrequency(e.target.value);
   };
 
-  const updateTaskCat = (e) => {
+  const updateCats = (e) => {
     let arr = [...taskcat, e.target.value];
     if (taskcat.has(e.target.value)) {
       taskcat.delete(e.target.value);
@@ -107,17 +107,10 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
           </div>
           <div>
             <FormControl>
-              {categories &&
-                categories.map((c) => {
-                  return (
-                    <>
-                      <div>
-                        <Checkbox value={c.id} onChange={updateTaskCat} />{" "}
-                        <Category data={c} />
-                      </div>
-                    </>
-                  );
-                })}
+              <CategorySelector
+                categories={categories}
+                updateCats={updateCats}
+              />
             </FormControl>
           </div>
           <Button type="submit">Submit</Button>
