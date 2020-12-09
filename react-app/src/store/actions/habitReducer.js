@@ -22,7 +22,7 @@ export const getHabitCategory = (id) => async (dispatch) => {
 };
 
 // Get checks for a specific habit
-export const getHabitChecks = (habitId) => async (dispatch) => {
+export const getHabitChecks = (habitId, start, end) => async (dispatch) => {
   const response = await fetch(`/api/habits/${habitId}/checks`);
   const data = await response.json();
   return data;
