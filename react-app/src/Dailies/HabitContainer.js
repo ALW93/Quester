@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getHabitChecks } from "../store/actions/habitReducer";
 import DateTime from "luxon/src/datetime.js";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
 const HabitContainer = ({ data }) => {
   const [checks, setChecks] = useState([]);
@@ -51,7 +52,9 @@ const HabitContainer = ({ data }) => {
                 {currentDay}
                 {parsed.includes(currentDay) ? (
                   <CheckBoxIcon style={{ fill: "green" }} />
-                ) : null}
+                ) : (
+                  <CheckBoxOutlineBlankIcon />
+                )}
               </div>
             </>
           );
