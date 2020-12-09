@@ -16,10 +16,10 @@ const CategoryForm = () => {
     <>
       <h1>Categories</h1>
       {categories &&
-        categories.map((c) => {
+        categories.map((c, i) => {
           return (
             <li>
-              <Category data={c} />
+              <Category data={c} key={`Category${i}`} />
             </li>
           );
         })}

@@ -24,8 +24,8 @@ const Task = ({ t }) => {
       <li>status: {t.status}</li>
       {t.deadline ? <li>deadline: {t.deadline}</li> : <li>No Deadline</li>}
       {categories &&
-        categories.map((c) => {
-          return <Category data={c} />;
+        categories.map((c, i) => {
+          return <Category data={c} key={`TaskCategory${i}`} />;
         })}
       <div>
         {/* <Button variant="contained" color="primary">

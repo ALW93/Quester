@@ -1,3 +1,4 @@
+import DateTime from "luxon/src/datetime.js";
 const SET_HABITS = "Quester/habits/SET_HABITS";
 
 export const setHabits = (payload) => ({ type: SET_HABITS, payload });
@@ -22,10 +23,11 @@ export const getHabitCategory = (id) => async (dispatch) => {
 };
 
 // Get checks for a specific habit
-export const getHabitChecks = (habitId, start, end) => async (dispatch) => {
+export const getHabitChecks = (habitId) => async (dispatch) => {
   const response = await fetch(`/api/habits/${habitId}/checks`);
   const data = await response.json();
-  return data;
+
+  return data.checks;
 };
 
 export const habitReducer = (state = { habits: [] }, action) => {

@@ -22,8 +22,8 @@ const Habit = () => {
         </div>
         <div>
           {habits &&
-            habits.map((habit) => {
-              return <HabitContainer data={habit} />;
+            habits.map((habit, i) => {
+              return <HabitContainer data={habit} key={`Habit${i}`} />;
             })}
         </div>
       </div>
