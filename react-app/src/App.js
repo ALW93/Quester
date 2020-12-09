@@ -13,6 +13,7 @@ import { getTasks } from "./store/actions/tasksReducer";
 import { getCategories } from "./store/actions/categoryReducer";
 import { getHabits } from "./store/actions/habitReducer";
 import { getStats } from "./store/actions/statReducer";
+import { WindMillLoading } from "react-loadingg";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -34,7 +35,7 @@ function App() {
   }, []);
 
   if (!loaded) {
-    return null;
+    return <WindMillLoading />;
   }
 
   return (

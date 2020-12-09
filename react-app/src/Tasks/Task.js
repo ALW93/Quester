@@ -4,17 +4,25 @@ import Category from "../Shared/Category";
 import { useDispatch } from "react-redux";
 import { parseDifficulty } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
+import { BlockLoading } from "react-loadingg";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
+
+  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       const cats = await dispatch(getTaskCategory(t.id));
       await setCategories(cats);
+      setLoaded(true);
     })();
   }, [t]);
+
+  if (!loaded) {
+    return <BlockLoading />;
+  }
 
   return (
     <>
@@ -25,7 +33,7 @@ const Task = ({ t }) => {
       {t.deadline ? <li>deadline: {t.deadline}</li> : <li>No Deadline</li>}
       {categories &&
         categories.map((c, i) => {
-          return <Category data={c} key={`TaskCategory${i}`} />;
+          return <Category cats={c} key={`TaskCategory${i}`} />;
         })}
       <div>
         {/* <Button variant="contained" color="primary">
