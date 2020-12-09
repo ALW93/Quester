@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { TextField, FormControl } from "@material-ui/core";
+import { TextField, FormControl, Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import CategorySelector from "../Shared/CategorySelector";
+import { getHabits, newHabit } from "../store/actions/habitReducer";
 
-const HabitForm = () => {
+const HabitForm = ({ setHabitForm, setHabits }) => {
   const user = useSelector((state) => state.session.user);
   const cats = useSelector((state) => state.categories.categories);
   const [categories, setCategories] = useState([]);
@@ -30,10 +31,14 @@ const HabitForm = () => {
 
   useEffect(() => {
     (async () => {
-      //   await dispatch(newHabit(user.id, newtask));
-      //   await setTasks(dispatch(getHabits(user.id)));
+      await dispatch(newHabit(user.id, newhabit));
+      await setHabits(dispatch(getHabits(user.id)));
     })();
   }, [newhabit]);
+
+  const updateName = (e) => {
+    setName(e.target.value);
+  };
 
   const updateCats = (e) => {
     let arr = [...habitcat, e.target.value];
@@ -47,13 +52,16 @@ const HabitForm = () => {
   return (
     <>
       <div>
-        <form>
+        <form onSubmit={habitSubmit}>
           <div>
-            <TextField placeholder={name} />
+            <TextField placeholder={name} onChange={updateName} />
           </div>
           <FormControl>
             <CategorySelector categories={categories} updateCats={updateCats} />
           </FormControl>
+          <div>
+            <Button type="submit">Submit</Button>
+          </div>
         </form>
       </div>
     </>

@@ -38,6 +38,7 @@ export const newTask = (id, payload) => async (dispatch) => {
   if (data) {
     return dispatch(addTask(payload));
   }
+  return data;
 };
 
 export const taskReducer = (state = { allTasks: [] }, action) => {

@@ -8,7 +8,6 @@ import {
   Button,
   Select,
   MenuItem,
-  Checkbox,
   FormControl,
 } from "@material-ui/core";
 import { newTask, getTasks } from "../store/actions/tasksReducer";
