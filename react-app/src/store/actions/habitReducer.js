@@ -12,6 +12,22 @@ export const getHabits = (id) => async (dispatch) => {
   return data.habits;
 };
 
+// Get Categories Associated with a Task
+export const getHabitCategory = (id) => async (dispatch) => {
+  if (id) {
+    const response = await fetch(`/api/habits/${id}/cat`);
+    const data = await response.json();
+    return data.categories;
+  }
+};
+
+// Get checks for a specific habit
+export const getHabitChecks = (habitId) => async (dispatch) => {
+  const response = await fetch(`/api/habits/${habitId}/checks`);
+  const data = await response.json();
+  return data;
+};
+
 export const habitReducer = (state = { habits: [] }, action) => {
   switch (action.type) {
     case SET_HABITS: {

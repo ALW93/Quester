@@ -1,6 +1,6 @@
 import React from "react";
 import "./Homepage.css";
-import Avatar from "../Avatar/Avatar";
+import User from "../User/User";
 import QuestLog from "../QuestLog/QuestLog";
 import LogoutButton from "../Shared/LogoutButton";
 
@@ -14,7 +14,7 @@ const Homepage = () => {
       </div>
       <div className="homepage__bottom">
         <div className="homepage__bottom-left">
-          <Avatar />
+          <User />
         </div>
         <div className="homepage__bottom-right">
           <QuestLog />

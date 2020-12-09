@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import Category from "../Shared/Category";
 import { useDispatch } from "react-redux";
+import { parseDifficulty } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
 
 const Task = ({ t }) => {
@@ -18,8 +19,8 @@ const Task = ({ t }) => {
   return (
     <>
       <li>{t.name}</li>
-      <li>difficulty: {t.difficulty}</li>
-      <li>frequency: {t.frequency}</li>
+      <li>difficulty: {parseDifficulty(t.difficulty)}</li>
+      <li>repeat: {t.frequency}</li>
       <li>status: {t.status}</li>
       {t.deadline ? <li>deadline: {t.deadline}</li> : <li>No Deadline</li>}
       {categories &&
@@ -27,9 +28,9 @@ const Task = ({ t }) => {
           return <Category data={c} />;
         })}
       <div>
-        <Button variant="contained" color="primary">
+        {/* <Button variant="contained" color="primary">
           Edit
-        </Button>
+        </Button> */}
         <Button variant="contained" color="secondary">
           Delete
         </Button>
