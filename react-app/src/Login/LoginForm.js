@@ -13,8 +13,8 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const authorized = useSelector((state) => state.auth.auth);
-  const form = useSelector((state) => state.util.visible);
+  const authorized = useSelector((state) => state.session.auth);
+  const form = useSelector((state) => state.utility.visible);
 
   const onLogin = async (e) => {
     e.preventDefault();

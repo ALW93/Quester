@@ -40,3 +40,4 @@ def delete_habit(id):
     if delete_habit:
         db.session.delete(delete_habit)
         db.session.commit()
+    return {"message": "Success"}
