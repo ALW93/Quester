@@ -8,10 +8,9 @@ import { getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
-const Task = ({ t, setTasks }) => {
+const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [deleteTask, setDeleteTask] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +22,6 @@ const Task = ({ t, setTasks }) => {
   }, [t]);
 
   const deleteHandler = async () => {
-    console.log("hitting");
     await dispatch(removeTask(t.id));
   };
 

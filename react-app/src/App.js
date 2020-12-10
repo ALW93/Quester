@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import LoginForm from "./Login/LoginForm";
 import SignUpForm from "./Login/SignUpForm";
 import ProtectedRoute from "./services/ProtectedRoute";
-import User from "./Profile/User";
 import Homepage from "./Homepage/Homepage";
 import CreateAvatar from "./User/CreateAvatar";
 import { useDispatch } from "react-redux";
@@ -49,9 +48,6 @@ function App() {
       <Route path="/create-avatar">
         <CreateAvatar />
       </Route>
-      <ProtectedRoute path="/users/:userId" exact={true}>
-        <User />
-      </ProtectedRoute>
       <ProtectedRoute path="/" exact={true}>
         <Homepage />
       </ProtectedRoute>
