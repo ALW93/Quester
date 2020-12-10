@@ -8,3 +8,22 @@ body {
 h1 {
   font-family: "Permanent Marker", cursive;
 }
+
+.category__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    ". . . . .";
+  height: 14rem;
+  width: fit-content;
+  border: 1px solid red;
+}
+
+.category__content {
+  width: 10rem;
+  height: 7rem;
+  border: 1px solid blue;
+}

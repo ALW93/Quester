@@ -10,7 +10,7 @@ const Tasks = () => {
   const data = useSelector((state) => state.tasks.allTasks);
   const [tasks, setTasks] = useState([]);
   const [taskForm, setTaskForm] = useState(false);
-  const [catForm, setCatForm] = useState(false);
+  const [catForm, setCatForm] = useState(true);
 
   useEffect(() => {
     setTasks(data);
