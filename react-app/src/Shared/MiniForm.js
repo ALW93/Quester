@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { newCategory } from "../store/actions/categoryReducer";
 import { Button, TextField, Select, MenuItem } from "@material-ui/core";
 
 export const MiniForm = ({ num }) => {
   const user = useSelector((state) => state.session.user);
   const stats = useSelector((state) => state.stats.stats);
+  const dispatch = useDispatch();
   const [mini, setMini] = useState(false);
   const [name, setName] = useState("");
   const [stat, setStat] = useState(0);
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     const new_category = {
-      userId: user.id,
       name: name,
-      statId: stat,
+      stat_id: stat,
     };
     console.log(new_category);
+    dispatch(newCategory(user.id, new_category));
   };
 
   const updateName = (e) => {

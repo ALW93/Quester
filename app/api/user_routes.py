@@ -155,7 +155,7 @@ def get_stats(id):
     return stat_json
 
 
-@user_routes.route('/<int:id>/categories')
+@user_routes.route('/<int:id>/categories', methods=["POST"])
 @login_required
 def new_category(id):
     """POST a new Category for a User"""
@@ -164,7 +164,7 @@ def new_category(id):
         new_cat = Category(
             user_id=id,
             name=data["name"],
-            stat_id=data["statId"]
+            stat_id=data["stat_id"]
         )
         db.session.add(new_cat)
         db.session.commit()
