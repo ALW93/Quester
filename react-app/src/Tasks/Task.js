@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
 import { useDispatch } from "react-redux";
@@ -28,12 +28,22 @@ const Task = ({ t }) => {
 
   return (
     <>
-      <div className="task">
-        <li>{t.name}</li>
-        <li>difficulty: {parseDifficulty(t.difficulty)}</li>
+      <Paper className="task">
+        <div className="task__title">
+          <h1>{t.name}</h1>
+          <div>
+            <h1>hard</h1>
+            {parseDifficulty(t.difficulty)}
+          </div>
+        </div>
+
         <li>repeat: {t.frequency}</li>
         <li>status: {t.status}</li>
-        {t.deadline ? <li>deadline: {t.deadline}</li> : <li>No Deadline</li>}
+        {t.deadline ? (
+          <li>Expires In: {t.deadline}</li>
+        ) : (
+          <li>No Expiration</li>
+        )}
         {categories &&
           categories.map((c, i) => {
             return <Category data={c} key={`TaskCategory${i}`} />;
@@ -46,7 +56,7 @@ const Task = ({ t }) => {
             <DeleteOutlineIcon style={{ fill: "red" }} />
           </Button>
         </div>
-      </div>
+      </Paper>
     </>
   );
 };

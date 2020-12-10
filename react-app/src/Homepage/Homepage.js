@@ -9,7 +9,7 @@ const Homepage = () => {
     <>
       <div className="homepage__topbar">
         <div>{new Date().toLocaleString()}</div>
-        <div>Quester</div>
+        <h1>Quester</h1>
         <LogoutButton />
       </div>
       <div className="homepage__bottom">

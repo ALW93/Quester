@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import { Paper, Button } from "@material-ui/core";
+import "./Category.css";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { CircleLoading } from "react-loadingg";
 
 const Category = ({ data }) => {
   const [stat, setStat] = useState("");
@@ -23,8 +23,25 @@ const Category = ({ data }) => {
 
   return (
     <>
-      <Button variant="outlined">{data.name}</Button>
-      {stat.name} <KeyboardArrowUpIcon />
+      <Paper
+        variant="outlined"
+        square
+        style={{
+          padding: "5px",
+          backgroundColor: "beige",
+          width: "fit-content",
+        }}
+      >
+        <div>
+          <b>{data.name}</b>
+        </div>
+        <div className="stat__container">
+          <div>{stat.name}</div>
+          <div className="test">
+            <KeyboardArrowUpIcon />
+          </div>
+        </div>
+      </Paper>
     </>
   );
 };
