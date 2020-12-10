@@ -10,7 +10,7 @@ const Tasks = () => {
   const data = useSelector((state) => state.tasks.allTasks);
   const [tasks, setTasks] = useState([]);
   const [taskForm, setTaskForm] = useState(false);
-  const [catForm, setCatForm] = useState(true);
+  const [catForm, setCatForm] = useState(false);
 
   useEffect(() => {
     setTasks(data);
@@ -50,7 +50,7 @@ const Tasks = () => {
       {taskForm ? (
         <TaskForm setTaskForm={setTaskForm} setTasks={setTasks} />
       ) : null}
-      {catForm ? <CategoryForm /> : null}
+      {catForm ? <CategoryForm setCatForm={setCatForm} /> : null}
       {tasks &&
         tasks.map((t) => {
           return <Task t={t} setTasks={setTasks} />;

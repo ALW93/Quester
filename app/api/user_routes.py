@@ -103,7 +103,7 @@ def get_tasks(id):
     """
     Load all Tasks for a User
     """
-    tasks = Task.query.filter(Task.user_id == id).all()
+    tasks = Task.query.filter(Task.user_id == id).filter(Task.status != "complete").all()
     task_dicts = [task.to_dict() for task in tasks]
     task_json = jsonify({'tasks': task_dicts})
     return task_json
