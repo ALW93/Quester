@@ -35,7 +35,6 @@ const HabitContainer = ({ data }) => {
   return (
     <>
       <h1>{data.name}</h1>
-      {JSON.stringify(parsed)}
       <div>
         {Info.weekdays().map((day, i) => {
           const currentDay = DateTime.local()

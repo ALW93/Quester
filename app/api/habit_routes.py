@@ -20,3 +20,13 @@ def habit_checks(id):
     checks = [check.to_dict() for check in data]
     check_json = jsonify({'checks': checks})
     return check_json
+
+
+@habit_routes.route("/<int:id>/cat")
+@login_required
+def habit_categories(id):
+    """Get Categories for a Specific Habit"""
+    habitCats = Category.query.filter(Habit_Category.habit_id == id, Habit_Category.category_id == Category.id).all()
+    cat_dicts = [cat.to_dict() for cat in habitCats]
+    cat_json = jsonify({'categories': cat_dicts})
+    return cat_json
