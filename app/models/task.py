@@ -12,7 +12,8 @@ class Task(db.Model):
     frequency = c(db.String(255), nullable=False)
     status = c(db.String(50), nullable=False)
 
-    categories = db.relationship('Task_Category', backref="task", lazy="joined")
+    categories = db.relationship('Task_Category', backref="task",
+                                 lazy="joined", cascade="all, delete-orphan")
 
 
     def to_dict(self):

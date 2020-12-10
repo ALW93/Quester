@@ -5,6 +5,7 @@ const DELETE_TASK = "Quest/tasks/DELETE_TASK";
 
 export const setTasks = (data) => ({ type: SET_TASKS, data });
 export const addTask = (task) => ({ type: ADD_TASK, task });
+export const deleteTask = (payload) => ({ type: DELETE_TASK, payload });
 
 // Get all tasks created by User
 export const getTasks = (id) => async (dispatch) => {
@@ -41,6 +42,21 @@ export const newTask = (id, payload) => async (dispatch) => {
   return data;
 };
 
+// Delete a Task
+export const removeTask = (taskId) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${taskId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+  if (data) {
+    dispatch(deleteTask(taskId));
+  }
+  return data;
+};
+
 export const taskReducer = (state = { allTasks: [] }, action) => {
   switch (action.type) {
     case SET_TASKS: {
@@ -49,6 +65,12 @@ export const taskReducer = (state = { allTasks: [] }, action) => {
     case ADD_TASK: {
       const newTasks = [...state.allTasks, action.task];
       return { ...state, allTasks: newTasks };
+    }
+    case DELETE_TASK: {
+      return {
+        ...state,
+        allTasks: state.allTasks.filter((task) => task.id !== action.payload),
+      };
     }
     default:
       return state;

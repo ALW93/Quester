@@ -5,13 +5,13 @@ import Category from "../Shared/Category";
 import { useDispatch } from "react-redux";
 import { parseDifficulty } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
-import { BlockLoading } from "react-loadingg";
+import { removeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
-const Task = ({ t }) => {
+const Task = ({ t, setTasks }) => {
   const [categories, setCategories] = useState([]);
-
   const [loaded, setLoaded] = useState(false);
+  const [deleteTask, setDeleteTask] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,8 +22,13 @@ const Task = ({ t }) => {
     })();
   }, [t]);
 
+  const deleteHandler = async () => {
+    console.log("hitting");
+    await dispatch(removeTask(t.id));
+  };
+
   if (!loaded) {
-    return <BlockLoading />;
+    return null;
   }
 
   return (
@@ -52,7 +57,7 @@ const Task = ({ t }) => {
           {/* <Button variant="contained" color="primary">
           Edit
         </Button> */}
-          <Button>
+          <Button onClick={deleteHandler}>
             <DeleteOutlineIcon style={{ fill: "red" }} />
           </Button>
         </div>
