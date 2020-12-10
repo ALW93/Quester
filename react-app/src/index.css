@@ -1,4 +1,10 @@
-/* TODO Add site wide styles */
+@import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
+
 body {
   padding: 30px;
+  font-family: "Andika New Basic", sans-serif;
+}
+
+h1 {
+  font-family: "Permanent Marker", cursive;
 }

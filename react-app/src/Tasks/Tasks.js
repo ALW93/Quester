@@ -53,7 +53,7 @@ const Tasks = () => {
       {catForm ? <CategoryForm /> : null}
       {tasks &&
         tasks.map((t) => {
-          return <Task t={t} />;
+          return <Task t={t} setTasks={setTasks} />;
         })}
     </>
   );
