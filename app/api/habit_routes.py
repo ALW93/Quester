@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, Habit, Habit_Category, Check
+from app.models import db, Habit, Habit_Category, Check, Category
 from datetime import datetime, timedelta, date
 
 dt = datetime.strptime(str(date.today()), '%Y-%m-%d')

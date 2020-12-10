@@ -14,7 +14,7 @@ export const getHabits = (id) => async (dispatch) => {
   return data.habits;
 };
 
-// Get Categories Associated with a Task
+// Get Categories Associated with a Habit
 export const getHabitCategory = (id) => async (dispatch) => {
   if (id) {
     const response = await fetch(`/api/habits/${id}/cat`);
