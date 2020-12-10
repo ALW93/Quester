@@ -10,7 +10,7 @@ class Habit(db.Model):
     name = c(db.String(50), nullable=False, unique=True)
     checks = db.relationship('Check', backref="habit", lazy=True)
 
-    categories = db.relationship('Habit_Category', backref="habit", lazy="joined")
+    categories = db.relationship('Habit_Category', backref="habit", lazy="joined", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -19,6 +19,7 @@ class Habit(db.Model):
             "userId": self.user_id,
             "name": self.name,
         }
+
 
 class Habit_Category(db.Model):
     __tablename__ = "habit_categories"

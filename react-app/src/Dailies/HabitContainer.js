@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Info from "luxon/src/info.js";
 import { useDispatch } from "react-redux";
+import { Button } from "@material-ui/core";
 import {
   getHabitCategory,
   getHabitChecks,
 } from "../store/actions/habitReducer";
 import DateTime from "luxon/src/datetime.js";
 import Category from "../Shared/Category";
+import { removeHabit } from "../store/actions/habitReducer";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
@@ -46,9 +48,18 @@ const HabitContainer = ({ data }) => {
     }
   }, [checks]);
 
+  const deleteHandler = async () => {
+    await dispatch(removeHabit(data.id));
+  };
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <>
       <h1>{data.name}</h1>
+      <Button onClick={deleteHandler}>Delete</Button>
       <div>
         {Info.weekdays().map((day, i) => {
           const currentDay = DateTime.local()

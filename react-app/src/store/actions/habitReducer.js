@@ -1,8 +1,10 @@
 const SET_HABITS = "Quester/habits/SET_HABITS";
 const ADD_HABIT = "Quester/habits/ADD_HABIT";
+const DELETE_HABIT = "Quester/habits/DELETE_HABIT";
 
 export const setHabits = (payload) => ({ type: SET_HABITS, payload });
 export const addHabit = (habit) => ({ type: ADD_HABIT, habit });
+export const deleteHabit = (id) => ({ type: DELETE_HABIT, id });
 
 // Get all habits created by User
 export const getHabits = (id) => async (dispatch) => {
@@ -31,6 +33,21 @@ export const getHabitChecks = (habitId) => async (dispatch) => {
   return data.checks;
 };
 
+// DELETE a Habit
+export const removeHabit = (id) => async (dispatch) => {
+  const response = await fetch(`/api/habits/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+  if (data) {
+    dispatch(deleteHabit(id));
+  }
+  return data;
+};
+
 // POST a new Habit
 export const newHabit = (id, payload) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}/habits`, {
@@ -55,6 +72,12 @@ export const habitReducer = (state = { habits: [] }, action) => {
     case ADD_HABIT: {
       const newHabits = [...state.habits, action.habit];
       return { ...state, habits: newHabits };
+    }
+    case DELETE_HABIT: {
+      return {
+        ...state,
+        habits: state.habits.filter((habit) => habit.id !== action.id),
+      };
     }
     default:
       return state;

@@ -30,3 +30,13 @@ def habit_categories(id):
     cat_dicts = [cat.to_dict() for cat in habitCats]
     cat_json = jsonify({'categories': cat_dicts})
     return cat_json
+
+
+@habit_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_habit(id):
+    """Delete a specific Habit"""
+    delete_habit = Habit.query.get(id)
+    if delete_habit:
+        db.session.delete(delete_habit)
+        db.session.commit()

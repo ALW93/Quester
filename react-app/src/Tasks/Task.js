@@ -22,7 +22,6 @@ const Task = ({ t }) => {
   }, [t]);
 
   const deleteHandler = async () => {
-    console.log("hitting");
     await dispatch(removeTask(t.id));
   };
 
