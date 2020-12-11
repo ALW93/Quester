@@ -40,9 +40,9 @@ def post_check(id):
 
 @habit_routes.route("/checks/<int:id>", methods=["DELETE"])
 @login_required
-def delete_check(check_id):
+def delete_check(id):
     """Delete Check from a Habit"""
-    delete_check = Check.query.get(check_id)
+    delete_check = Check.query.get(id)
     if delete_check:
         db.session.delete(delete_check)
         db.session.commit()
