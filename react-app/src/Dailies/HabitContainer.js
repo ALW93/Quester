@@ -21,6 +21,7 @@ const HabitContainer = ({ data }) => {
   const [parsed, setParsed] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [remove, setRemove] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const HabitContainer = ({ data }) => {
       const checkQuery = await dispatch(getHabitChecks(data.id));
       await setChecks(checkQuery);
     })();
-  }, [data]);
+  }, [data, remove]);
 
   useEffect(() => {
     (async () => {
@@ -49,7 +50,7 @@ const HabitContainer = ({ data }) => {
       });
       setParsed(parsed);
     }
-  }, [checks]);
+  }, [checks, setChecks]);
 
   const deleteHandler = async () => {
     await dispatch(removeHabit(data.id));
@@ -68,11 +69,12 @@ const HabitContainer = ({ data }) => {
   };
 
   const checkRemover = async (display) => {
+    setLoaded(false);
     const short = display.slice(0, 3);
     const id = checks.filter((e) => e.date.includes(short))[0].id;
     await dispatch(removeCheck(data.id, id));
-    const checkQuery = await dispatch(getHabitChecks(data.id));
-    await setChecks(checkQuery);
+    await setRemove(id);
+    setLoaded(true);
   };
 
   if (!loaded) {

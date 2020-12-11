@@ -12,6 +12,7 @@ import DateTime from "luxon/src/datetime.js";
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [expired, setExpired] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +35,9 @@ const Task = ({ t }) => {
     const now = DateTime.local();
     const expiration = DateTime.fromHTTP(t.deadline);
     const time = expiration.diff(now, ["days", "hours"]).toObject();
+    if (time.days < 0) {
+      return "Expired";
+    }
     return time;
   };
 
@@ -54,7 +58,7 @@ const Task = ({ t }) => {
         {t.deadline ? (
           <>
             <li>
-              Expires In: {timeLeft().days} Days{"  "}
+              Time Remaining: {timeLeft().days} Days{"  "}
               {Math.round(timeLeft().hours)} Hours
             </li>
           </>
