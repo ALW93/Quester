@@ -43,9 +43,9 @@ export const postCheck = (habitId, payload) => async (dispatch) => {
     body: JSON.stringify(payload),
   });
   const data = await response.json();
-  if (data) {
-    return dispatch(getHabitChecks(habitId));
-  }
+
+  await dispatch(getHabitChecks(habitId));
+
   return data;
 };
 

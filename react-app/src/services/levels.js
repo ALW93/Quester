@@ -1,3 +1,4 @@
+import React from "react";
 export const parseLevel = (exp) => {
   if (exp < 300) {
     return 1;
@@ -17,9 +18,39 @@ export const parseStatLevel = (points) => {
 };
 
 export const parseDifficulty = (num) => {
-  if (num === 1) return "⭐";
-  if (num === 2) return "⭐⭐";
-  if (num === 3) return "⭐⭐⭐";
-  if (num === 4) return "⭐⭐⭐⭐";
-  if (num === 5) return "⭐⭐⭐⭐⭐";
+  if (num === 1) {
+    return (
+      <>
+        <h1 style={{ color: "lightblue" }}>Very Easy</h1>⭐
+      </>
+    );
+  }
+  if (num === 2) {
+    return (
+      <>
+        <h1 style={{ color: "green" }}>Easy</h1>⭐⭐
+      </>
+    );
+  }
+  if (num === 3) {
+    return (
+      <>
+        <h1 style={{ color: "indigo" }}>Normal</h1>⭐⭐⭐
+      </>
+    );
+  }
+  if (num === 4) {
+    return (
+      <>
+        <h1 style={{ color: "orange" }}>Hard</h1>⭐⭐⭐⭐
+      </>
+    );
+  }
+  if (num === 5) {
+    return (
+      <>
+        <h1 style={{ color: "red" }}>Very Hard</h1>⭐⭐⭐⭐⭐
+      </>
+    );
+  }
 };
