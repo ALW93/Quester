@@ -22,7 +22,6 @@ const HabitContainer = ({ data }) => {
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  console.log(checks, parsed);
 
   useEffect(() => {
     (async () => {
@@ -63,14 +62,17 @@ const HabitContainer = ({ data }) => {
       user_id: user.id,
       habit_id: data.id,
     };
-    console.log(value);
-    // await dispatch(postCheck(data.id, new_check));
-    // const checkQuery = await dispatch(getHabitChecks(data.id));
-    // await setChecks(checkQuery);
+    await dispatch(postCheck(data.id, new_check));
+    const checkQuery = await dispatch(getHabitChecks(data.id));
+    await setChecks(checkQuery);
   };
 
-  const checkRemover = async () => {
-    console.log("check removed");
+  const checkRemover = async (display) => {
+    const short = display.slice(0, 3);
+    const id = checks.filter((e) => e.date.includes(short))[0].id;
+    await dispatch(removeCheck(data.id, id));
+    const checkQuery = await dispatch(getHabitChecks(data.id));
+    await setChecks(checkQuery);
   };
 
   if (!loaded) {
@@ -118,7 +120,7 @@ const HabitContainer = ({ data }) => {
                   {parsed.includes(currentDay) ? (
                     <CheckBoxIcon
                       style={{ fill: "green" }}
-                      onClick={checkRemover}
+                      onClick={() => checkRemover(display)}
                     />
                   ) : (
                     <CheckBoxOutlineBlankIcon
