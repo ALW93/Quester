@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, User, Avatar, Task, Category, Task_Category, Habit, Stat, Habit_Category
+from app.models import db, User, Avatar, Task, Category, Task_Category, Habit, Stat, Habit_Category, friends, messages
 from datetime import date
 
 user_routes = Blueprint('users', __name__)
@@ -171,3 +171,23 @@ def new_category(id):
         db.session.add(new_cat)
         db.session.commit()
         return new_cat.to_dict()
+
+
+@user_routes.route('/<int:id>/friends')
+@login_required
+def get_friends(id):
+    """Returns List of User's Friends"""
+    user_friends = friends.query.filter(friends.friend_a_id == id).all()
+    friend_dict = [friend for friend in user_friends]
+    friend_json = jsonify({"friends": friend_dict})
+    return friend_json
+
+
+@user_routes.route('/<int:id>/messages')
+@login_required
+def get_messages(id):
+    """Returns List of User's Messages"""
+    user_msg = messages.query.filter(messages.receiver_id == id).all()
+    msg_dict = [msg for msg in user_msg]
+    msg_json = jsonify({"messages": msg_dict})
+    return msg_json
