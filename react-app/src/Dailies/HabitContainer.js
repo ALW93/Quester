@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Info from "luxon/src/info.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
 import {
   getHabitCategory,
   getHabitChecks,
+  postCheck,
+  removeCheck,
 } from "../store/actions/habitReducer";
 import DateTime from "luxon/src/datetime.js";
 import Category from "../Shared/Category";
@@ -14,11 +16,13 @@ import "./Habit.css";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
 const HabitContainer = ({ data }) => {
+  const user = useSelector((state) => state.session.user);
   const [checks, setChecks] = useState([]);
   const [parsed, setParsed] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  console.log(checks, parsed);
 
   useEffect(() => {
     (async () => {
@@ -38,7 +42,6 @@ const HabitContainer = ({ data }) => {
   useEffect(() => {
     if (checks.length) {
       const parsed = checks.map((c) => {
-        console.log(c.date);
         return DateTime.fromHTTP(`${c.date}`, { zone: "utc" }).toLocaleString({
           weekday: "long",
           month: "2-digit",
@@ -53,8 +56,21 @@ const HabitContainer = ({ data }) => {
     await dispatch(removeHabit(data.id));
   };
 
-  const checkHandler = async () => {
+  const checkHandler = async (value) => {
     console.log("checked!");
+    const new_check = {
+      date: value,
+      user_id: user.id,
+      habit_id: data.id,
+    };
+    console.log(value);
+    // await dispatch(postCheck(data.id, new_check));
+    // const checkQuery = await dispatch(getHabitChecks(data.id));
+    // await setChecks(checkQuery);
+  };
+
+  const checkRemover = async () => {
+    console.log("check removed");
   };
 
   if (!loaded) {
@@ -84,6 +100,10 @@ const HabitContainer = ({ data }) => {
               month: "2-digit",
               day: "2-digit",
             });
+          const value = DateTime.local()
+            .startOf("week")
+            .plus({ days: i })
+            .toHTTP({ zone: "est" });
           const display = DateTime.local()
             .startOf("week")
             .plus({ days: i })
@@ -96,9 +116,14 @@ const HabitContainer = ({ data }) => {
                 <div>{display}</div>
                 <div>
                   {parsed.includes(currentDay) ? (
-                    <CheckBoxIcon style={{ fill: "green" }} />
+                    <CheckBoxIcon
+                      style={{ fill: "green" }}
+                      onClick={checkRemover}
+                    />
                   ) : (
-                    <CheckBoxOutlineBlankIcon onClick={checkHandler} />
+                    <CheckBoxOutlineBlankIcon
+                      onClick={() => checkHandler(value)}
+                    />
                   )}
                 </div>
               </div>

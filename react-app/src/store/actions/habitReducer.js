@@ -33,6 +33,37 @@ export const getHabitChecks = (habitId) => async (dispatch) => {
   return data.checks;
 };
 
+// POST a check for a specific habit
+export const postCheck = (habitId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/habits/${habitId}/checks`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  const data = await response.json();
+  if (data) {
+    return dispatch(getHabitChecks(habitId));
+  }
+  return data;
+};
+
+// DELETE a Check
+export const removeCheck = (habitId, checkId) => async (dispatch) => {
+  const response = await fetch(`/api/habits/checks/${checkId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+  if (data) {
+    return dispatch(getHabitChecks(habitId));
+  }
+  return data;
+};
+
 // DELETE a Habit
 export const removeHabit = (id) => async (dispatch) => {
   const response = await fetch(`/api/habits/${id}`, {

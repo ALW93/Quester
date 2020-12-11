@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, date
 
 dt = datetime.strptime(str(date.today()), '%Y-%m-%d')
 start = dt - timedelta(days=dt.weekday())
-end = start + timedelta(days=6)
+end = start + timedelta(days=7)
 
 habit_routes = Blueprint("habits", __name__)
 
@@ -21,15 +21,15 @@ def habit_checks(id):
     return check_json
 
 
-@habit_routes.route("/<int:id>/checks", method=["POST"])
+@habit_routes.route("/<int:id>/checks", methods=["POST"])
 @login_required
 def post_check(id):
     """POST Check for a Habit"""
-    data = request.jsonify
+    data = request.json
     if data:
         new_check = Check(
-            date=dt,
-            user_id=id,
+            date=data["date"],
+            user_id=data["user_id"],
             habit_id=data["habit_id"]
         )
         db.session.add(new_check)
@@ -38,7 +38,7 @@ def post_check(id):
     return {"error": "Something went wrong..."}
 
 
-@habit_routes.route("/checks/<int:id>", method=["DELETE"])
+@habit_routes.route("/checks/<int:id>", methods=["DELETE"])
 @login_required
 def delete_check(check_id):
     """Delete Check from a Habit"""
