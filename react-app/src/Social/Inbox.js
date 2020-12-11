@@ -7,7 +7,7 @@ const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
   return (
     <>
-      <div>
+      <div className="social__container--inbox">
         <div>
           <h1>Inbox</h1>
         </div>
