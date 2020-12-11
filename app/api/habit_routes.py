@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, date
 
 dt = datetime.strptime(str(date.today()), '%Y-%m-%d')
 start = dt - timedelta(days=dt.weekday())
-end = start + timedelta(days=6)
+end = start + timedelta(days=7)
 
 habit_routes = Blueprint("habits", __name__)
 
@@ -14,12 +14,39 @@ habit_routes = Blueprint("habits", __name__)
 @login_required
 def habit_checks(id):
     """Get Checks for a Habit"""
-    dates = request.json
     data = Check.query.filter(Check.habit_id == id) \
         .filter(Check.date >= start).filter(Check.date <= end).all()
     checks = [check.to_dict() for check in data]
     check_json = jsonify({'checks': checks})
     return check_json
+
+
+@habit_routes.route("/<int:id>/checks", methods=["POST"])
+@login_required
+def post_check(id):
+    """POST Check for a Habit"""
+    data = request.json
+    if data:
+        new_check = Check(
+            date=data["date"],
+            user_id=data["user_id"],
+            habit_id=data["habit_id"]
+        )
+        db.session.add(new_check)
+        db.session.commit()
+        return new_check.to_dict()
+    return {"error": "Something went wrong..."}
+
+
+@habit_routes.route("/checks/<int:id>", methods=["DELETE"])
+@login_required
+def delete_check(id):
+    """Delete Check from a Habit"""
+    delete_check = Check.query.get(id)
+    if delete_check:
+        db.session.delete(delete_check)
+        db.session.commit()
+    return {"message": "Success"}
 
 
 @habit_routes.route("/<int:id>/cat")
