@@ -1,11 +1,11 @@
-const gacha = (type, difficulty) => {
-  let output = { exp: 0, currency: 0, health: 0 };
+export const gacha = (type, difficulty) => {
   const multi = gachaMultiplier();
-  console.log("multi", multi);
+  let output = { exp: 0, currency: 0, health: 0, gacha: multi || 1, points: 0 };
   if (type === "complete_task") {
-    output.exp = Math.round(difficulty * 10 * (multi / 1.5 || 1));
+    output.exp = difficulty * 10;
     output.currency = difficulty * (multi || 1);
     output.health = difficulty;
+    output.points = difficulty * ((multi || 1) / 2);
   }
   if (type === "expire_task") {
     output.health = -Math.round((multi || 1) * 2);

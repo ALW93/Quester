@@ -8,6 +8,7 @@ import { getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import DateTime from "luxon/src/datetime.js";
+import { gacha } from "../services/gacha";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
@@ -27,7 +28,7 @@ const Task = ({ t }) => {
       const expiration = DateTime.fromHTTP(t.deadline);
       const time = expiration.diff(now, ["days", "hours"]).toObject();
       if (time.days < 0) {
-        alert(`${t.name} has expired! You lost 10 HP!`);
+        // alert(`${t.name} has expired! You lost 10 HP!`);
         setExpired(true);
       }
       setTime(time);
@@ -40,7 +41,13 @@ const Task = ({ t }) => {
   };
 
   const completeHandler = async () => {
-    await dispatch(completeTask(t.id));
+    const payload = gacha("complete_task", t.difficulty);
+    if (categories.length) {
+      payload.statId = await categories.map((e) => e.stat_id);
+    }
+
+    // alert(`Collected ${payload.currency} coins!`);
+    await dispatch(completeTask(t.id, payload));
   };
 
   if (!loaded) {

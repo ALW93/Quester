@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Task_Category, Category, Task, User
+from app.models import db, Task_Category, Category, Task, User, Stat
 from flask_login import login_required
+import sys
 
 
 task_routes = Blueprint('tasks', __name__)
@@ -43,11 +44,26 @@ def expire_task(id):
 @task_routes.route('/<int:id>/complete', methods=["PUT"])
 @login_required
 def complete_task(id):
+
     """Complete a task"""
+
+    rewards = request.json
     task = Task.query.get(id)
     user = User.query.get(task.user_id)
+
     if task and user:
+        print('Hello world!', file=sys.stderr)
         task.status = "complete"
-        user.currency += task.difficulty
+        user.currency += rewards["currency"]
+        user.exp += rewards["exp"]
         db.session.commit()
-        return task.status
+        if user.health < 100:
+            user.health += rewards["health"]
+            db.session.commit()
+        for stat in rewards["statId"]:
+            current = Stat.query.get(stat)
+            current.points += rewards["points"]
+            db.session.commit()
+
+    db.session.commit()
+    return task.status
