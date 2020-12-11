@@ -10,6 +10,7 @@ import DateTime from "luxon/src/datetime.js";
 import Category from "../Shared/Category";
 import { removeHabit } from "../store/actions/habitReducer";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import "./Habit.css";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 
 const HabitContainer = ({ data }) => {
@@ -58,9 +59,18 @@ const HabitContainer = ({ data }) => {
 
   return (
     <>
-      <h1>{data.name}</h1>
-      <Button onClick={deleteHandler}>Delete</Button>
-      <div>
+      <div style={{ display: "flex " }}>
+        <h1>{data.name}</h1>
+        {categories &&
+          categories.map((c, i) => {
+            return <Category data={c} key={`habitCategory${i}`} />;
+          })}
+        <Button color="secondary" variant="contained" onClick={deleteHandler}>
+          Delete
+        </Button>
+      </div>
+
+      <div style={{ display: "flex" }}>
         {Info.weekdays().map((day, i) => {
           const currentDay = DateTime.local()
             .startOf("week")
@@ -70,10 +80,16 @@ const HabitContainer = ({ data }) => {
               month: "2-digit",
               day: "2-digit",
             });
+          const display = DateTime.local()
+            .startOf("week")
+            .plus({ days: i })
+            .toLocaleString({
+              weekday: "long",
+            });
           return (
             <>
               <div key={`Check${i}${day}`}>
-                {currentDay}
+                <div>{display}</div>
                 {parsed.includes(currentDay) ? (
                   <CheckBoxIcon style={{ fill: "green" }} />
                 ) : (
@@ -84,10 +100,6 @@ const HabitContainer = ({ data }) => {
           );
         })}
       </div>
-      {categories &&
-        categories.map((c, i) => {
-          return <Category data={c} key={`habitCategory${i}`} />;
-        })}
     </>
   );
 };
