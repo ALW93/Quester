@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Task_Category, Category, Task
+from app.models import db, Task_Category, Category, Task, User
 from flask_login import login_required
 
 
@@ -29,12 +29,25 @@ def delete_task(id):
         db.session.commit()
 
 
-@task_routes.route('/<int:id>', methods=["PUT"])
+@task_routes.route('/<int:id>/expire', methods=["PUT"])
+@login_required
+def expire_task(id):
+    """Expire a Task"""
+    task = Task.query.get(id)
+    if task:
+        task.status = "expired"
+        db.session.commit()
+        return task.status
+
+
+@task_routes.route('/<int:id>/complete', methods=["PUT"])
 @login_required
 def complete_task(id):
     """Complete a task"""
     task = Task.query.get(id)
-    if task:
+    user = User.query.get(task.user_id)
+    if task and user:
         task.status = "complete"
+        user.currency += 10
         db.session.commit()
         return task.status

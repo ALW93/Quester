@@ -48,6 +48,8 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+
+
     def to_dict(self):
         return {
           "id": self.id,
