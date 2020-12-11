@@ -48,6 +48,6 @@ def complete_task(id):
     user = User.query.get(task.user_id)
     if task and user:
         task.status = "complete"
-        user.currency += 10
+        user.currency += task.difficulty
         db.session.commit()
         return task.status
