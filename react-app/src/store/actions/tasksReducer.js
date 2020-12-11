@@ -57,6 +57,21 @@ export const removeTask = (taskId) => async (dispatch) => {
   return data;
 };
 
+// Complete a Task
+export const completeTask = (taskId) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${taskId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+  if (data) {
+    dispatch(deleteTask(taskId));
+  }
+  return data;
+};
+
 export const taskReducer = (state = { allTasks: [] }, action) => {
   switch (action.type) {
     case SET_TASKS: {

@@ -27,3 +27,14 @@ def delete_task(id):
     if delete_task:
         db.session.delete(delete_task)
         db.session.commit()
+
+
+@task_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def complete_task(id):
+    """Complete a task"""
+    task = Task.query.get(id)
+    if task:
+        task.status = "complete"
+        db.session.commit()
+        return task.status
