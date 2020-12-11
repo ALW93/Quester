@@ -177,17 +177,16 @@ def new_category(id):
 @login_required
 def get_friends(id):
     """Returns List of User's Friends"""
-    user_friends = friends.query.filter(friends.friend_a_id == id).all()
-    friend_dict = [friend for friend in user_friends]
-    friend_json = jsonify({"friends": friend_dict})
-    return friend_json
+    user_friends = db.session.query(friends).filter(friends.c.friend_a_id == id).all()
+    friendlist = [User.query.get(friend[2]).to_dict() for friend in user_friends]
+    return {'friends': friendlist}
 
 
 @user_routes.route('/<int:id>/messages')
 @login_required
 def get_messages(id):
     """Returns List of User's Messages"""
-    user_msg = messages.query.filter(messages.receiver_id == id).all()
+    user_msg = db.session.query(messages).filter(messages.c.receiver_id == id).all()
     msg_dict = [msg for msg in user_msg]
     msg_json = jsonify({"messages": msg_dict})
     return msg_json

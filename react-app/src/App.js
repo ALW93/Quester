@@ -12,6 +12,7 @@ import { getTasks } from "./store/actions/tasksReducer";
 import { getCategories } from "./store/actions/categoryReducer";
 import { getHabits } from "./store/actions/habitReducer";
 import { getStats } from "./store/actions/statReducer";
+import { getUserFriends, getUserMessages } from "./store/actions/userReducer";
 import { WindMillLoading } from "react-loadingg";
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         getCategories(user.id),
         getHabits(user.id),
         getStats(user.id),
+        getUserFriends(user.id),
+        getUserMessages(user.id),
       ]);
       setLoaded(true);
     })();
