@@ -7,6 +7,7 @@ import { parseDifficulty } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import DateTime from "luxon/src/datetime.js";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
@@ -29,6 +30,13 @@ const Task = ({ t }) => {
     await dispatch(completeTask(t.id));
   };
 
+  const timeLeft = () => {
+    const now = DateTime.local();
+    const expiration = DateTime.fromHTTP(t.deadline);
+    const time = expiration.diff(now, ["days", "hours"]).toObject();
+    return time;
+  };
+
   if (!loaded) {
     return null;
   }
@@ -44,7 +52,12 @@ const Task = ({ t }) => {
         {/* <li>repeat: {t.frequency}</li> */}
         <li>status: {t.status}</li>
         {t.deadline ? (
-          <li>Expires In: {t.deadline}</li>
+          <>
+            <li>
+              Expires In: {timeLeft().days} Days{"  "}
+              {Math.round(timeLeft().hours)} Hours
+            </li>
+          </>
         ) : (
           <li>No Expiration</li>
         )}
