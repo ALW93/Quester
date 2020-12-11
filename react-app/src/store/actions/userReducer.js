@@ -6,7 +6,7 @@ const setMessages = (payload) => ({ type: GET_MESSAGES, payload });
 
 export const getUserFriends = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/friends`);
-  const data = response.json();
+  const data = await response.json();
   if (data) {
     await dispatch(setFriends(data));
     return data;
@@ -17,7 +17,7 @@ export const getUserFriends = (userId) => async (dispatch) => {
 
 export const getUserMessages = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/messages`);
-  const data = response.json();
+  const data = await response.json();
   if (data) {
     await dispatch(setMessages(data));
     return data;
