@@ -38,10 +38,7 @@ const Task = ({ t }) => {
       <Paper className="task">
         <div className="task__title">
           <h1>{t.name}</h1>
-          <div>
-            <h1>hard</h1>
-            {parseDifficulty(t.difficulty)}
-          </div>
+          <div>{parseDifficulty(t.difficulty)}</div>
         </div>
 
         {/* <li>repeat: {t.frequency}</li> */}
