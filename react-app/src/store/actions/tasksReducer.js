@@ -58,16 +58,18 @@ export const removeTask = (taskId) => async (dispatch) => {
 };
 
 // Complete a Task
-export const completeTask = (taskId) => async (dispatch) => {
-  const response = await fetch(`/api/tasks/${taskId}`, {
+export const completeTask = (taskId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${taskId}/complete`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(payload),
   });
   const data = response.json();
   if (data) {
     dispatch(deleteTask(taskId));
+    console.log(data);
   }
   return data;
 };

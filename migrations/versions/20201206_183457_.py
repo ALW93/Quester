@@ -76,8 +76,8 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('custom', sa.Boolean(), nullable=False),
-    sa.Column('icon', sa.String(length=50), nullable=False),
-    sa.Column('points', sa.String(length=50), nullable=False),
+    sa.Column('color', sa.String(length=50), nullable=False),
+    sa.Column('points', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
