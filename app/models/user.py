@@ -57,3 +57,9 @@ class User(db.Model, UserMixin):
           "exp": self.exp,
           "health": self.health
         }
+
+    def short_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+        }
