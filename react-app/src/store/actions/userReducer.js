@@ -8,7 +8,7 @@ export const getUserFriends = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/friends`);
   const data = await response.json();
   if (data) {
-    await dispatch(setFriends(data));
+    await dispatch(setFriends(data.friends));
     return data;
   } else {
     console.error("Error Fetching User Friends");
@@ -19,7 +19,7 @@ export const getUserMessages = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/messages`);
   const data = await response.json();
   if (data) {
-    await dispatch(setMessages(data));
+    await dispatch(setMessages(data.messages));
     return data;
   } else {
     console.error("Error Fetching User Messages");

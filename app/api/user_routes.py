@@ -188,6 +188,6 @@ def get_friends(id):
 def get_messages(id):
     """Returns List of User's Messages"""
     user_msg = db.session.query(messages).filter(messages.c.receiver_id == id).all()
-    msg_dict = [{"received": msg[1], "type": msg[2], "message": msg[3], "sender": User.query.get(msg[4]).short_dict()} for msg in user_msg]
+    msg_dict = [{"received": msg[1], "type": msg[2], "message": msg[3], "sender": User.query.get(msg[5]).short_dict()} for msg in user_msg]
     msg_json = jsonify({"messages": msg_dict})
     return msg_json
