@@ -53,6 +53,10 @@ const HabitContainer = ({ data }) => {
     await dispatch(removeHabit(data.id));
   };
 
+  const checkHandler = async () => {
+    console.log("checked!");
+  };
+
   if (!loaded) {
     return null;
   }
@@ -90,11 +94,13 @@ const HabitContainer = ({ data }) => {
             <>
               <div key={`Check${i}${day}`}>
                 <div>{display}</div>
-                {parsed.includes(currentDay) ? (
-                  <CheckBoxIcon style={{ fill: "green" }} />
-                ) : (
-                  <CheckBoxOutlineBlankIcon />
-                )}
+                <div>
+                  {parsed.includes(currentDay) ? (
+                    <CheckBoxIcon style={{ fill: "green" }} />
+                  ) : (
+                    <CheckBoxOutlineBlankIcon onClick={checkHandler} />
+                  )}
+                </div>
               </div>
             </>
           );
