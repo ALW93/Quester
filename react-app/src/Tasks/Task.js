@@ -5,7 +5,7 @@ import Category from "../Shared/Category";
 import { useDispatch } from "react-redux";
 import { parseDifficulty } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
-import { removeTask } from "../store/actions/tasksReducer";
+import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 const Task = ({ t }) => {
@@ -25,6 +25,10 @@ const Task = ({ t }) => {
     await dispatch(removeTask(t.id));
   };
 
+  const completeHandler = async () => {
+    await dispatch(completeTask(t.id));
+  };
+
   if (!loaded) {
     return null;
   }
@@ -40,7 +44,7 @@ const Task = ({ t }) => {
           </div>
         </div>
 
-        <li>repeat: {t.frequency}</li>
+        {/* <li>repeat: {t.frequency}</li> */}
         <li>status: {t.status}</li>
         {t.deadline ? (
           <li>Expires In: {t.deadline}</li>
@@ -52,9 +56,9 @@ const Task = ({ t }) => {
             return <Category data={c} key={`TaskCategory${i}`} />;
           })}
         <div>
-          {/* <Button variant="contained" color="primary">
-          Edit
-        </Button> */}
+          <Button onClick={completeHandler} variant="contained" color="primary">
+            Complete
+          </Button>
           <Button onClick={deleteHandler}>
             <DeleteOutlineIcon style={{ fill: "red" }} />
           </Button>

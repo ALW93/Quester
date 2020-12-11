@@ -11,10 +11,15 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [taskForm, setTaskForm] = useState(false);
   const [catForm, setCatForm] = useState(false);
+  const [log, setLog] = useState(false);
 
   useEffect(() => {
     setTasks(data);
   }, [data]);
+
+  const toggleLog = (open) => {
+    setLog(open);
+  };
 
   const showTaskForm = (open) => {
     setTaskForm(open);
@@ -28,6 +33,9 @@ const Tasks = () => {
     <>
       <h1>Tasks</h1>
       <div>
+        <Button variant="outlined" onClick={() => toggleLog(false)}>
+          Quests
+        </Button>
         <Button
           variant="outlined"
           onClick={() => {
@@ -46,15 +54,23 @@ const Tasks = () => {
         >
           Edit Categories
         </Button>
+        <Button variant="outlined" onClick={() => toggleLog(true)}>
+          Log
+        </Button>
       </div>
       {taskForm ? (
         <TaskForm setTaskForm={setTaskForm} setTasks={setTasks} />
       ) : null}
-      {catForm ? <CategoryForm /> : null}
-      {tasks &&
+      {catForm ? <CategoryForm setCatForm={setCatForm} /> : null}
+
+      {log ? (
+        <h1>Log Items will Go Here</h1>
+      ) : (
+        tasks &&
         tasks.map((t) => {
           return <Task t={t} setTasks={setTasks} />;
-        })}
+        })
+      )}
     </>
   );
 };

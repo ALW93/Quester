@@ -97,13 +97,15 @@ def create_task(id):
         return new_task.to_dict()
 
 
+
+
 @user_routes.route('/<int:id>/tasks')
 @login_required
 def get_tasks(id):
     """
     Load all Tasks for a User
     """
-    tasks = Task.query.filter(Task.user_id == id).all()
+    tasks = Task.query.filter(Task.user_id == id).filter(Task.status != "complete").all()
     task_dicts = [task.to_dict() for task in tasks]
     task_json = jsonify({'tasks': task_dicts})
     return task_json
@@ -153,3 +155,19 @@ def get_stats(id):
     stat_dicts = [stat.to_dict() for stat in stats]
     stat_json = jsonify({"stats": stat_dicts})
     return stat_json
+
+
+@user_routes.route('/<int:id>/categories', methods=["POST"])
+@login_required
+def new_category(id):
+    """POST a new Category for a User"""
+    data = request.json
+    if data:
+        new_cat = Category(
+            user_id=id,
+            name=data["name"],
+            stat_id=data["stat_id"]
+        )
+        db.session.add(new_cat)
+        db.session.commit()
+        return new_cat.to_dict()
