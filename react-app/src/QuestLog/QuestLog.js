@@ -6,9 +6,9 @@ import Task from "../Tasks/Tasks";
 import Social from "../Social/Social";
 
 const QuestLog = () => {
-  const [showQ, setShowQ] = useState(false);
+  const [showQ, setShowQ] = useState(true);
   const [showD, setShowD] = useState(false);
-  const [showS, setShowS] = useState(true);
+  const [showS, setShowS] = useState(false);
 
   const toggleQuest = () => {
     setShowQ(true);

@@ -7,6 +7,12 @@ import { TextField, Button } from "@material-ui/core";
 import SignUpForm from "./SignUpForm";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import { setAvatar, getAvatar } from "../store/actions/avatarReducer";
+import { setUserInfo, authenticate } from "../store/actions/authReducer";
+import { getTasks } from "../store/actions/tasksReducer";
+import { getCategories } from "../store/actions/categoryReducer";
+import { getHabits } from "../store/actions/habitReducer";
+import { getStats } from "../store/actions/statReducer";
+import { getUserFriends, getUserMessages } from "../store/actions/userReducer";
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -26,6 +32,16 @@ const LoginForm = () => {
       dispatch(setId(user.id));
       dispatch(setUser(user));
       dispatch(setAvatar(avatar));
+      dispatch([
+        setUserInfo(),
+        getAvatar(user.id),
+        getTasks(user.id),
+        getCategories(user.id),
+        getHabits(user.id),
+        getStats(user.id),
+        getUserFriends(user.id),
+        getUserMessages(user.id),
+      ]);
     } else {
       setErrors(user.errors);
     }

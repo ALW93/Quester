@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { mailIcon } from "../assets/icons";
+import { mailIcon, potionIcon } from "../assets/icons";
 import { Paper } from "@material-ui/core";
 
 const Inbox = () => {
@@ -16,11 +16,15 @@ const Inbox = () => {
             mail.map((e) => {
               return (
                 <>
-                  <Paper>
+                  <Paper
+                    elevation={3}
+                    style={{ padding: "10px", margin: "3px" }}
+                  >
                     <div>
-                      {mailIcon()}
-                      {e.type.toUpperCase()} from {e.sender.username}
+                      {e.type === "potion" ? potionIcon() : mailIcon()}
+                      from {e.sender.username}
                     </div>
+                    <p>"{e.message}"</p>
                     <div>Received {e.received}</div>
                   </Paper>
                 </>
