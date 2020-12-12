@@ -22,14 +22,14 @@ const Clock = () => {
 
   return (
     <>
-      <div>
+      <div style={{ textAlign: "center" }}>
+        <div>{time}</div>
         {new Date().toLocaleDateString([], {
           weekday: "long",
           year: "numeric",
           month: "long",
           day: "numeric",
         })}
-        <div>{time}</div>
       </div>
     </>
   );

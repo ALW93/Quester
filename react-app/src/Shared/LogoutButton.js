@@ -14,8 +14,12 @@ const LogoutButton = () => {
   return (
     <>
       <div>
-        <button onClick={onLogout}>Logout</button>
-        <ExitToAppIcon />
+        <button className="fadebutton" onClick={onLogout}>
+          <div className="logoutButton__inner">
+            Logout
+            <ExitToAppIcon />
+          </div>
+        </button>
       </div>
     </>
   );

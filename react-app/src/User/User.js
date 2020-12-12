@@ -9,7 +9,7 @@ import Stats from "./Stats";
 const User = () => {
   const info = useSelector((state) => state.session.user);
   const update = useSelector((state) => state.utility.update);
-  const [showUpdate, hideShowUpdate] = useState(true);
+  const [showUpdate, hideShowUpdate] = useState(false);
 
   useEffect(() => {
     const statChange = () => {

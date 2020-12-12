@@ -10,7 +10,10 @@ const Homepage = () => {
     <>
       <div className="homepage__topbar">
         <Clock />
-        <h1>Quester</h1>
+        <div className="homepage__logo">
+          <h1>Quester</h1>
+          <p>Productivity RPG Adventure</p>
+        </div>
         <LogoutButton />
       </div>
       <div className="homepage__bottom">
