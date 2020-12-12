@@ -67,7 +67,7 @@ export const completeTask = (taskId, payload) => async (dispatch) => {
     },
     body: JSON.stringify(payload),
   });
-  const data = response.json();
+  const data = response;
 
   if (data) {
     dispatch(deleteTask(taskId));

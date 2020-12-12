@@ -9,7 +9,8 @@ import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import DateTime from "luxon/src/datetime.js";
 import { gacha } from "../services/gacha";
-import { authenticate, setUserInfo } from "../store/actions/authReducer";
+import { setUserInfo } from "../store/actions/authReducer";
+import { getStats } from "../store/actions/statReducer";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
@@ -52,8 +53,9 @@ const Task = ({ t }) => {
     //   `Rewards: Gained ${payload.exp} EXP! Earned ${payload.currency} coins! Healed for ${payload.health} pts!`
     // );
     await dispatch(completeTask(t.id, payload));
-    dispatch(setUserInfo());
-    console.log(user);
+    await dispatch(setUserInfo());
+    dispatch(getStats(user.id));
+    console.log(payload);
   };
 
   if (!loaded) {
