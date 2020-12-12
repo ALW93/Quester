@@ -3,7 +3,7 @@ import "./User.css";
 import { parseLevel } from "../services/levels";
 import { useSelector } from "react-redux";
 import Avatar from "./Avatar";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { coinIcon } from "../assets/icons";
 import Stats from "./Stats";
 
 const User = () => {
@@ -29,7 +29,10 @@ const User = () => {
           {info.username} lv.{parseLevel(info.exp)}
         </h1>
       </div>
-      <div>currency: {info.currency}</div>
+      <div className="User__currency">
+        {coinIcon()}
+        <div>{info.currency} Gold</div>
+      </div>
 
       {showUpdate ? (
         <>

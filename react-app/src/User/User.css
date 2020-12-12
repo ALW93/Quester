@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
+
 .tester {
   margin-top: 10px;
   margin-left: 300px;
@@ -23,4 +25,9 @@
 
 .stat__container {
   display: flex;
+}
+
+.User__currency {
+  font-weight: 1000;
+  align-content: center;
 }
