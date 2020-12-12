@@ -1,5 +1,11 @@
-.test {
-  color: blue;
+.tester {
+  margin-top: 10px;
+  margin-left: 300px;
+  background-color: rgb(233, 235, 223);
+  border-radius: 10px;
+  padding: 30px;
+  border: 1px dashed black;
+  position: absolute;
   animation: bounce 0.5s;
   animation-direction: alternate;
   animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
