@@ -12,7 +12,7 @@ const SignUpForm = ({ showSignup }) => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
-  const authorized = useSelector((state) => state.auth.auth);
+  const authorized = useSelector((state) => state.session.auth);
 
   const onSignUp = async (e) => {
     e.preventDefault();
