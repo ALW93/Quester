@@ -24,35 +24,40 @@ const User = () => {
   }, [update]);
   return (
     <>
-      <div>
-        <h1>
-          {info.username} lv.{parseLevel(info.exp)}
-        </h1>
-      </div>
-      <div className="User__currency">
-        {coinIcon()}
-        <div>{info.currency} Gold</div>
-      </div>
-
-      {showUpdate ? (
-        <>
-          <div className="tester">Good Work!</div>
-        </>
-      ) : null}
-      <img src="https://i.gyazo.com/7a8d38a048fc6f1c04c6e5eb995447a0.png" />
-
-      <div className="progress">
-        <div
-          className="progress-bar bg-success"
-          role="progressbar"
-          style={{ width: `${info.health}%` }}
-        >
-          {info.health}/100 HP
+      <div className="User__container">
+        <div className="User__currency">
+          {coinIcon()}
+          <div className="User__gold">
+            {info.currency}
+            {"  "} Gold
+          </div>
         </div>
-      </div>
-      <div>{info.exp} exp</div>
+        <div>
+          <h1>
+            {info.username} lv.{parseLevel(info.exp)}
+          </h1>
+        </div>
 
-      <Stats />
+        {showUpdate ? (
+          <>
+            <div className="tester">Good Work!</div>
+          </>
+        ) : null}
+        <img src="https://i.gyazo.com/7a8d38a048fc6f1c04c6e5eb995447a0.png" />
+
+        <div className="progress">
+          <div
+            className="progress-bar bg-success"
+            role="progressbar"
+            style={{ width: `${info.health}%` }}
+          >
+            {info.health}/100 HP
+          </div>
+        </div>
+        <div>{info.exp} exp</div>
+
+        <Stats />
+      </div>
     </>
   );
 };
