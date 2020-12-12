@@ -63,14 +63,16 @@ export const completeTask = (taskId, payload) => async (dispatch) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify(payload),
   });
   const data = response.json();
+
   if (data) {
     dispatch(deleteTask(taskId));
-    console.log(data);
   }
+
   return data;
 };
 
