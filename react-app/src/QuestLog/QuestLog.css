@@ -1,6 +1,10 @@
-.questlog__page {
+.questlog__page--top {
   height: 100vh;
+}
+
+.questlog__page--bottom {
   border: 1px solid black;
   background-color: rgb(194, 201, 216);
   overflow: scroll;
+  height: 96vh;
 }

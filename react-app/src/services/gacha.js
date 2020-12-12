@@ -36,7 +36,7 @@ export const gacha = (type, difficulty) => {
 const gachaMultiplier = () => {
   const roll = Math.floor(Math.random() * 100);
   if (roll < 40) {
-    return;
+    return 1;
   }
   if (roll < 70) {
     return 2;

@@ -65,7 +65,10 @@ const LoginForm = () => {
 
   return (
     <>
-      <h1>Quester</h1>
+      <div>
+        <h1>Quester</h1>
+        <p>Productivity RPG Adventure</p>
+      </div>
       {form ? (
         <SignUpForm showSignup={showSignup} />
       ) : (

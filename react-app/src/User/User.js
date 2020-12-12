@@ -45,11 +45,14 @@ const User = () => {
         ) : null}
         {tempAvatar()}
 
-        <div className="progress">
+        <div className="progress" style={{ height: "40px" }}>
           <div
-            className="progress-bar bg-success"
+            className="progress-bar"
             role="progressbar"
-            style={{ width: `${info.health}%` }}
+            style={{
+              width: `${info.health}%`,
+              backgroundColor: "rgb(137, 210, 191)",
+            }}
           >
             {info.health}/100 HP
           </div>

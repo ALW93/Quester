@@ -29,24 +29,28 @@ const QuestLog = () => {
   };
 
   return (
-    <>
+    <div className="questlog__page--top">
       <div>
-        <Button variant="outlined" onClick={toggleQuest}>
+        <button variant="outlined" onClick={toggleQuest} className="fadebutton">
           Quests
-        </Button>
-        <Button variant="outlined" onClick={toggleDaily}>
+        </button>
+        <button variant="outlined" onClick={toggleDaily} className="fadebutton">
           Dailies
-        </Button>
-        <Button variant="outlined" onClick={toggleSocial}>
+        </button>
+        <button
+          variant="outlined"
+          onClick={toggleSocial}
+          className="fadebutton"
+        >
           Social
-        </Button>
+        </button>
       </div>
-      <div className="questlog__page">
+      <div className="questlog__page--bottom">
         {showQ ? <Task /> : null}
         {showD ? <Habit /> : null}
         {showS ? <Social /> : null}
       </div>
-    </>
+    </div>
   );
 };
 
