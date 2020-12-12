@@ -3,7 +3,7 @@ import "./User.css";
 import { parseLevel } from "../services/levels";
 import { useSelector } from "react-redux";
 import Avatar from "./Avatar";
-import { coinIcon } from "../assets/icons";
+import { coinIcon, tempAvatar } from "../assets/icons";
 import Stats from "./Stats";
 
 const User = () => {
@@ -43,7 +43,7 @@ const User = () => {
             <div className="tester">Good Work!</div>
           </>
         ) : null}
-        <img src="https://i.gyazo.com/7a8d38a048fc6f1c04c6e5eb995447a0.png" />
+        {tempAvatar()}
 
         <div className="progress">
           <div

@@ -5,6 +5,10 @@ body {
   font-family: "Andika New Basic", sans-serif;
 }
 
+div {
+  border-radius: 3px;
+}
+
 h1 {
   font-family: "Permanent Marker", "Andika New Basic", sans-serif;
 }
