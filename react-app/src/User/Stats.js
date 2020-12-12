@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import "./User.css";
 import { parseStatLevel } from "../services/levels";
 
 const Stats = () => {
@@ -8,6 +9,7 @@ const Stats = () => {
   return (
     <>
       <h1>Stats</h1>
+
       {stats &&
         stats.map((stat, i) => {
           return (

@@ -1,6 +1,13 @@
 export const gacha = (type, difficulty) => {
   const multi = gachaMultiplier();
-  let output = { exp: 0, currency: 0, health: 0, gacha: multi || 1, points: 0 };
+  let output = {
+    exp: 0,
+    currency: 0,
+    health: 0,
+    gacha: multi || 1,
+    points: 0,
+    statId: [],
+  };
   if (type === "complete_task") {
     output.exp = difficulty * 10;
     output.currency = difficulty * (multi || 1);

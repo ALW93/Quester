@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { parseDifficulty } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import DateTime from "luxon/src/datetime.js";
 import { gacha } from "../services/gacha";
+import { setUserInfo } from "../store/actions/authReducer";
+import { getStats } from "../store/actions/statReducer";
+import { updateTimer } from "../store/actions/utilityReducer";
 
 const Task = ({ t }) => {
   const [categories, setCategories] = useState([]);
@@ -16,6 +19,8 @@ const Task = ({ t }) => {
   const [time, setTime] = useState({});
   const [expired, setExpired] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
+  const update = useSelector((state) => state.utility.update);
 
   useEffect(() => {
     (async () => {
@@ -46,8 +51,15 @@ const Task = ({ t }) => {
       payload.statId = await categories.map((e) => e.stat_id);
     }
 
-    // alert(`Collected ${payload.currency} coins!`);
+    alert(
+      `Rewards: Gained ${payload.exp} EXP! Earned ${payload.currency} coins! Healed for ${payload.health} pts!`
+    );
     await dispatch(completeTask(t.id, payload));
+    await dispatch(setUserInfo());
+    await dispatch(getStats(user.id));
+    await dispatch(updateTimer());
+    console.log(update);
+    console.log(payload);
   };
 
   if (!loaded) {
