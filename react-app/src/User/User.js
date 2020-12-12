@@ -16,7 +16,7 @@ const User = () => {
       </div>
       <div>currency: {info.currency}</div>
       <img src="https://i.gyazo.com/7a8d38a048fc6f1c04c6e5eb995447a0.png" />
-      <Avatar />
+
       <div className="progress">
         <div
           className="progress-bar bg-success"

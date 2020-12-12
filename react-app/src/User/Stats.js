@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { parseStatLevel } from "../services/levels";
 
 const Stats = () => {
   const stats = useSelector((state) => state.stats.stats);
+  const update = useSelector((state) => state.utility.update);
+
+  useEffect(() => {
+    if (update) {
+      console.log("stats updating");
+    }
+  }, [update]);
 
   return (
     <>
