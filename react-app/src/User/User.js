@@ -32,7 +32,7 @@ const User = () => {
             {"  "} Gold
           </div>
         </div>
-        <div>
+        <div className="User__topinfo">
           <h1>
             {info.username} lv.{parseLevel(info.exp)}
           </h1>

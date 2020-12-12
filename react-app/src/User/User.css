@@ -34,8 +34,13 @@
   align-content: center;
 }
 
+.User__topinfo {
+  text-shadow: 0 0 10px rgb(137, 210, 191);
+}
+
 .User__gold {
   align-self: center;
+  color: rgb(255, 200, 21);
 }
 
 .User__container {
@@ -45,5 +50,5 @@
   background-size: cover;
   margin-right: 10px;
   color: white;
-  padding: 10px;
+  padding: 30px 20px 30px 20px;
 }
