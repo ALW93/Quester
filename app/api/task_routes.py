@@ -52,12 +52,15 @@ def expire_task(id):
 def restore_task(id):
     """Expire a Task"""
 
+    data = request.json
     task = Task.query.get(id)
 
     if task:
         task.status = "pending"
+        task.deadline = data['deadline']
         db.session.commit()
-        return task.to_dict()
+
+    return task.to_dict()
 
 
 @task_routes.route('/<int:id>/complete', methods=["PUT"])

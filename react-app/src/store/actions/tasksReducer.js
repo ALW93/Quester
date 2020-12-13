@@ -166,7 +166,7 @@ export const expire = (taskId, payload, taskData) => async (dispatch) => {
 };
 
 // Restore a Task
-export const restoreTask = (taskId) => async (dispatch) => {
+export const restoreTask = (taskId, payload) => async (dispatch) => {
   console.log("restoring");
   const response = await fetch(`/api/tasks/${taskId}/restore`, {
     method: "PUT",
@@ -174,6 +174,7 @@ export const restoreTask = (taskId) => async (dispatch) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
+    body: JSON.stringify(payload),
   });
   const data = await response.json();
   if (data) {
