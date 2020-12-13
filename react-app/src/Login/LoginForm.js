@@ -5,6 +5,7 @@ import { setAuth, setId, setUser, login } from "../store/actions/authReducer";
 import { showForm } from "../store/actions/utilityReducer";
 import { TextField, Button } from "@material-ui/core";
 import SignUpForm from "./SignUpForm";
+import "./LoginForm.css";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import { setAvatar, getAvatar } from "../store/actions/avatarReducer";
 import { setUserInfo, authenticate } from "../store/actions/authReducer";
@@ -64,51 +65,57 @@ const LoginForm = () => {
   }
 
   return (
-    <>
-      <div>
-        <h1>Quester</h1>
-        <p>Productivity RPG Adventure</p>
+    <div className="login__container">
+      <div className="login__left" />
+
+      <div className="login__center">
+        <h1 style={{ fontSize: "100px", color: "rgb(12,17,33)" }}>Quester</h1>
+
+        {form ? (
+          <SignUpForm showSignup={showSignup} />
+        ) : (
+          <>
+            <form onSubmit={onLogin}>
+              <div>
+                {errors.map((error) => (
+                  <div>{error}</div>
+                ))}
+              </div>
+              <div>
+                <TextField
+                  name="email"
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={updateEmail}
+                />
+              </div>
+              <div>
+                <TextField
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={updatePassword}
+                />
+              </div>
+              <div>
+                <button type="submit" className="fadebutton">
+                  Login
+                </button>
+                {"  "}
+                <button className="fadebutton">Demo</button>
+              </div>
+            </form>
+            <div onClick={() => showSignup(true)}>
+              Sign up Here <DoubleArrowIcon />
+            </div>
+          </>
+        )}
       </div>
-      {form ? (
-        <SignUpForm showSignup={showSignup} />
-      ) : (
-        <>
-          <form onSubmit={onLogin}>
-            <div>
-              {errors.map((error) => (
-                <div>{error}</div>
-              ))}
-            </div>
-            <div>
-              <TextField
-                name="email"
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={updateEmail}
-              />
-            </div>
-            <div>
-              <TextField
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={updatePassword}
-              />
-            </div>
-            <div>
-              <Button type="submit" variant="outlined">
-                Login
-              </Button>
-            </div>
-          </form>
-          <div onClick={() => showSignup(true)}>
-            Sign up Here <DoubleArrowIcon />
-          </div>
-        </>
-      )}
-    </>
+
+      <div className="login__left flip__x" />
+    </div>
   );
 };
 

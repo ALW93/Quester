@@ -1,4 +1,9 @@
+body {
+  background-color: white;
+}
+
 .homepage__topbar {
+  margin: 0 120px 0 120px;
   background-image: url("../assets/Top_BG2.jpg");
   background-size: cover;
   background-position: 20% 7%;
@@ -17,6 +22,7 @@
 
 .homepage__bottom {
   display: flex;
+  margin: 0 120px 0 120px;
 }
 
 .homepage__logo {

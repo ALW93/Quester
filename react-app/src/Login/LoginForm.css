@@ -1,0 +1,35 @@
+body {
+  background-color: rgb(0, 0, 0);
+  padding: 0;
+}
+
+.login__container {
+  display: flex;
+  width: 100vw;
+  border-radius: 0px;
+}
+
+.flip__x {
+  transform: scaleX(-1);
+}
+
+.login__center {
+  padding-top: 30vh;
+  outline: none;
+  text-align: center;
+  background-color: white;
+  width: 50%;
+  border: 1px solid white;
+  z-index: 999;
+  box-shadow: 0 0 60px 30px #fff, 0 0 60px 30px #fff,
+    0 0 100px 60px rgb(255, 221, 190), 0 0 140px 90px #0ff, 0 0 60px 30px #fff;
+}
+
+.login__left {
+  background-image: url("../assets/Top_BG2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 50%;
+  height: 100vh;
+}
