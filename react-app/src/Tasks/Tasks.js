@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 import Damage from "../Shared/Damage";
+import Reward from "../Shared/Reward";
 import "./Tasks.css";
 import CompleteTask from "./CompleteTask";
 import ExpiredTask from "./ExpiredTask";
@@ -15,6 +16,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [taskForm, setTaskForm] = useState(false);
   const [damage, showDamage] = useState(false);
+  const [reward, showReward] = useState(false);
 
   const [log, setLog] = useState(false);
 
@@ -62,11 +64,19 @@ const Tasks = () => {
         </>
       ) : (
         <>
+          {reward ? <Reward rewards={reward} showReward={showReward} /> : null}
           {damage ? <Damage message={damage} showDamage={showDamage} /> : null}
 
           {tasks &&
             tasks.map((t) => {
-              return <Task t={t} setTasks={setTasks} showDamage={showDamage} />;
+              return (
+                <Task
+                  t={t}
+                  setTasks={setTasks}
+                  showDamage={showDamage}
+                  showReward={showReward}
+                />
+              );
             })}
           {expired &&
             expired.map((e) => {

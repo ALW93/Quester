@@ -13,7 +13,7 @@ import { setUserInfo } from "../store/actions/authReducer";
 import { getStats } from "../store/actions/statReducer";
 import { updateTimer } from "../store/actions/utilityReducer";
 
-const Task = ({ t, showDamage }) => {
+const Task = ({ t, showDamage, showReward }) => {
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [time, setTime] = useState({});
@@ -51,7 +51,8 @@ const Task = ({ t, showDamage }) => {
     await dispatch(completeTask(t.id, payload));
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
-    await dispatch(updateTimer(payload));
+    showReward(payload);
+    // await dispatch(updateTimer(payload));
   };
 
   const deleteHandler = async () => {
