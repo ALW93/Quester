@@ -1,5 +1,4 @@
 .taskpage__container {
-  border: 1px solid red;
 }
 
 .task {
@@ -7,7 +6,9 @@
   background-size: cover;
   background-position: center 40%;
   margin: 10px;
+
   padding: 10px 20px 10px 20px;
+  box-shadow: 0 0 50px 15px rgb(255, 255, 255);
 }
 
 .veryeasy {
@@ -43,10 +44,10 @@
 
 @keyframes glow {
   from {
-    box-shadow: 0 0 60px 15px rgb(255, 255, 255) inset;
+    box-shadow: 0 0 60px 15px rgb(255, 255, 255);
   }
   to {
-    box-shadow: 0 0 60px 30px rgb(255, 255, 255) inset;
+    box-shadow: 0 0 60px 30px rgb(255, 255, 255);
   }
 }
 

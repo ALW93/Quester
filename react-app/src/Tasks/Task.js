@@ -68,7 +68,8 @@ const Task = ({ t }) => {
 
   return (
     <>
-      <Paper className={`task ${parseClass(t.difficulty)}`}>
+      {/* <Paper className={`task ${parseClass(t.difficulty)}`}> */}
+      <Paper className="task">
         <div className="task__title">
           <h1>{t.name}</h1>
           <div>{parseDifficulty(t.difficulty)}</div>

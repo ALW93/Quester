@@ -34,8 +34,8 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
       categories: catIds,
     };
     console.log(new_task);
-    // await setNewTask(new_task);
-    // setTaskForm(false);
+    await setNewTask(new_task);
+    setTaskForm(false);
   };
 
   useEffect(() => {

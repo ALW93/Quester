@@ -9,7 +9,7 @@ import CategoryForm from "../Shared/CategoryForm";
 const Tasks = () => {
   const data = useSelector((state) => state.tasks.allTasks);
   const [tasks, setTasks] = useState([]);
-  const [taskForm, setTaskForm] = useState(true);
+  const [taskForm, setTaskForm] = useState(false);
 
   const [log, setLog] = useState(false);
 
