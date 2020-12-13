@@ -34,9 +34,14 @@ def delete_task(id):
 @login_required
 def expire_task(id):
     """Expire a Task"""
+
+    rewards = request.json
     task = Task.query.get(id)
-    if task:
+    user = User.query.get(task.user_id)
+
+    if task and user:
         task.status = "expired"
+        user.health += rewards["health"]
         db.session.commit()
         return task.status
 
