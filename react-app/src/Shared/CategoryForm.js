@@ -50,9 +50,6 @@ const CategoryForm = () => {
             );
           })}
       </div>
-      <div>
-        <Button variant="outlined">Cancel</Button>
-      </div>
     </>
   );
 };

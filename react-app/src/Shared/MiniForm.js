@@ -11,14 +11,16 @@ export const MiniForm = ({ num }) => {
   const [name, setName] = useState("");
   const [stat, setStat] = useState(0);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const new_category = {
       name: name,
       stat_id: stat,
     };
     console.log(new_category);
-    dispatch(newCategory(user.id, new_category));
+    await dispatch(newCategory(user.id, new_category));
+    setName("");
+    setStat("");
   };
 
   const updateName = (e) => {
@@ -36,8 +38,9 @@ export const MiniForm = ({ num }) => {
           required={true}
           placeholder="Category Name"
           onChange={updateName}
+          value={name}
         />
-        <Select onChange={updateStat}>
+        <Select onChange={updateStat} value={stat}>
           {stats &&
             stats.map((s) => {
               return <MenuItem value={s.id}>{s.name}</MenuItem>;
