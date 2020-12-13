@@ -99,15 +99,37 @@ def create_task(id):
         return new_task.to_dict()
 
 
-
-
 @user_routes.route('/<int:id>/tasks')
 @login_required
 def get_tasks(id):
     """
     Load all Tasks for a User
     """
-    tasks = Task.query.filter(Task.user_id == id).filter(Task.status != "complete").all()
+    tasks = Task.query.filter(Task.user_id == id).filter(Task.status == "pending").all()
+    task_dicts = [task.to_dict() for task in tasks]
+    task_json = jsonify({'tasks': task_dicts})
+    return task_json
+
+
+@user_routes.route('/<int:id>/tasks/expired')
+@login_required
+def get_expired(id):
+    """
+    Load all Expired Tasks for a User
+    """
+    tasks = Task.query.filter(Task.user_id == id).filter(Task.status == "expired").all()
+    task_dicts = [task.to_dict() for task in tasks]
+    task_json = jsonify({'tasks': task_dicts})
+    return task_json
+
+
+@user_routes.route('/<int:id>/tasks/complete')
+@login_required
+def get_complete(id):
+    """
+    Load all Expired Tasks for a User
+    """
+    tasks = Task.query.filter(Task.user_id == id).filter(Task.status == "complete").all()
     task_dicts = [task.to_dict() for task in tasks]
     task_json = jsonify({'tasks': task_dicts})
     return task_json

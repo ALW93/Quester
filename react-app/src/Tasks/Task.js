@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
+
 import { useDispatch, useSelector } from "react-redux";
 import { parseDifficulty, parseClass } from "../services/levels";
 import { expire, getTaskCategory } from "../store/actions/tasksReducer";
@@ -13,11 +14,10 @@ import { setUserInfo } from "../store/actions/authReducer";
 import { getStats } from "../store/actions/statReducer";
 import { updateTimer } from "../store/actions/utilityReducer";
 
-const Task = ({ t }) => {
+const Task = ({ t, showDamage }) => {
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [time, setTime] = useState({});
-  const [expired, setExpired] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const update = useSelector((state) => state.utility.update);
@@ -26,7 +26,6 @@ const Task = ({ t }) => {
     (async () => {
       const cats = await dispatch(getTaskCategory(t.id));
       await setCategories(cats);
-      if (t.status === "expired") setExpired(true);
       setLoaded(true);
     })();
     const timeLeft = async () => {
@@ -35,14 +34,12 @@ const Task = ({ t }) => {
       const time = expiration.diff(now, ["days", "hours"]).toObject();
       const payload = gacha("expire_task", t.difficulty);
       if (time.days <= 0 && time.hours <= 0) {
-        alert(`${t.name} has expired! You lost 10 HP!`);
-        await dispatch(expire(t.id, payload));
+        showDamage(`${t.name} has expired! You lost ${payload.health} HP!`);
+        await dispatch(expire(t.id, payload, t));
       }
-      console.log(expired);
       setTime(time);
     };
     if (t.deadline !== null) {
-      console.log(t, "triggering");
       timeLeft();
     }
   }, [t]);
@@ -61,8 +58,6 @@ const Task = ({ t }) => {
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
     await dispatch(updateTimer(payload));
-    console.log(update);
-    console.log(payload);
   };
 
   if (!loaded) {
@@ -83,14 +78,8 @@ const Task = ({ t }) => {
         {t.deadline ? (
           <>
             <li>
-              {expired ? (
-                "Quest Failed"
-              ) : (
-                <>
-                  Time Remaining: {time.days} Days{"  "}
-                  {Math.round(time.hours)} Hours
-                </>
-              )}
+              Time Remaining: {time.days} Days{"  "}
+              {Math.round(time.hours)} Hours
             </li>
           </>
         ) : (
@@ -101,17 +90,10 @@ const Task = ({ t }) => {
             return <Category data={c} key={`TaskCategory${i}`} />;
           })}
         <div>
-          {expired ? (
-            <Button variant="contained">Try Again</Button>
-          ) : (
-            <Button
-              onClick={completeHandler}
-              variant="contained"
-              color="primary"
-            >
-              Complete
-            </Button>
-          )}
+          <Button onClick={completeHandler} variant="contained" color="primary">
+            Complete
+          </Button>
+
           <Button onClick={deleteHandler}>
             <DeleteOutlineIcon style={{ fill: "red" }} />
           </Button>

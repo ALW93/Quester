@@ -9,7 +9,11 @@ import "./LoginForm.css";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import { setAvatar, getAvatar } from "../store/actions/avatarReducer";
 import { setUserInfo, authenticate } from "../store/actions/authReducer";
-import { getTasks } from "../store/actions/tasksReducer";
+import {
+  getTasks,
+  getComplete,
+  getExpired,
+} from "../store/actions/tasksReducer";
 import { getCategories } from "../store/actions/categoryReducer";
 import { getHabits } from "../store/actions/habitReducer";
 import { getStats } from "../store/actions/statReducer";
@@ -37,6 +41,8 @@ const LoginForm = () => {
         setUserInfo(),
         getAvatar(user.id),
         getTasks(user.id),
+        getExpired(user.id),
+        getComplete(user.id),
         getCategories(user.id),
         getHabits(user.id),
         getStats(user.id),
