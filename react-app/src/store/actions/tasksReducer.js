@@ -2,17 +2,27 @@ const SET_TASKS = "Quester/tasks/SET_TASKS";
 const ADD_TASK = "Quest/tasks/ADD_TASK";
 const EXPIRE_TASK = "Quest/tasks/EXPIRE_TASK";
 const DELETE_TASK = "Quest/tasks/DELETE_TASK";
+
 const SET_EXPIRED = "Quest/tasks/SET_EXPIRED";
 const ADD_EXPIRED = "Quest/tasks/ADD_EXPIRED";
+const DELETE_EXPIRED = "Quest/tasks/DELETE_EXPIRED";
+
 const SET_COMPLETE = "QUEST/tasks/SET_COMPLETE";
+const ADD_COMPLETE = "Quester/tasks/ADD_COMPLETE";
+const DELETE_COMPLETE = "Quester/tasks/DELETE_COMPLETE";
 
 export const setTasks = (data) => ({ type: SET_TASKS, data });
 export const addTask = (task) => ({ type: ADD_TASK, task });
 export const deleteTask = (payload) => ({ type: DELETE_TASK, payload });
 export const expireTask = (payload) => ({ type: EXPIRE_TASK, payload });
+
 export const setExpired = (data) => ({ type: SET_EXPIRED, data });
 export const addExpired = (payload) => ({ type: ADD_EXPIRED, payload });
+export const deleteExpired = (payload) => ({ type: DELETE_EXPIRED, payload });
+
 export const setComplete = (data) => ({ type: SET_COMPLETE, data });
+export const addComplete = (payload) => ({ type: ADD_COMPLETE, payload });
+export const deleteComplete = (taskId) => ({ type: DELETE_COMPLETE, taskId });
 
 // Get all tasks created by User
 export const getTasks = (id) => async (dispatch) => {
@@ -78,6 +88,25 @@ export const removeTask = (taskId) => async (dispatch) => {
     },
   });
   const data = response.json();
+  if (data) {
+    dispatch(deleteTask(taskId));
+  }
+  return data;
+};
+
+// Delete Completed Task
+export const removeComplete = (taskId) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${taskId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+
+  if (data) {
+    dispatch(deleteComplete(taskId));
+  }
   return data;
 };
 
@@ -143,8 +172,24 @@ export const taskReducer = (
       const newExpired = [...state.expired, action.payload];
       return { ...state, expired: newExpired };
     }
+    case DELETE_EXPIRED: {
+      return {
+        ...state,
+        expired: state.expired.filter((task) => task.id !== action.payload),
+      };
+    }
     case SET_COMPLETE: {
       return { ...state, complete: action.data };
+    }
+    case ADD_COMPLETE: {
+      const newComplete = [...state.complete, action.payload];
+      return { ...state, complete: newComplete };
+    }
+    case DELETE_COMPLETE: {
+      return {
+        ...state,
+        complete: state.complete.filter((task) => task.id !== action.taskId),
+      };
     }
     default:
       return state;

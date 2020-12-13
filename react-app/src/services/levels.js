@@ -68,7 +68,7 @@ export const parseDifficulty = (num) => {
   if (num === 2) {
     return (
       <>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex" }}>
           {starIcon(45)}
           {starIcon(45)}
         </div>
@@ -78,7 +78,7 @@ export const parseDifficulty = (num) => {
   if (num === 3) {
     return (
       <div style={{ display: "flex" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex" }}>
           {starIcon(40)}
           {starIcon(40)}
           {starIcon(40)}
@@ -89,7 +89,7 @@ export const parseDifficulty = (num) => {
   if (num === 4) {
     return (
       <>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex" }}>
           {starIcon(35)}
           {starIcon(35)}
           {starIcon(35)}
@@ -104,7 +104,6 @@ export const parseDifficulty = (num) => {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
           }}
         >
           {starIcon(30)}

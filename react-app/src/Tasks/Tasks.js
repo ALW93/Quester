@@ -5,6 +5,8 @@ import Task from "./Task";
 import TaskForm from "./TaskForm";
 import Damage from "../Shared/Damage";
 import "./Tasks.css";
+import CompleteTask from "./CompleteTask";
+import ExpiredTask from "./ExpiredTask";
 
 const Tasks = () => {
   const data = useSelector((state) => state.tasks.allTasks);
@@ -52,7 +54,12 @@ const Tasks = () => {
       ) : null}
 
       {log ? (
-        <h1>Log Items will Go Here</h1>
+        <>
+          {complete &&
+            complete.map((c) => {
+              return <CompleteTask data={c} />;
+            })}
+        </>
       ) : (
         <>
           {damage ? <Damage message={damage} showDamage={showDamage} /> : null}
@@ -63,7 +70,7 @@ const Tasks = () => {
             })}
           {expired &&
             expired.map((e) => {
-              return <div>{JSON.stringify(e)}</div>;
+              return <ExpiredTask data={e} />;
             })}
         </>
       )}

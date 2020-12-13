@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
-
-import { useDispatch, useSelector } from "react-redux";
 import { parseDifficulty, parseClass } from "../services/levels";
+import { useDispatch, useSelector } from "react-redux";
 import { expire, getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -20,7 +19,6 @@ const Task = ({ t, showDamage }) => {
   const [time, setTime] = useState({});
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const update = useSelector((state) => state.utility.update);
 
   useEffect(() => {
     (async () => {
@@ -44,10 +42,6 @@ const Task = ({ t, showDamage }) => {
     }
   }, [t]);
 
-  const deleteHandler = async () => {
-    await dispatch(removeTask(t.id));
-  };
-
   const completeHandler = async () => {
     const payload = gacha("complete_task", t.difficulty);
     if (categories.length) {
@@ -58,6 +52,10 @@ const Task = ({ t, showDamage }) => {
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
     await dispatch(updateTimer(payload));
+  };
+
+  const deleteHandler = async () => {
+    await dispatch(removeTask(t.id));
   };
 
   if (!loaded) {

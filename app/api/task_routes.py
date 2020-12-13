@@ -28,6 +28,7 @@ def delete_task(id):
     if delete_task:
         db.session.delete(delete_task)
         db.session.commit()
+    return {"message": "deleted successfully"}
 
 
 @task_routes.route('/<int:id>/expire', methods=["PUT"])
