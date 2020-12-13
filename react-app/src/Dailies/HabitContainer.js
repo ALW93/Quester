@@ -75,7 +75,10 @@ const HabitContainer = ({ data }) => {
   const checkRemover = async (display) => {
     setLoaded(false);
     const short = display.slice(0, 3);
-    const id = checks.filter((e) => e.date.includes(short))[0].id;
+    const id =
+      checks.filter((e) => e.date && e.date.includes(short))[0].id || null;
+
+    console.log(checks, short, id);
     await dispatch(removeCheck(data.id, id));
     await setRemove(id);
   };

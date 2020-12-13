@@ -4,6 +4,7 @@ import { parseLevel } from "../services/levels";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
 import { coinIcon, tempAvatar, expIcon, healthIcon } from "../assets/icons";
+import girl from "../characters/sword_girl.png";
 import Stats from "./Stats";
 import { closeUpdate } from "../store/actions/utilityReducer";
 
@@ -28,7 +29,7 @@ const User = () => {
           </h1>
         </div>
 
-        {tempAvatar()}
+        <img src={girl} style={{ width: "95%" }} />
 
         <div className="progress" style={{ height: "40px" }}>
           <div

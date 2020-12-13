@@ -5,6 +5,7 @@ import Habit from "../Dailies/Habit";
 import Task from "../Tasks/Tasks";
 import Social from "../Social/Social";
 import Settings from "../Settings/Settings";
+import { swordIcon, fantasyIcon, hatIcon, bookIcon } from "../assets/icons";
 
 const QuestLog = () => {
   const [showQ, setShowQ] = useState(true);
@@ -44,15 +45,19 @@ const QuestLog = () => {
     <div className="questlog__page--top">
       <div>
         <button onClick={toggleQuest} className="fadebutton">
+          {swordIcon()}
           Quests
         </button>
         <button onClick={toggleDaily} className="fadebutton">
+          {bookIcon()}
           Dailies
         </button>
         <button onClick={toggleSocial} className="fadebutton">
+          {hatIcon()}
           Social
         </button>
         <button onClick={toggleSettings} className="fadebutton">
+          {fantasyIcon()}
           Settings
         </button>
       </div>

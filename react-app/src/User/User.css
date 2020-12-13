@@ -54,12 +54,12 @@
 }
 
 .User__container {
-  border: 1px solid black;
+  border: 10px solid black;
   background-image: url("../assets/Top_BG2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   margin-right: 10px;
   color: white;
   padding: 30px 20px 30px 20px;
-  height: 100vh;
+  height: fit-content;
 }
