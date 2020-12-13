@@ -11,7 +11,6 @@ const Habit = () => {
   const [habits, setHabits] = useState([]);
 
   const [habitForm, setHabitForm] = useState(false);
-  const [catForm, setCatForm] = useState(false);
 
   useEffect(() => {
     setHabits(data);
@@ -19,10 +18,6 @@ const Habit = () => {
 
   const showHabitForm = (open) => {
     setHabitForm(open);
-  };
-
-  const showCatForm = (open) => {
-    setCatForm(open);
   };
 
   return (
@@ -34,19 +29,9 @@ const Habit = () => {
             variant="outlined"
             onClick={() => {
               showHabitForm(true);
-              showCatForm(false);
             }}
           >
             Add Daily
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              showCatForm(true);
-              showHabitForm(false);
-            }}
-          >
-            Edit Categories
           </Button>
         </div>
         <div>
@@ -57,7 +42,7 @@ const Habit = () => {
         {habitForm ? (
           <HabitForm setHabitForm={setHabitForm} setHabits={setHabits} />
         ) : null}
-        {catForm ? <CategoryForm /> : null}
+
         <div>
           {habits &&
             habits.map((habit, i) => {

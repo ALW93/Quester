@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField, FormControl, Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import CategorySelector from "../Shared/CategorySelector";
 import { getHabits, newHabit } from "../store/actions/habitReducer";
 
 const HabitForm = ({ setHabitForm, setHabits }) => {
@@ -56,9 +55,7 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
           <div>
             <TextField placeholder={name} onChange={updateName} />
           </div>
-          <FormControl>
-            <CategorySelector categories={categories} updateCats={updateCats} />
-          </FormControl>
+
           <div>
             <Button type="submit">Submit</Button>
           </div>

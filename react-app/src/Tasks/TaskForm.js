@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Tasks.css";
-import CategorySelector from "../Shared/CategorySelector";
 
 import {
   TextField,
@@ -20,21 +19,28 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
   const [difficulty, setDifficulty] = useState(1);
   const [deadline, setDeadline] = useState(null);
   const [frequency, setFrequency] = useState("Once");
-  const [taskcat, setTaskCat] = useState(new Set());
+  const [cat1, setCat1] = useState("");
+  const [cat2, setCat2] = useState("");
   const [newtask, setNewTask] = useState({});
   const dispatch = useDispatch();
 
-  const taskSubmit = (e) => {
+  const taskSubmit = async (e) => {
     e.preventDefault();
+    const catIds = [];
+    if (cat1) catIds.push(cat1);
+    if (cat2) catIds.push(cat2);
+
     const new_task = {
       name: name,
       difficulty: parseInt(difficulty),
       deadline: deadline,
       frequency: frequency,
       status: "pending",
-      categories: Array.from(taskcat),
+      categories: catIds,
     };
-    setNewTask(new_task);
+    console.log(new_task);
+    // await setNewTask(new_task);
+    // setTaskForm(false);
   };
 
   useEffect(() => {
@@ -67,18 +73,28 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
     setFrequency(e.target.value);
   };
 
-  const updateCats = (e) => {
-    let arr = [...taskcat, e.target.value];
-    if (taskcat.has(e.target.value)) {
-      taskcat.delete(e.target.value);
-      arr = [...taskcat];
+  const updateCat1 = (e) => {
+    if ([cat1, cat2].includes(e.target.value)) {
+      alert("Category already selected!");
+      setCat1("");
+      return;
     }
-    setTaskCat(new Set(arr));
+    setCat1(e.target.value);
+  };
+
+  const updateCat2 = (e) => {
+    if ([cat1, cat2].includes(e.target.value)) {
+      alert("Category already selected!");
+      setCat2("");
+      return;
+    }
+    setCat2(e.target.value);
   };
 
   return (
     <>
       <div className="taskform__new">
+        <h1>New Quest</h1>
         <form onSubmit={taskSubmit}>
           <div>
             <TextField placeholder={name} onChange={updateName} />
@@ -105,12 +121,21 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
             </Select>
           </div>
           <div>
-            <FormControl>
-              <CategorySelector
-                categories={categories}
-                updateCats={updateCats}
-              />
-            </FormControl>
+            <TextField select onChange={updateCat1} value={cat1}>
+              <MenuItem>--</MenuItem>
+              {categories &&
+                categories.map((e) => {
+                  return <MenuItem value={e.id}>{e.name}</MenuItem>;
+                })}
+            </TextField>
+          </div>
+          <div>
+            <TextField select onChange={updateCat2} value={cat2}>
+              {categories &&
+                categories.map((e) => {
+                  return <MenuItem value={e.id}>{e.name}</MenuItem>;
+                })}
+            </TextField>
           </div>
           <Button type="submit">Submit</Button>
           <Button onClick={() => setTaskForm(false)}>Cancel</Button>

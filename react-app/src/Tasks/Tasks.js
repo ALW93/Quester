@@ -9,8 +9,8 @@ import CategoryForm from "../Shared/CategoryForm";
 const Tasks = () => {
   const data = useSelector((state) => state.tasks.allTasks);
   const [tasks, setTasks] = useState([]);
-  const [taskForm, setTaskForm] = useState(false);
-  const [catForm, setCatForm] = useState(false);
+  const [taskForm, setTaskForm] = useState(true);
+
   const [log, setLog] = useState(false);
 
   useEffect(() => {
@@ -25,35 +25,21 @@ const Tasks = () => {
     setTaskForm(open);
   };
 
-  const showCatForm = (open) => {
-    setCatForm(open);
-  };
-
   return (
-    <>
-      <h1>Tasks</h1>
+    <div className="taskpage__container">
       <div>
         <Button variant="outlined" onClick={() => toggleLog(false)}>
-          Quests
+          Active
         </Button>
         <Button
           variant="outlined"
           onClick={() => {
             showTaskForm(true);
-            showCatForm(false);
           }}
         >
           Add Task
         </Button>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            showCatForm(true);
-            showTaskForm(false);
-          }}
-        >
-          Edit Categories
-        </Button>
+
         <Button variant="outlined" onClick={() => toggleLog(true)}>
           Log
         </Button>
@@ -61,7 +47,6 @@ const Tasks = () => {
       {taskForm ? (
         <TaskForm setTaskForm={setTaskForm} setTasks={setTasks} />
       ) : null}
-      {catForm ? <CategoryForm setCatForm={setCatForm} /> : null}
 
       {log ? (
         <h1>Log Items will Go Here</h1>
@@ -71,7 +56,7 @@ const Tasks = () => {
           return <Task t={t} setTasks={setTasks} />;
         })
       )}
-    </>
+    </div>
   );
 };
 
