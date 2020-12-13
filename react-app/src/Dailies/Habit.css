@@ -1,0 +1,18 @@
+.habit__container {
+  background-image: url(../assets/paper_texture.jpg);
+  margin: 10px;
+  border-radius: 3px;
+  padding: 20px 30px 20px 30px;
+}
+
+.habit__calendar {
+  margin-top: 20px;
+}
+
+.calendar__day {
+  width: 100px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  justify-content: space-between;
+}

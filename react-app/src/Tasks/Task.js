@@ -3,7 +3,7 @@ import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
 import { useDispatch, useSelector } from "react-redux";
-import { parseDifficulty } from "../services/levels";
+import { parseDifficulty, parseClass } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -32,13 +32,15 @@ const Task = ({ t }) => {
       const now = DateTime.local();
       const expiration = DateTime.fromHTTP(t.deadline);
       const time = expiration.diff(now, ["days", "hours"]).toObject();
-      if (time.days < 0) {
+      if (time.days < 0 || time.hours < 0) {
         // alert(`${t.name} has expired! You lost 10 HP!`);
         setExpired(true);
       }
       setTime(time);
     };
-    timeLeft();
+    if (t.deadline) {
+      timeLeft();
+    }
   }, [t]);
 
   const deleteHandler = async () => {
@@ -51,13 +53,10 @@ const Task = ({ t }) => {
       payload.statId = await categories.map((e) => e.stat_id);
     }
 
-    alert(
-      `Rewards: Gained ${payload.exp} EXP! Earned ${payload.currency} coins! Healed for ${payload.health} pts!`
-    );
     await dispatch(completeTask(t.id, payload));
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
-    await dispatch(updateTimer());
+    await dispatch(updateTimer(payload));
     console.log(update);
     console.log(payload);
   };
@@ -68,6 +67,7 @@ const Task = ({ t }) => {
 
   return (
     <>
+      {/* <Paper className={`task ${parseClass(t.difficulty)}`}> */}
       <Paper className="task">
         <div className="task__title">
           <h1>{t.name}</h1>

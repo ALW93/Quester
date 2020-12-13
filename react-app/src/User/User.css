@@ -1,11 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
+
 .tester {
+  z-index: 999;
+  background-image: url("../assets/paper_texture.jpg");
+  background-size: cover;
+  background-position: center;
   margin-top: 10px;
-  margin-left: 300px;
   background-color: rgb(233, 235, 223);
   border-radius: 10px;
-  padding: 30px;
+  padding: 45px;
   border: 1px dashed black;
   position: absolute;
+  animation: bounce 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: infinite;
+}
+
+.bounceAnimation {
   animation: bounce 0.5s;
   animation-direction: alternate;
   animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
@@ -23,4 +35,31 @@
 
 .stat__container {
   display: flex;
+}
+
+.User__currency {
+  display: flex;
+  justify-content: center;
+  font-weight: 1000;
+  align-content: center;
+}
+
+.User__topinfo {
+  text-shadow: 0 0 10px rgb(137, 210, 191);
+}
+
+.User__gold {
+  align-self: center;
+  color: rgb(255, 200, 21);
+}
+
+.User__container {
+  border: 1px solid black;
+  background-image: url("../assets/Top_BG2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 10px;
+  color: white;
+  padding: 30px 20px 30px 20px;
+  height: 100vh;
 }

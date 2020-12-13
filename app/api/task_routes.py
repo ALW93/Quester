@@ -52,7 +52,6 @@ def complete_task(id):
     user = User.query.get(task.user_id)
 
     if task and user:
-        print('Hello world!', file=sys.stderr)
         task.status = "complete"
         user.currency += rewards["currency"]
         user.exp += rewards["exp"]

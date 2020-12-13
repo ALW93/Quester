@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Info from "luxon/src/info.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
+import { deleteIcon } from "../assets/icons";
 import {
   getHabitCategory,
   getHabitChecks,
@@ -84,19 +85,17 @@ const HabitContainer = ({ data }) => {
   }
 
   return (
-    <>
-      <div style={{ display: "flex " }}>
+    <div className="habit__container">
+      <div className="habit__detail" style={{ display: "flex " }}>
         <h1>{data.name}</h1>
         {categories &&
           categories.map((c, i) => {
             return <Category data={c} key={`habitCategory${i}`} />;
           })}
-        <Button color="secondary" variant="contained" onClick={deleteHandler}>
-          Delete
-        </Button>
+        <Button onClick={deleteHandler}>{deleteIcon()}</Button>
       </div>
 
-      <div style={{ display: "flex" }}>
+      <div className="habit__calendar" style={{ display: "flex" }}>
         {Info.weekdays().map((day, i) => {
           const currentDay = DateTime.local()
             .startOf("week")
@@ -118,7 +117,7 @@ const HabitContainer = ({ data }) => {
             });
           return (
             <>
-              <div key={`Check${i}${day}`}>
+              <div key={`Check${i}${day}`} className="calendar__day">
                 <div>{display}</div>
                 <div>
                   {parsed.includes(currentDay) ? (
@@ -137,7 +136,7 @@ const HabitContainer = ({ data }) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

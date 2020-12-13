@@ -15,7 +15,7 @@ export const authenticate = () => async (dispatch) => {
     },
   });
   const user = await response.json();
-  if (user) {
+  if (!user.errors) {
     dispatch(setAuth(true));
     dispatch(setUser(user));
   }

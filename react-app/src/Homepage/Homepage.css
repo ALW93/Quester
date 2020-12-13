@@ -1,13 +1,35 @@
+body {
+  background-color: white;
+}
+
 .homepage__topbar {
+  margin: 0 120px 0 120px;
+  background-image: url("../assets/Top_BG2.jpg");
+  background-size: cover;
+  background-position: 20% 7%;
+  background-repeat: no-repeat;
+  text-shadow: 0 0 10px rgb(137, 210, 191);
   display: flex;
+  color: white;
+  height: 150px;
+  align-items: center;
   justify-content: space-between;
-  background-color: beige;
-  padding: 10px;
+  border-radius: 3px;
+  padding: 18px;
+  margin-bottom: 10px;
   border: 1px solid black;
 }
 
 .homepage__bottom {
   display: flex;
+  margin: 0 120px 0 120px;
+}
+
+.homepage__logo {
+  position: absolute;
+  text-align: center;
+  margin-top: 1%;
+  margin-left: 43.2%;
 }
 
 .homepage__bottom-left {
@@ -18,4 +40,9 @@
 
 .homepage__bottom-right {
   width: 65%;
+}
+
+.logoutButton__inner {
+  position: relative;
+  margin: -4px 0 0 5px;
 }

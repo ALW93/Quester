@@ -1,12 +1,54 @@
+.taskpage__container {
+}
+
 .task {
+  background-image: url(../assets/brown-papyrus-paper.jpg);
+  background-size: cover;
+  background-position: center 40%;
   margin: 10px;
+
   padding: 10px 20px 10px 20px;
+  box-shadow: 0 0 50px 15px rgb(255, 255, 255);
+}
+
+.veryeasy {
+  animation: glow 3s infinite alternate;
+}
+
+.easy {
+  animation: glow 3s infinite alternate;
+}
+
+.normal {
+  animation: glow 3s infinite alternate;
+}
+
+.hard {
+  animation: glow 3s infinite alternate;
+}
+
+.veryhard {
+  animation: glow 3s infinite alternate;
 }
 
 .taskform__new {
-  border: 1px solid rgb(0, 0, 0);
+  background-image: url(../assets/brown-papyrus-paper.jpg);
+  background-size: cover;
+  background-position: center;
+  color: rgb(0, 0, 0);
   margin: 10px;
-  padding: 15px;
+  border-radius: 3px;
+  padding: 30px;
+  text-align: center;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 60px 15px rgb(255, 255, 255);
+  }
+  to {
+    box-shadow: 0 0 60px 30px rgb(255, 255, 255);
+  }
 }
 
 .task__title {

@@ -8,7 +8,7 @@ const Stats = () => {
 
   return (
     <>
-      <h1>Stats</h1>
+      <h1></h1>
 
       {stats &&
         stats.map((stat, i) => {

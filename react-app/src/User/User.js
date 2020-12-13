@@ -1,55 +1,83 @@
 import React, { useEffect, useState } from "react";
 import "./User.css";
 import { parseLevel } from "../services/levels";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { coinIcon, tempAvatar, expIcon, healthIcon } from "../assets/icons";
 import Stats from "./Stats";
+import { closeUpdate } from "../store/actions/utilityReducer";
 
 const User = () => {
   const info = useSelector((state) => state.session.user);
   const update = useSelector((state) => state.utility.update);
-  const [showUpdate, hideShowUpdate] = useState(true);
+  const dispatch = useDispatch();
+  const [showUpdate, hideShowUpdate] = useState(false);
 
   useEffect(() => {
     const statChange = () => {
       setTimeout(() => hideShowUpdate(false), 20000);
     };
 
+    const close = async () => {
+      setTimeout(() => dispatch(closeUpdate()), 20000);
+    };
+
     if (update) {
-      console.log("stats updating");
       hideShowUpdate(true);
       statChange();
+      close();
     }
   }, [update]);
   return (
     <>
-      <div>
-        <h1>
-          {info.username} lv.{parseLevel(info.exp)}
-        </h1>
-      </div>
-      <div>currency: {info.currency}</div>
-
-      {showUpdate ? (
-        <>
-          <div className="tester">Good Work!</div>
-        </>
-      ) : null}
-      <img src="https://i.gyazo.com/7a8d38a048fc6f1c04c6e5eb995447a0.png" />
-
-      <div className="progress">
-        <div
-          className="progress-bar bg-success"
-          role="progressbar"
-          style={{ width: `${info.health}%` }}
-        >
-          {info.health}/100 HP
+      <div className="User__container">
+        <div className="User__currency">
+          {coinIcon()}
+          <div className="User__gold">
+            {info.currency}
+            {"  "} Gold
+          </div>
         </div>
-      </div>
-      <div>{info.exp} exp</div>
+        <div className="User__topinfo">
+          <h1>
+            {info.username} lv.{parseLevel(info.exp)}
+          </h1>
+        </div>
 
-      <Stats />
+        {showUpdate ? (
+          <>
+            <div className="tester">
+              <h1>Rewards</h1>
+              <div>
+                {expIcon()} {update.exp} EXP
+              </div>
+              <div>
+                {coinIcon()} {update.currency} Gold
+              </div>
+              <div>
+                {healthIcon()} {update.health} HP
+              </div>
+            </div>
+          </>
+        ) : null}
+        {tempAvatar()}
+
+        <div className="progress" style={{ height: "40px" }}>
+          <div
+            className="progress-bar"
+            role="progressbar"
+            style={{
+              width: `${info.health}%`,
+              backgroundColor: "rgb(137, 210, 191)",
+            }}
+          >
+            {info.health}/100 HP
+          </div>
+        </div>
+        <div>{info.exp} exp</div>
+
+        <Stats />
+      </div>
     </>
   );
 };

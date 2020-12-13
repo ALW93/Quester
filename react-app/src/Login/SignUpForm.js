@@ -12,7 +12,7 @@ const SignUpForm = ({ showSignup }) => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
-  const authorized = useSelector((state) => state.auth.auth);
+  const authorized = useSelector((state) => state.session.auth);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -52,7 +52,7 @@ const SignUpForm = ({ showSignup }) => {
 
   return (
     <>
-      <h2>Sign Up</h2>
+      <h2>Create an Account</h2>
       {errors.map((error) => (
         <div>{error}</div>
       ))}
@@ -94,7 +94,9 @@ const SignUpForm = ({ showSignup }) => {
             required={true}
           />
         </div>
-        <Button type="submit">Sign Up</Button>
+        <button type="submit" className="fadebutton">
+          Sign Up
+        </button>
       </form>
       <div onClick={() => showSignup(false)}>
         Return to Login

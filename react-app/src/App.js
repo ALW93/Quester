@@ -22,16 +22,18 @@ function App() {
   useEffect(() => {
     (async () => {
       const user = await dispatch(authenticate());
-      dispatch([
-        setUserInfo(),
-        getAvatar(user.id),
-        getTasks(user.id),
-        getCategories(user.id),
-        getHabits(user.id),
-        getStats(user.id),
-        getUserFriends(user.id),
-        getUserMessages(user.id),
-      ]);
+      if (user) {
+        dispatch([
+          setUserInfo(),
+          getAvatar(user.id),
+          getTasks(user.id),
+          getCategories(user.id),
+          getHabits(user.id),
+          getStats(user.id),
+          getUserFriends(user.id),
+          getUserMessages(user.id),
+        ]);
+      }
       setLoaded(true);
     })();
   }, []);

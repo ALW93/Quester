@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
 
 body {
-  padding: 30px;
+  padding: 20px 200px 20px 200px;
   font-family: "Andika New Basic", sans-serif;
 }
 
 h1 {
-  font-family: "Permanent Marker", cursive;
+  font-family: "Permanent Marker", "Andika New Basic", sans-serif;
 }
 
 .category__grid {
@@ -26,4 +26,30 @@ h1 {
   width: 10rem;
   height: 7rem;
   border: 1px solid blue;
+}
+
+.fadebutton {
+  color: rgb(205, 255, 242);
+  background-color: #292d3e;
+  border: 1px solid rgb(137, 210, 191);
+  border-radius: 4px;
+  padding: 15px 18px 30px 15px;
+  cursor: pointer;
+  height: 10px;
+  font-size: 14px;
+  box-shadow: 0 0 4px #999;
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.fadebutton:hover {
+  background: rgb(137, 210, 191)
+    radial-gradient(circle, transparent 1%, rgb(137, 210, 191) 1%) center/15000%;
+  color: white;
+}
+
+.fadebutton:active {
+  background-color: #292d3e;
+  background-size: 100%;
+  transition: background 0s;
 }

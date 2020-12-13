@@ -1,6 +1,13 @@
-.questlog__page {
+.questlog__page--top {
   height: 100vh;
+}
+
+.questlog__page--bottom {
   border: 1px solid black;
-  background-color: rgb(194, 201, 216);
+  background-image: url(../assets/Top_Background.jpg);
+  background-size: cover;
+  background-position: center;
   overflow: scroll;
+  height: 96vh;
+  padding: 20px;
 }

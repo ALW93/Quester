@@ -3,13 +3,17 @@ import "./Homepage.css";
 import User from "../User/User";
 import QuestLog from "../QuestLog/QuestLog";
 import LogoutButton from "../Shared/LogoutButton";
+import Clock from "../Shared/Clock";
 
 const Homepage = () => {
   return (
     <>
       <div className="homepage__topbar">
-        <div>{new Date().toLocaleString()}</div>
-        <h1>Quester</h1>
+        <Clock />
+        <div className="homepage__logo">
+          <h1>Quester</h1>
+          <p>Productivity RPG Adventure</p>
+        </div>
         <LogoutButton />
       </div>
       <div className="homepage__bottom">
