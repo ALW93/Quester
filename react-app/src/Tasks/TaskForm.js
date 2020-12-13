@@ -33,7 +33,6 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
       status: "pending",
       categories: catIds,
     };
-    console.log(new_task);
     await setNewTask(new_task);
     setTaskForm(false);
   };

@@ -28,17 +28,39 @@ def delete_task(id):
     if delete_task:
         db.session.delete(delete_task)
         db.session.commit()
+    return {"message": "deleted successfully"}
 
 
 @task_routes.route('/<int:id>/expire', methods=["PUT"])
 @login_required
 def expire_task(id):
     """Expire a Task"""
+
+    rewards = request.json
     task = Task.query.get(id)
-    if task:
+    user = User.query.get(task.user_id)
+
+    if task and user:
         task.status = "expired"
+        user.health += rewards["health"]
         db.session.commit()
         return task.status
+
+
+@task_routes.route('/<int:id>/restore', methods=["PUT"])
+@login_required
+def restore_task(id):
+    """Expire a Task"""
+
+    data = request.json
+    task = Task.query.get(id)
+
+    if task:
+        task.status = "pending"
+        task.deadline = data['deadline']
+        db.session.commit()
+
+    return task.to_dict()
 
 
 @task_routes.route('/<int:id>/complete', methods=["PUT"])

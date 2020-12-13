@@ -11,23 +11,7 @@ const User = () => {
   const info = useSelector((state) => state.session.user);
   const update = useSelector((state) => state.utility.update);
   const dispatch = useDispatch();
-  const [showUpdate, hideShowUpdate] = useState(false);
 
-  useEffect(() => {
-    const statChange = () => {
-      setTimeout(() => hideShowUpdate(false), 20000);
-    };
-
-    const close = async () => {
-      setTimeout(() => dispatch(closeUpdate()), 20000);
-    };
-
-    if (update) {
-      hideShowUpdate(true);
-      statChange();
-      close();
-    }
-  }, [update]);
   return (
     <>
       <div className="User__container">
@@ -44,22 +28,6 @@ const User = () => {
           </h1>
         </div>
 
-        {showUpdate ? (
-          <>
-            <div className="tester">
-              <h1>Rewards</h1>
-              <div>
-                {expIcon()} {update.exp} EXP
-              </div>
-              <div>
-                {coinIcon()} {update.currency} Gold
-              </div>
-              <div>
-                {healthIcon()} {update.health} HP
-              </div>
-            </div>
-          </>
-        ) : null}
         {tempAvatar()}
 
         <div className="progress" style={{ height: "40px" }}>
