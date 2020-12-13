@@ -3,4 +3,17 @@
   background-size: cover;
   background-position: center;
   margin-top: 10px;
+  color: white;
+  border: 2px dashed black;
+}
+
+.reward__inner {
+  padding: 0 20px 10px 20px;
+  text-align: center;
+}
+
+.reward__detail {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 90px 10px 90px;
 }
