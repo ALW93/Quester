@@ -4,7 +4,6 @@ import { Button } from "@material-ui/core";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 import "./Tasks.css";
-import CategoryForm from "../Shared/CategoryForm";
 
 const Tasks = () => {
   const data = useSelector((state) => state.tasks.allTasks);

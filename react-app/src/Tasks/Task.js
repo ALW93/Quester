@@ -32,13 +32,15 @@ const Task = ({ t }) => {
       const now = DateTime.local();
       const expiration = DateTime.fromHTTP(t.deadline);
       const time = expiration.diff(now, ["days", "hours"]).toObject();
-      if (time.days < 0) {
+      if (time.days < 0 || time.hours < 0) {
         // alert(`${t.name} has expired! You lost 10 HP!`);
         setExpired(true);
       }
       setTime(time);
     };
-    timeLeft();
+    if (t.deadline) {
+      timeLeft();
+    }
   }, [t]);
 
   const deleteHandler = async () => {
@@ -51,13 +53,10 @@ const Task = ({ t }) => {
       payload.statId = await categories.map((e) => e.stat_id);
     }
 
-    alert(
-      `Rewards: Gained ${payload.exp} EXP! Earned ${payload.currency} coins! Healed for ${payload.health} pts!`
-    );
     await dispatch(completeTask(t.id, payload));
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
-    await dispatch(updateTimer());
+    await dispatch(updateTimer(payload));
     console.log(update);
     console.log(payload);
   };

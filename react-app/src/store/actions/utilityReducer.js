@@ -4,8 +4,9 @@ export const SET_UPDATE = "Quester/utility/SET_UPDATE";
 export const showForm = (open) => ({ type: SHOW_FORM, open });
 export const setUpdate = (payload) => ({ type: SET_UPDATE, payload });
 
-export const updateTimer = () => async (dispatch) => {
-  await dispatch(setUpdate(true));
+export const updateTimer = (payload) => async (dispatch) => {
+  console.log(payload);
+  await dispatch(setUpdate(payload));
 };
 
 export const closeUpdate = () => async (dispatch) => {

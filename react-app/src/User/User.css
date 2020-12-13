@@ -1,13 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
 
 .tester {
+  z-index: 999;
+  background-image: url("../assets/paper_texture.jpg");
+  background-size: cover;
+  background-position: center;
   margin-top: 10px;
-  margin-left: 300px;
   background-color: rgb(233, 235, 223);
   border-radius: 10px;
-  padding: 30px;
+  padding: 45px;
   border: 1px dashed black;
   position: absolute;
+  animation: bounce 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: infinite;
+}
+
+.bounceAnimation {
   animation: bounce 0.5s;
   animation-direction: alternate;
   animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);

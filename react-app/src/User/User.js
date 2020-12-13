@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./User.css";
 import { parseLevel } from "../services/levels";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
-import { coinIcon, tempAvatar } from "../assets/icons";
+import { coinIcon, tempAvatar, expIcon, healthIcon } from "../assets/icons";
 import Stats from "./Stats";
+import { closeUpdate } from "../store/actions/utilityReducer";
 
 const User = () => {
   const info = useSelector((state) => state.session.user);
   const update = useSelector((state) => state.utility.update);
+  const dispatch = useDispatch();
   const [showUpdate, hideShowUpdate] = useState(false);
 
   useEffect(() => {
@@ -16,10 +18,14 @@ const User = () => {
       setTimeout(() => hideShowUpdate(false), 20000);
     };
 
+    const close = async () => {
+      setTimeout(() => dispatch(closeUpdate()), 20000);
+    };
+
     if (update) {
-      console.log("stats updating");
       hideShowUpdate(true);
       statChange();
+      close();
     }
   }, [update]);
   return (
@@ -40,7 +46,18 @@ const User = () => {
 
         {showUpdate ? (
           <>
-            <div className="tester">Good Work!</div>
+            <div className="tester">
+              <h1>Rewards</h1>
+              <div>
+                {expIcon()} {update.exp} EXP
+              </div>
+              <div>
+                {coinIcon()} {update.currency} Gold
+              </div>
+              <div>
+                {healthIcon()} {update.health} HP
+              </div>
+            </div>
           </>
         ) : null}
         {tempAvatar()}
