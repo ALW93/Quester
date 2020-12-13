@@ -3,20 +3,42 @@
 }
 
 .task {
+  background-image: url(../assets/brown-papyrus-paper.jpg);
+  background-size: cover;
+  background-position: center 40%;
   margin: 10px;
   padding: 10px 20px 10px 20px;
+}
+
+.veryeasy {
+  animation: glow 3s infinite alternate;
+}
+
+.easy {
+  animation: glow 3s infinite alternate;
+}
+
+.normal {
+  animation: glow 3s infinite alternate;
+}
+
+.hard {
+  animation: glow 3s infinite alternate;
+}
+
+.veryhard {
+  animation: glow 3s infinite alternate;
 }
 
 .taskform__new {
   background-image: url(../assets/brown-papyrus-paper.jpg);
   background-size: cover;
   background-position: center;
-
+  color: rgb(0, 0, 0);
   margin: 10px;
   border-radius: 3px;
   padding: 30px;
   text-align: center;
-  animation: glow 3s infinite alternate;
 }
 
 @keyframes glow {
@@ -24,7 +46,7 @@
     box-shadow: 0 0 60px 15px rgb(255, 255, 255) inset;
   }
   to {
-    box-shadow: 0 0 60px 28px rgb(255, 255, 255) inset;
+    box-shadow: 0 0 60px 30px rgb(255, 255, 255) inset;
   }
 }
 

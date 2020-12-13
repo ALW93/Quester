@@ -3,7 +3,7 @@ import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
 import { useDispatch, useSelector } from "react-redux";
-import { parseDifficulty } from "../services/levels";
+import { parseDifficulty, parseClass } from "../services/levels";
 import { getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -68,7 +68,7 @@ const Task = ({ t }) => {
 
   return (
     <>
-      <Paper className="task">
+      <Paper className={`task ${parseClass(t.difficulty)}`}>
         <div className="task__title">
           <h1>{t.name}</h1>
           <div>{parseDifficulty(t.difficulty)}</div>

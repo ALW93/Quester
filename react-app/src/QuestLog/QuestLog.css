@@ -4,7 +4,9 @@
 
 .questlog__page--bottom {
   border: 1px solid black;
-  background-color: wheat;
+  background-image: url(../assets/Top_Background.jpg);
+  background-size: cover;
+  background-position: center;
   overflow: scroll;
   height: 96vh;
   padding: 20px;

@@ -54,3 +54,11 @@ export const parseDifficulty = (num) => {
     );
   }
 };
+
+export const parseClass = (num) => {
+  if (num === 1) return "veryeasy";
+  if (num === 2) return "easy";
+  if (num === 3) return "normal";
+  if (num === 4) return "hard";
+  if (num === 5) return "veryhard";
+};
