@@ -1,11 +1,12 @@
 const SET_TASKS = "Quester/tasks/SET_TASKS";
 const ADD_TASK = "Quest/tasks/ADD_TASK";
-const EDIT_TASK = "Quest/tasks/EDIT_TASK";
+const EXPIRE_TASK = "Quest/tasks/EXPIRE_TASK";
 const DELETE_TASK = "Quest/tasks/DELETE_TASK";
 
 export const setTasks = (data) => ({ type: SET_TASKS, data });
 export const addTask = (task) => ({ type: ADD_TASK, task });
 export const deleteTask = (payload) => ({ type: DELETE_TASK, payload });
+export const expireTask = (payload) => ({ type: EXPIRE_TASK, payload });
 
 // Get all tasks created by User
 export const getTasks = (id) => async (dispatch) => {
@@ -51,9 +52,6 @@ export const removeTask = (taskId) => async (dispatch) => {
     },
   });
   const data = response.json();
-  if (data) {
-    dispatch(deleteTask(taskId));
-  }
   return data;
 };
 
@@ -73,6 +71,20 @@ export const completeTask = (taskId, payload) => async (dispatch) => {
     dispatch(deleteTask(taskId));
   }
 
+  return data;
+};
+
+// Expire a Task
+export const expire = (taskId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${taskId}/expire`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  const data = response;
   return data;
 };
 

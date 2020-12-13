@@ -4,7 +4,7 @@ import "./Tasks.css";
 import Category from "../Shared/Category";
 import { useDispatch, useSelector } from "react-redux";
 import { parseDifficulty, parseClass } from "../services/levels";
-import { getTaskCategory } from "../store/actions/tasksReducer";
+import { expire, getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import DateTime from "luxon/src/datetime.js";
@@ -26,19 +26,23 @@ const Task = ({ t }) => {
     (async () => {
       const cats = await dispatch(getTaskCategory(t.id));
       await setCategories(cats);
+      if (t.status === "expired") setExpired(true);
       setLoaded(true);
     })();
-    const timeLeft = () => {
+    const timeLeft = async () => {
       const now = DateTime.local();
       const expiration = DateTime.fromHTTP(t.deadline);
       const time = expiration.diff(now, ["days", "hours"]).toObject();
-      if (time.days < 0 || time.hours < 0) {
-        // alert(`${t.name} has expired! You lost 10 HP!`);
-        setExpired(true);
+      const payload = gacha("expire_task", t.difficulty);
+      if (time.days <= 0 && time.hours <= 0) {
+        alert(`${t.name} has expired! You lost 10 HP!`);
+        await dispatch(expire(t.id, payload));
       }
+      console.log(expired);
       setTime(time);
     };
-    if (t.deadline) {
+    if (t.deadline !== null) {
+      console.log(t, "triggering");
       timeLeft();
     }
   }, [t]);
@@ -98,7 +102,7 @@ const Task = ({ t }) => {
           })}
         <div>
           {expired ? (
-            <Button>Try Again</Button>
+            <Button variant="contained">Try Again</Button>
           ) : (
             <Button
               onClick={completeHandler}

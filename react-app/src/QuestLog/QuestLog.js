@@ -7,8 +7,8 @@ import Social from "../Social/Social";
 import Settings from "../Settings/Settings";
 
 const QuestLog = () => {
-  const [showQ, setShowQ] = useState(false);
-  const [showD, setShowD] = useState(true);
+  const [showQ, setShowQ] = useState(true);
+  const [showD, setShowD] = useState(false);
   const [showS, setShowS] = useState(false);
   const [settings, showSettings] = useState(false);
 
