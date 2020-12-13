@@ -22,16 +22,8 @@ const Category = ({ data }) => {
   }
 
   return (
-    <>
-      <Paper
-        variant="outlined"
-        square
-        style={{
-          padding: "5px",
-          backgroundColor: "beige",
-          width: "fit-content",
-        }}
-      >
+    <div className="cat__container">
+      <div variant="outlined" square className="cat">
         <div>
           <b>{data.name}</b>
         </div>
@@ -41,8 +33,8 @@ const Category = ({ data }) => {
             <KeyboardArrowUpIcon />
           </div>
         </div>
-      </Paper>
-    </>
+      </div>
+    </div>
   );
 };
 

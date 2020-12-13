@@ -22,19 +22,9 @@ const Habit = () => {
 
   return (
     <>
-      <h1>Habits</h1>
+      <h1 style={{ color: "white" }}>Daily Quests</h1>
       <div>
-        <div>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              showHabitForm(true);
-            }}
-          >
-            Add Daily
-          </Button>
-        </div>
-        <div>
+        <div style={{ color: "white" }}>
           {DateTime.local().startOf("week").toLocaleString(DateTime.DATE_FULL)}
           {" - "}
           {DateTime.local().endOf("week").toLocaleString(DateTime.DATE_FULL)}
@@ -44,6 +34,16 @@ const Habit = () => {
         ) : null}
 
         <div>
+          <div>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                showHabitForm(true);
+              }}
+            >
+              Add Daily
+            </Button>
+          </div>
           {habits &&
             habits.map((habit, i) => {
               return <HabitContainer data={habit} key={`Habit${i}`} />;

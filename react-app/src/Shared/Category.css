@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
+
+.cat {
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  width: fit-content;
+  height: fit-content;
+  margin: 5px;
+  border-radius: 5px;
+}
+
 .test {
   animation: bounce 0.5s;
   animation-direction: alternate;
@@ -14,6 +25,14 @@
   }
 }
 
+.cat__container {
+  margin: 5px;
+}
+
 .stat__container {
+  background-color: pink;
+  font-size: 12px;
+  font-family: "Permanent Marker", "Andika New Basic", sans-serif;
+  position: absolute;
   display: flex;
 }

@@ -9,7 +9,7 @@ import star from "./star_ribbon.svg";
 import exp from "./star_outline.svg";
 import health from "./health.svg";
 
-export const deleteIcon = () => <DeleteOutlineIcon />;
+export const deleteIcon = () => <DeleteOutlineIcon style={{ fill: "red" }} />;
 export const editIcon = () => <EditIcon />;
 export const mailIcon = () => <img src={mail} />;
 export const potionIcon = () => <img src={potion} style={{ width: "47px" }} />;
