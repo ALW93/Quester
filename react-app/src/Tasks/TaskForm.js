@@ -100,7 +100,7 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
           <div>
             <TextField placeholder={name} onChange={updateName} />
 
-            <Select onChange={updateDifficulty}>
+            <Select onChange={updateDifficulty} value={difficulty}>
               <MenuItem value={1}>⭐</MenuItem>
               <MenuItem value={2}>⭐ ⭐ </MenuItem>
               <MenuItem value={3}>⭐ ⭐ ⭐ </MenuItem>
