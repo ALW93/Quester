@@ -1,6 +1,3 @@
-.taskpage__container {
-}
-
 .task {
   background-image: url(../assets/brown-papyrus-paper.jpg);
   background-size: cover;
@@ -31,13 +28,14 @@
 }
 
 .taskform__new {
-  background-image: url(../assets/brown-papyrus-paper.jpg);
+  background-image: url(../assets/paper_texture.jpg);
   background-size: cover;
   background-position: center;
   color: rgb(0, 0, 0);
   margin: 10px;
+  border: 1px dashed white;
   border-radius: 3px;
-  padding: 30px;
+  padding: 10px 30px 10px 30px;
   text-align: center;
 }
 

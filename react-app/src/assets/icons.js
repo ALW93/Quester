@@ -8,6 +8,7 @@ import avatar from "./transparent.png";
 import star from "./star_ribbon.svg";
 import exp from "./star_outline.svg";
 import health from "./health.svg";
+import scroll from "./torah.svg";
 
 export const deleteIcon = () => <DeleteOutlineIcon style={{ fill: "red" }} />;
 export const editIcon = () => <EditIcon />;
@@ -20,3 +21,4 @@ export const tempAvatar = () => <img src={avatar} style={{ width: "400px" }} />;
 export const starIcon = (size) => (
   <img src={star} style={{ width: `${size}px` }} />
 );
+export const questIcon = () => <img src={scroll} style={{ width: "40px" }} />;
