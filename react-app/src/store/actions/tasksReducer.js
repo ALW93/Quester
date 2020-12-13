@@ -5,6 +5,7 @@ const DELETE_TASK = "Quest/tasks/DELETE_TASK";
 
 const SET_EXPIRED = "Quest/tasks/SET_EXPIRED";
 const ADD_EXPIRED = "Quest/tasks/ADD_EXPIRED";
+const REVIVE_EXPIRED = "Quest/tasks/REVIVE_EXPIRED";
 const DELETE_EXPIRED = "Quest/tasks/DELETE_EXPIRED";
 
 const SET_COMPLETE = "QUEST/tasks/SET_COMPLETE";
@@ -19,6 +20,7 @@ export const expireTask = (payload) => ({ type: EXPIRE_TASK, payload });
 export const setExpired = (data) => ({ type: SET_EXPIRED, data });
 export const addExpired = (payload) => ({ type: ADD_EXPIRED, payload });
 export const deleteExpired = (payload) => ({ type: DELETE_EXPIRED, payload });
+export const reviveExpired = (payload) => ({ type: REVIVE_EXPIRED, payload });
 
 export const setComplete = (data) => ({ type: SET_COMPLETE, data });
 export const addComplete = (payload) => ({ type: ADD_COMPLETE, payload });
@@ -110,6 +112,22 @@ export const removeComplete = (taskId) => async (dispatch) => {
   return data;
 };
 
+// Delete Expired Task
+export const removeExpired = (taskId) => async (dispatch) => {
+  const response = await fetch(`/api/tasks/${taskId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+
+  if (data) {
+    dispatch(deleteExpired(taskId));
+  }
+  return data;
+};
+
 // Complete a Task
 export const completeTask = (taskId, payload) => async (dispatch) => {
   const response = await fetch(`/api/tasks/${taskId}/complete`, {
@@ -144,6 +162,26 @@ export const expire = (taskId, payload, taskData) => async (dispatch) => {
     dispatch(deleteTask(taskId));
     dispatch(addExpired(taskData));
   }
+  return data;
+};
+
+// Restore a Task
+export const restoreTask = (taskId) => async (dispatch) => {
+  console.log("restoring");
+  const response = await fetch(`/api/tasks/${taskId}/restore`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+  const data = await response.json();
+  if (data) {
+    dispatch(addTask(data));
+    dispatch(deleteExpired(taskId));
+    return data;
+  }
+
   return data;
 };
 

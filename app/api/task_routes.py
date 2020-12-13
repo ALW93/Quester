@@ -47,6 +47,19 @@ def expire_task(id):
         return task.status
 
 
+@task_routes.route('/<int:id>/restore', methods=["PUT"])
+@login_required
+def restore_task(id):
+    """Expire a Task"""
+
+    task = Task.query.get(id)
+
+    if task:
+        task.status = "pending"
+        db.session.commit()
+        return task.to_dict()
+
+
 @task_routes.route('/<int:id>/complete', methods=["PUT"])
 @login_required
 def complete_task(id):
