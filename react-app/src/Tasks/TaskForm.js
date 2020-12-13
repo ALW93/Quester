@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Tasks.css";
+import DateTime from "luxon/src/datetime.js";
 
-import {
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  FormControl,
-} from "@material-ui/core";
+import { TextField, Button, Select, MenuItem } from "@material-ui/core";
 import { newTask, getTasks } from "../store/actions/tasksReducer";
 
 const TaskForm = ({ setTaskForm, setTasks }) => {
@@ -46,7 +41,7 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
   useEffect(() => {
     (async () => {
       setCategories(cats);
-      setName(`${user.username}'s New Task`);
+      setName(`${user.username}'s Quest`);
     })();
   }, [user, cats]);
 
@@ -66,6 +61,12 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
   };
 
   const updateDeadline = (e) => {
+    const current = DateTime.local();
+    const chosen = DateTime.fromISO(e.target.value);
+    if (chosen <= current) {
+      alert("Deadline must be later than current time!");
+      return;
+    }
     setDeadline(e.target.value);
   };
 
@@ -98,8 +99,7 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
         <form onSubmit={taskSubmit}>
           <div>
             <TextField placeholder={name} onChange={updateName} />
-          </div>
-          <div>
+
             <Select onChange={updateDifficulty}>
               <MenuItem value={1}>⭐</MenuItem>
               <MenuItem value={2}>⭐ ⭐ </MenuItem>
@@ -108,8 +108,13 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
               <MenuItem value={5}>⭐ ⭐ ⭐ ⭐ ⭐ </MenuItem>
             </Select>
           </div>
+
           <div>
-            <TextField type="datetime-local" onChange={updateDeadline} />
+            <TextField
+              type="datetime-local"
+              onChange={updateDeadline}
+              value={deadline}
+            />
           </div>
           <div>
             <div>Frequency</div>
