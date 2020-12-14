@@ -1,5 +1,6 @@
 import React from "react";
 import { starIcon } from "../assets/icons";
+import "./Text.css";
 
 export const parseLevel = (exp) => {
   if (exp < 300) {
@@ -22,36 +23,36 @@ export const parseStatLevel = (points) => {
 export const parseStarText = (num) => {
   if (num === 1) {
     return (
-      <>
-        <h1 style={{ color: "lightblue" }}>Very Easy</h1>
-      </>
+      <div className="one">
+        <h2>Very Easy</h2>
+      </div>
     );
   }
   if (num === 2) {
     return (
-      <>
-        <h1 style={{ color: "green" }}>Easy</h1>
-      </>
+      <div className="two">
+        <h2>Easy</h2>
+      </div>
     );
   }
   if (num === 3) {
     return (
-      <div style={{ display: "flex" }}>
-        <h1 style={{ color: "indigo" }}>Normal</h1>
+      <div style={{ display: "flex" }} className="three">
+        <h2>Normal</h2>
       </div>
     );
   }
   if (num === 4) {
     return (
-      <>
-        <h1 style={{ color: "orange" }}>Hard</h1>
-      </>
+      <div className="four">
+        <h2>Hard</h2>
+      </div>
     );
   }
   if (num === 5) {
     return (
-      <div style={{ justifyContent: "center" }}>
-        <h1 style={{ color: "red" }}>Very Hard</h1>
+      <div style={{ justifyContent: "center" }} className="five">
+        <h2>Very Hard</h2>
       </div>
     );
   }

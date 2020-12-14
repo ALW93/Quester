@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
-import { parseDifficulty, parseClass } from "../services/levels";
+import { parseDifficulty, parseStarText, parseClass } from "../services/levels";
 import { useDispatch, useSelector } from "react-redux";
 import { expire, getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
@@ -11,7 +11,7 @@ import DateTime from "luxon/src/datetime.js";
 import { gacha } from "../services/gacha";
 import { setUserInfo } from "../store/actions/authReducer";
 import { getStats } from "../store/actions/statReducer";
-import { updateTimer } from "../store/actions/utilityReducer";
+import timeIcon from "../assets/hourglass.svg";
 
 const Task = ({ t, showDamage, showReward }) => {
   const [categories, setCategories] = useState([]);
@@ -52,7 +52,6 @@ const Task = ({ t, showDamage, showReward }) => {
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
     showReward(payload);
-    // await dispatch(updateTimer(payload));
   };
 
   const deleteHandler = async () => {
@@ -65,37 +64,49 @@ const Task = ({ t, showDamage, showReward }) => {
 
   return (
     <>
-      {/* <Paper className={`task ${parseClass(t.difficulty)}`}> */}
+      {/* <Paper className={`task ${parseClass(t.difficulty)}`} /> */}
       <Paper className="task">
         <div className="task__title">
-          <h1>{t.name}</h1>
+          <h1>
+            {t.name}
+            {parseStarText(t.difficulty)}
+          </h1>
+
           <div>{parseDifficulty(t.difficulty)}</div>
         </div>
 
         {/* <li>repeat: {t.frequency}</li> */}
-        <li>status: {t.status}</li>
-        {t.deadline ? (
-          <>
-            <li>
-              Time Remaining: {time.days} Days{"  "}
-              {Math.round(time.hours)} Hours
-            </li>
-          </>
-        ) : (
-          <li>No Expiration</li>
-        )}
-        {categories &&
-          categories.map((c, i) => {
-            return <Category data={c} key={`TaskCategory${i}`} />;
-          })}
-        <div>
-          <Button onClick={completeHandler} variant="contained" color="primary">
-            Complete
-          </Button>
 
-          <Button onClick={deleteHandler}>
-            <DeleteOutlineIcon style={{ fill: "red" }} />
-          </Button>
+        <div className="task__bottom">
+          {t.deadline ? (
+            <div>
+              <img src={timeIcon} style={{ width: "40px" }} /> {time.days} Days
+              {"  "}
+              {Math.round(time.hours)} Hours
+            </div>
+          ) : (
+            <>No Expiration</>
+          )}
+          <div style={{ display: "flex" }}>
+            {categories &&
+              categories.map((c, i) => {
+                return <Category data={c} key={`TaskCategory${i}`} />;
+              })}
+          </div>
+          <div>
+            <button
+              className="fadebutton"
+              onClick={completeHandler}
+              variant="contained"
+              color="primary"
+            >
+              Complete
+            </button>
+
+            <button onClick={deleteHandler} className="fb2">
+              Delete
+            </button>
+          </div>
         </div>
       </Paper>
     </>

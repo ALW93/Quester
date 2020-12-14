@@ -7,6 +7,7 @@ messages = db.Table('messages', c("id", db.Integer, primary_key=True),
                     c("created_at", db.Date, nullable=False),
                     c("type", db.String(50), nullable=False),
                     c("message", db.String(255), nullable=False),
+                    c("status", db.String(50), nullable=False),
                     c("receiver_id", db.Integer, db.ForeignKey("users.id")),
                     c("sender_id", db.Integer, db.ForeignKey("users.id")))
 

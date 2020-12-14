@@ -4,7 +4,7 @@ import "./Tasks.css";
 import DateTime from "luxon/src/datetime.js";
 import { questIcon } from "../assets/icons";
 
-import { TextField, Button, Select, MenuItem } from "@material-ui/core";
+import { TextField, Select, MenuItem } from "@material-ui/core";
 import { newTask, getTasks } from "../store/actions/tasksReducer";
 
 const TaskForm = ({ setTaskForm, setTasks }) => {

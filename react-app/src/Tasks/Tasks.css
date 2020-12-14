@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center 40%;
   margin: 10px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 30px 10px 30px;
   box-shadow: 0 0 50px 15px rgb(255, 255, 255);
 }
 
@@ -62,4 +62,9 @@
 
   padding: 10px 20px 10px 20px;
   box-shadow: 0 0 50px 15px rgb(255, 255, 255);
+}
+
+.task__bottom {
+  display: flex;
+  justify-content: space-between;
 }

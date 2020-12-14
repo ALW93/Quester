@@ -11,14 +11,17 @@ export const MiniForm = ({ num }) => {
   const [name, setName] = useState("");
   const [stat, setStat] = useState(0);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const new_category = {
       name: name,
       stat_id: stat,
     };
     console.log(new_category);
-    dispatch(newCategory(user.id, new_category));
+    await dispatch(newCategory(user.id, new_category));
+    setName("");
+    setStat("");
+    setMini(false);
   };
 
   const updateName = (e) => {
@@ -31,21 +34,24 @@ export const MiniForm = ({ num }) => {
 
   const miniForm = () => {
     return (
-      <form className="category__content" onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
+        <div>Name</div>
         <TextField
           required={true}
           placeholder="Category Name"
           onChange={updateName}
+          value={name}
         />
-        <Select onChange={updateStat}>
+        <div>Stat</div>
+        <Select onChange={updateStat} value={stat}>
           {stats &&
             stats.map((s) => {
               return <MenuItem value={s.id}>{s.name}</MenuItem>;
             })}
         </Select>
-        <div>
-          <Button type="submit">Submit</Button>
-          <Button onClick={() => setMini(false)}>Cancel</Button>
+        <div style={{ marginTop: "10px" }}>
+          <button type="submit">Submit</button>
+          <button onClick={() => setMini(false)}>Cancel</button>
         </div>
       </form>
     );
@@ -53,7 +59,9 @@ export const MiniForm = ({ num }) => {
 
   const addTask = () => {
     return (
-      <Button onClick={() => setMini(true)}>Empty Slot (+) Add Task</Button>
+      <button onClick={() => setMini(true)} style={{ marginTop: "25px" }}>
+        Add Category
+      </button>
     );
   };
 

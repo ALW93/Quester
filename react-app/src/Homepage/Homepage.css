@@ -3,7 +3,8 @@ body {
 }
 
 .homepage__topbar {
-  margin: 0 120px 0 120px;
+  /* margin: 0 120px 0 120px; */
+  margin: 0px;
   background-image: url("../assets/Top_BG2.jpg");
   background-size: cover;
   background-position: 20% 7%;
@@ -22,7 +23,8 @@ body {
 
 .homepage__bottom {
   display: flex;
-  margin: 0 120px 0 120px;
+  margin: 0px;
+  /* margin: 0 120px 0 120px; */
 }
 
 .homepage__logo {

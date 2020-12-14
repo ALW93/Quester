@@ -9,23 +9,13 @@ h1 {
   font-family: "Permanent Marker", "Andika New Basic", sans-serif;
 }
 
-.category__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    ". . . . ."
-    ". . . . .";
-  height: 14rem;
-  width: fit-content;
-  border: 1px solid red;
+h2 {
+  font-family: "Permanent Marker", "Andika New Basic", sans-serif;
 }
 
-.category__content {
-  width: 10rem;
-  height: 7rem;
-  border: 1px solid blue;
+.white {
+  color: white;
+  text-shadow: 0 0 10px rgb(137, 210, 191);
 }
 
 .fadebutton {
