@@ -38,11 +38,14 @@ def post_check(id):
     return {"error": "Something went wrong..."}
 
 
-@habit_routes.route("/checks/<int:id>", methods=["DELETE"])
+@habit_routes.route("/<int:id>/checks", methods=["DELETE"])
 @login_required
 def delete_check(id):
     """Delete Check from a Habit"""
-    delete_check = Check.query.get(id)
+
+    data = request.json
+    delete_check = Check.query.filter(Check.habit_id == id)
+
     if delete_check:
         db.session.delete(delete_check)
         db.session.commit()

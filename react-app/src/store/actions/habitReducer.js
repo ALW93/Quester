@@ -50,17 +50,15 @@ export const postCheck = (habitId, payload) => async (dispatch) => {
 };
 
 // DELETE a Check
-export const removeCheck = (habitId, checkId) => async (dispatch) => {
-  const response = await fetch(`/api/habits/checks/${checkId}`, {
+export const removeCheck = (habitId, date) => async (dispatch) => {
+  const response = await fetch(`/api/habits/${habitId}/checks`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(date),
   });
   const data = response.json();
-  if (data) {
-    return dispatch(getHabitChecks(habitId));
-  }
   return data;
 };
 

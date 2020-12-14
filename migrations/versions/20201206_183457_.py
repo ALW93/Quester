@@ -65,6 +65,7 @@ def upgrade():
     sa.Column('created_at', sa.Date(), nullable=False),
     sa.Column('type', sa.String(length=50), nullable=False),
     sa.Column('message', sa.String(length=255), nullable=False),
+    sa.Column('status', sa.String(length=50), nullable=False),
     sa.Column('receiver_id', sa.Integer(), nullable=True),
     sa.Column('sender_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['receiver_id'], ['users.id'], ),
@@ -104,7 +105,7 @@ def upgrade():
     )
     op.create_table('check',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('date', sa.Date(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('habit_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['habit_id'], ['habits.id'], ),
