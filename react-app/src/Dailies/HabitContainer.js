@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Info from "luxon/src/info.js";
+import { Info, DateTime } from "luxon";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
 import { deleteIcon } from "../assets/icons";
@@ -10,7 +10,7 @@ import {
   postCheck,
   removeCheck,
 } from "../store/actions/habitReducer";
-import DateTime from "luxon/src/datetime.js";
+
 import Category from "../Shared/Category";
 import { removeHabit } from "../store/actions/habitReducer";
 import "./Habit.css";

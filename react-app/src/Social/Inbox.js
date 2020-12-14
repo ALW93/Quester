@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { mailIcon, potionIcon } from "../assets/icons";
 import { Paper } from "@material-ui/core";
-import DateTime from "luxon/src/datetime.js";
+import { DateTime } from "luxon";
 
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);

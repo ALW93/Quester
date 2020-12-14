@@ -6,8 +6,8 @@ import { parseDifficulty, parseStarText, parseClass } from "../services/levels";
 import { useDispatch, useSelector } from "react-redux";
 import { expire, getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import DateTime from "luxon/src/datetime.js";
+
+import { DateTime } from "luxon";
 import { gacha } from "../services/gacha";
 import { setUserInfo } from "../store/actions/authReducer";
 import { getStats } from "../store/actions/statReducer";

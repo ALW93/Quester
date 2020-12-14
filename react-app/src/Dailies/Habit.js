@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import HabitContainer from "./HabitContainer";
-import DateTime from "luxon/src/datetime.js";
+import { DateTime } from "luxon";
 import HabitForm from "./HabitForm";
-import CategoryForm from "../Shared/CategoryForm";
 
 const Habit = () => {
   const data = useSelector((state) => state.habits.habits);

@@ -3,7 +3,7 @@ import { deleteIcon } from "../assets/icons";
 import { removeExpired, restoreTask } from "../store/actions/tasksReducer";
 import { Button, Paper, TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import DateTime from "luxon/src/datetime.js";
+import { DateTime } from "luxon";
 import { parseDifficulty, parseClass } from "../services/levels";
 
 const ExpiredTask = ({ data }) => {
