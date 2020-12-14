@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, FormControl, Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { getHabits, newHabit } from "../store/actions/habitReducer";
+import "./Habit.css";
 
 const HabitForm = ({ setHabitForm, setHabits }) => {
   const user = useSelector((state) => state.session.user);
@@ -39,29 +40,18 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
     setName(e.target.value);
   };
 
-  const updateCats = (e) => {
-    let arr = [...habitcat, e.target.value];
-    if (habitcat.has(e.target.value)) {
-      habitcat.delete(e.target.value);
-      arr = [...habitcat];
-    }
-    setHabitCat(new Set(arr));
-  };
-
   return (
-    <>
-      <div>
-        <form onSubmit={habitSubmit}>
-          <div>
-            <TextField placeholder={name} onChange={updateName} />
-          </div>
-
-          <div>
-            <Button type="submit">Submit</Button>
-          </div>
-        </form>
-      </div>
-    </>
+    <div className="habitform__container">
+      <form onSubmit={habitSubmit}>
+        <h1>New Daily</h1>
+        <div>Name</div>
+        <TextField placeholder={name} onChange={updateName} />
+        <div>
+          <button type="submit">Submit</button>
+          <button onClick={() => setHabitForm(false)}>Cancel</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

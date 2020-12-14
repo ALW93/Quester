@@ -1,5 +1,7 @@
 .habit__container {
-  background-image: url(../assets/paper_texture.jpg);
+  background-image: url(../assets/texture-of-wooden-boards.jpg);
+  background-size: cover;
+  border: 1px solid black;
   margin: 10px;
   border-radius: 3px;
   padding: 20px 30px 20px 30px;
@@ -15,4 +17,9 @@
   padding: 10px;
   text-align: center;
   justify-content: space-between;
+}
+
+.habitform__container {
+  background-image: url(../assets/paper_texture.jpg);
+  background-size: cover;
 }
