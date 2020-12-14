@@ -66,6 +66,11 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
+  const setCreds = (e) => {
+    setEmail("admin@aa.io");
+    setPassword("password");
+  };
+
   if (authorized) {
     return <Redirect to="/" />;
   }
@@ -110,7 +115,9 @@ const LoginForm = () => {
                   Login
                 </button>
                 {"  "}
-                <button className="fadebutton">Demo</button>
+                <button className="fadebutton" onClick={setCreds}>
+                  Demo
+                </button>
               </div>
             </form>
             <div onClick={() => showSignup(true)}>

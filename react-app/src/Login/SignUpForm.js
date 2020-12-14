@@ -13,6 +13,7 @@ const SignUpForm = ({ showSignup }) => {
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const authorized = useSelector((state) => state.session.auth);
+  const [beta, setBeta] = useState(true);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -56,48 +57,53 @@ const SignUpForm = ({ showSignup }) => {
       {errors.map((error) => (
         <div>{error}</div>
       ))}
-      <form onSubmit={onSignUp}>
-        <div>
-          <TextField
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={updateUsername}
-            value={username}
-          />
-        </div>
-        <div>
-          <TextField
-            type="text"
-            name="email"
-            placeholder="Email"
-            onChange={updateEmail}
-            value={email}
-          />
-        </div>
-        <div>
-          <TextField
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={updatePassword}
-            value={password}
-          />
-        </div>
-        <div>
-          <TextField
-            type="password"
-            name="repeat_password"
-            placeholder="Confirm Password"
-            onChange={updateRepeatPassword}
-            value={repeatPassword}
-            required={true}
-          />
-        </div>
-        <button type="submit" className="fadebutton">
-          Sign Up
-        </button>
-      </form>
+
+      {beta ? (
+        <h1>Currently under Development, Login with Demo to Tour!</h1>
+      ) : (
+        <form onSubmit={onSignUp}>
+          <div>
+            <TextField
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={updateUsername}
+              value={username}
+            />
+          </div>
+          <div>
+            <TextField
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={updateEmail}
+              value={email}
+            />
+          </div>
+          <div>
+            <TextField
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={updatePassword}
+              value={password}
+            />
+          </div>
+          <div>
+            <TextField
+              type="password"
+              name="repeat_password"
+              placeholder="Confirm Password"
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              required={true}
+            />
+          </div>
+          <button type="submit" className="fadebutton">
+            Sign Up
+          </button>
+        </form>
+      )}
       <div onClick={() => showSignup(false)}>
         Return to Login
         <DoubleArrowIcon />
