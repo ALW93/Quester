@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Category from "./Category";
 import { Button, Paper } from "@material-ui/core";
-import { deleteIcon, editIcon } from "../assets/icons";
+import { removeCategory } from "../store/actions/categoryReducer";
 import { MiniForm } from "./MiniForm";
 import "./Category.css";
 
 const CategoryForm = () => {
   const cats = useSelector((state) => state.categories.categories);
+  const user = useSelector((state) => state.session.user);
   const [categories, setCategories] = useState([]);
   const [emptySlot, setEmptySlot] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -20,6 +22,10 @@ const CategoryForm = () => {
       setLoaded(true);
     })();
   }, [cats]);
+
+  const deleteCat = async (userId, catId) => {
+    await dispatch(removeCategory(userId, catId));
+  };
 
   if (!loaded) {
     return null;
@@ -34,7 +40,12 @@ const CategoryForm = () => {
               <>
                 <div className="category__content">
                   <Category data={c} key={`Category${i}`} />
-                  <button style={{ marginTop: "10px" }}>Remove</button>
+                  <button
+                    style={{ marginTop: "10px" }}
+                    onClick={() => deleteCat(user.id, c.id)}
+                  >
+                    Remove
+                  </button>
                 </div>
               </>
             );

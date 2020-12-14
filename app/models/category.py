@@ -9,8 +9,8 @@ class Category(db.Model):
     stat_id = c(db.Integer, db.ForeignKey('stats.id'), nullable=True)
     name = c(db.String(50), nullable=False)
 
-    tasks = db.relationship('Task_Category', backref="category", lazy=True)
-    habits = db.relationship('Habit_Category', backref="category", lazy=True)
+    tasks = db.relationship('Task_Category', backref="category", lazy=True, cascade="all, delete-orphan")
+    habits = db.relationship('Habit_Category', backref="category", lazy=True, cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

@@ -198,6 +198,17 @@ def new_category(id):
         return new_cat.to_dict()
 
 
+@user_routes.route('/<int:id>/categories/<int:catId>', methods=["DELETE"])
+@login_required
+def delete_category(id, catId):
+    """DELETE a new Category for a User"""
+    delete_cat = Category.query.get(catId)
+    if delete_cat:
+        db.session.delete(delete_cat)
+        db.session.commit()
+    return delete_cat.to_dict()
+
+
 @user_routes.route('/<int:id>/friends')
 @login_required
 def get_friends(id):
