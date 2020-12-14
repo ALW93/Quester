@@ -6,15 +6,12 @@ import "./Social.css";
 
 const Social = () => {
   return (
-    <>
-      <div>
-        <h1>Social</h1>
-        <div style={{ display: "flex" }}>
-          <Friends />
-          <Inbox />
-        </div>
+    <div>
+      <div style={{ display: "flex" }}>
+        <Friends />
+        <Inbox />
       </div>
-    </>
+    </div>
   );
 };
 

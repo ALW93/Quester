@@ -22,4 +22,8 @@
 .habitform__container {
   background-image: url(../assets/paper_texture.jpg);
   background-size: cover;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px dashed rgb(255, 255, 255);
+  text-align: center;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Paper } from "@material-ui/core";
+import { mailIcon, potionIcon } from "../assets/icons";
+import "./Social.css";
 
 const Friends = () => {
   const friendlist = useSelector((state) => state.user.friends);
@@ -8,15 +9,18 @@ const Friends = () => {
     <>
       <div className="social__container--friends">
         <div>
-          <h1>Friends</h1>
+          <h1 className="white">Friends</h1>
         </div>
         <div>
           {friendlist &&
             friendlist.map((e) => {
               return (
                 <>
-                  <Paper>
-                    <h1>{e.username}</h1>
+                  <div className="friend">
+                    <h1 className="friendname">
+                      {e.username}
+                      {mailIcon()}
+                    </h1>
                     <div
                       className="progress-bar bg-success"
                       role="progressbar"
@@ -24,7 +28,7 @@ const Friends = () => {
                     >
                       {e.health}/100 HP
                     </div>
-                  </Paper>
+                  </div>
                 </>
               );
             })}

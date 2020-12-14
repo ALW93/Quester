@@ -13,6 +13,7 @@ import sword from "./sword.svg";
 import dream from "./fantasy.svg";
 import hat from "./hat.svg";
 import book2 from "./book.svg";
+import fairy from "./fairy-tale.svg";
 
 export const deleteIcon = () => <DeleteOutlineIcon style={{ fill: "red" }} />;
 export const editIcon = () => <EditIcon />;
@@ -26,6 +27,7 @@ export const starIcon = (size) => (
   <img src={star} style={{ width: `${size}px` }} />
 );
 export const questIcon = () => <img src={scroll} style={{ width: "40px" }} />;
+export const dailyIcon = () => <img src={fairy} style={{ width: "40px" }} />;
 export const swordIcon = () => <img src={sword} style={{ width: "25px" }} />;
 export const fantasyIcon = () => <img src={dream} style={{ width: "25px" }} />;
 export const hatIcon = () => <img src={hat} style={{ width: "25px" }} />;

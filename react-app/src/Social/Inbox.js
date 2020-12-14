@@ -9,7 +9,7 @@ const Inbox = () => {
     <>
       <div className="social__container--inbox">
         <div>
-          <h1>Inbox</h1>
+          <h1 className="white">Inbox</h1>
         </div>
         <div>
           {mail &&
