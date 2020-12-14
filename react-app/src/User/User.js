@@ -7,6 +7,7 @@ import { coinIcon, tempAvatar, expIcon, healthIcon } from "../assets/icons";
 import girl from "../characters/sword_girl.png";
 import boy from "../characters/bow_boy.png";
 import Stats from "./Stats";
+import newgirl from "../assets/new_girl.png";
 import { closeUpdate } from "../store/actions/utilityReducer";
 
 const User = () => {
@@ -30,7 +31,7 @@ const User = () => {
           </h1>
         </div>
 
-        <img src={boy} style={{ width: "95%" }} />
+        <img src={newgirl} style={{ width: "95%" }} />
 
         <div className="progress" style={{ height: "40px" }}>
           <div

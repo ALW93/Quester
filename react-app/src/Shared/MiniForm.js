@@ -9,7 +9,7 @@ export const MiniForm = ({ num }) => {
   const dispatch = useDispatch();
   const [mini, setMini] = useState(false);
   const [name, setName] = useState("");
-  const [stat, setStat] = useState(0);
+  const [stat, setStat] = useState(null);
 
   const submitHandler = async (e) => {
     e.preventDefault();
