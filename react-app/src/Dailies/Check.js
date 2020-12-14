@@ -40,7 +40,7 @@ const Check = ({ data, display, parsed, value, checks, setChecks }) => {
   };
 
   const checkRemover = async (display) => {
-    await dispatch(removeCheck(data.id, value));
+    await dispatch(removeCheck(data.id, { date: value }));
     showCheck(false);
   };
 

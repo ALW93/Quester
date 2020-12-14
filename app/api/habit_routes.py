@@ -44,7 +44,7 @@ def delete_check(id):
     """Delete Check from a Habit"""
 
     data = request.json
-    delete_check = Check.query.filter(Check.habit_id == id)
+    delete_check = Check.query.filter(Check.habit_id == id).filter(Check.date == data['date']).first();
 
     if delete_check:
         db.session.delete(delete_check)
