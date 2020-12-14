@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
-import { parseDifficulty, parseClass } from "../services/levels";
+import { parseDifficulty, parseStarText, parseClass } from "../services/levels";
 import { useDispatch, useSelector } from "react-redux";
 import { expire, getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
@@ -52,7 +52,6 @@ const Task = ({ t, showDamage, showReward }) => {
     await dispatch(setUserInfo());
     await dispatch(getStats(user.id));
     showReward(payload);
-    // await dispatch(updateTimer(payload));
   };
 
   const deleteHandler = async () => {
@@ -65,15 +64,17 @@ const Task = ({ t, showDamage, showReward }) => {
 
   return (
     <>
-      {/* <Paper className={`task ${parseClass(t.difficulty)}`}> */}
+      {/* <Paper className={`task ${parseClass(t.difficulty)}`} /> */}
       <Paper className="task">
         <div className="task__title">
-          <h1>{t.name}</h1>
+          <h1>
+            {t.name}
+            {parseStarText(t.difficulty)}
+          </h1>
           <div>{parseDifficulty(t.difficulty)}</div>
         </div>
 
         {/* <li>repeat: {t.frequency}</li> */}
-        <li>status: {t.status}</li>
         {t.deadline ? (
           <>
             <li>

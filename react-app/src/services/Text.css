@@ -1,0 +1,54 @@
+.one {
+  color: rgb(154, 226, 250);
+  animation: glow1 3s infinite;
+}
+
+@keyframes glow1 {
+  30% {
+    text-shadow: 0 0 10px rgb(255, 227, 227);
+  }
+}
+
+.two {
+  color: rgb(27, 99, 27);
+  animation: glow2 3s infinite alternate;
+}
+
+@keyframes glow2 {
+  30% {
+    text-shadow: 0 0 15px rgb(133, 255, 133);
+  }
+}
+
+.three {
+  color: rgb(38, 45, 130);
+  animation: glow3 3s infinite alternate;
+}
+
+@keyframes glow3 {
+  30% {
+    text-shadow: 0 0 15px rgb(189, 193, 255);
+  }
+}
+
+.four {
+  color: rgb(235, 121, 0);
+  animation: glow4 3s infinite alternate;
+}
+
+@keyframes glow4 {
+  30% {
+    text-shadow: 0 0 15px rgb(255, 220, 182);
+  }
+}
+
+.five {
+  color: rgb(206, 7, 7);
+  animation: glow5 3s infinite alternate;
+}
+
+@keyframes glow5 {
+  35% {
+    text-shadow: 0 0 15px rgb(255, 154, 154);
+  }
+}
