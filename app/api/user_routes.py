@@ -161,11 +161,12 @@ def create_habit(id):
         db.session.commit()
 
         latest = Habit.query.filter(Habit.user_id == id).order_by(Habit.id.desc()).first()
-        for cat in data["categories"]:
+
+        if data['category']:
             new_cat = Habit_Category(
-                habit_id=latest.id,
-                category_id=cat
-            )
+                    habit_id=latest.id,
+                    category_id=data['category']
+                )
             db.session.add(new_cat)
             db.session.commit()
         return new_habit.to_dict()

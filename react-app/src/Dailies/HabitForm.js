@@ -34,6 +34,7 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
     (async () => {
       await dispatch(newHabit(user.id, newhabit));
       await setHabits(dispatch(getHabits(user.id)));
+      setHabitForm(false);
     })();
   }, [newhabit]);
 
