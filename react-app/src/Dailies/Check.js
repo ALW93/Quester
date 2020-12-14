@@ -8,6 +8,7 @@ import {
   removeCheck,
 } from "../store/actions/habitReducer";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import { ribbon, noribbon } from "../assets/icons";
 
 const Check = ({ data, display, parsed, value, checks, setChecks }) => {
   const user = useSelector((state) => state.session.user);
@@ -49,12 +50,9 @@ const Check = ({ data, display, parsed, value, checks, setChecks }) => {
       <div>{display}</div>
       <div>
         {check ? (
-          <CheckBoxIcon
-            style={{ fill: "green" }}
-            onClick={() => checkRemover(display)}
-          />
+          <div onClick={() => checkRemover(display)}> {ribbon()}</div>
         ) : (
-          <CheckBoxOutlineBlankIcon onClick={() => checkHandler(value)} />
+          <div onClick={() => checkHandler(value)}>{noribbon()}</div>
         )}
       </div>
     </div>
