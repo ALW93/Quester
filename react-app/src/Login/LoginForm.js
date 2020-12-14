@@ -67,6 +67,7 @@ const LoginForm = () => {
   };
 
   const setCreds = (e) => {
+    e.preventDefault();
     setEmail("admin@aa.io");
     setPassword("password");
   };
