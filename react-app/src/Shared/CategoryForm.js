@@ -15,7 +15,7 @@ const CategoryForm = () => {
   useEffect(() => {
     (async () => {
       await setCategories(cats);
-      const length = 6 - cats.length;
+      const length = 9 - cats.length;
       await setEmptySlot(length);
       setLoaded(true);
     })();
