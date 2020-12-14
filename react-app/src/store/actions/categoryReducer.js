@@ -27,7 +27,7 @@ export const newCategory = (id, payload) => async (dispatch) => {
   });
   const data = await response.json();
   if (data) {
-    return dispatch(addCategory(payload));
+    return dispatch(addCategory(data));
   }
   return data;
 };
@@ -41,7 +41,8 @@ export const removeCategory = (userId, catId) => async (dispatch) => {
   });
   const data = await response.json();
   if (data) {
-    dispatch(deleteCategory(data));
+    console.log(data);
+    dispatch(deleteCategory(data.id));
     return data;
   }
 };
@@ -54,6 +55,12 @@ export const categoryReducer = (state = { categories: [] }, action) => {
     case ADD_CATEGORY: {
       const newCategories = [...state.categories, action.payload];
       return { ...state, categories: newCategories };
+    }
+    case DELETE_CATEGORY: {
+      return {
+        ...state,
+        categories: state.categories.filter((cat) => cat.id !== action.payload),
+      };
     }
     default:
       return state;
