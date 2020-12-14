@@ -11,7 +11,7 @@ import DateTime from "luxon/src/datetime.js";
 import { gacha } from "../services/gacha";
 import { setUserInfo } from "../store/actions/authReducer";
 import { getStats } from "../store/actions/statReducer";
-import { updateTimer } from "../store/actions/utilityReducer";
+import timeIcon from "../assets/hourglass.svg";
 
 const Task = ({ t, showDamage, showReward }) => {
   const [categories, setCategories] = useState([]);
@@ -71,32 +71,42 @@ const Task = ({ t, showDamage, showReward }) => {
             {t.name}
             {parseStarText(t.difficulty)}
           </h1>
+
           <div>{parseDifficulty(t.difficulty)}</div>
         </div>
 
         {/* <li>repeat: {t.frequency}</li> */}
-        {t.deadline ? (
-          <>
-            <li>
-              Time Remaining: {time.days} Days{"  "}
-              {Math.round(time.hours)} Hours
-            </li>
-          </>
-        ) : (
-          <li>No Expiration</li>
-        )}
-        {categories &&
-          categories.map((c, i) => {
-            return <Category data={c} key={`TaskCategory${i}`} />;
-          })}
-        <div>
-          <Button onClick={completeHandler} variant="contained" color="primary">
-            Complete
-          </Button>
 
-          <Button onClick={deleteHandler}>
-            <DeleteOutlineIcon style={{ fill: "red" }} />
-          </Button>
+        <div className="task__bottom">
+          {t.deadline ? (
+            <div>
+              <img src={timeIcon} style={{ width: "40px" }} /> {time.days} Days
+              {"  "}
+              {Math.round(time.hours)} Hours
+            </div>
+          ) : (
+            <>No Expiration</>
+          )}
+          <div style={{ display: "flex" }}>
+            {categories &&
+              categories.map((c, i) => {
+                return <Category data={c} key={`TaskCategory${i}`} />;
+              })}
+          </div>
+          <div>
+            <button
+              className="fadebutton"
+              onClick={completeHandler}
+              variant="contained"
+              color="primary"
+            >
+              Complete
+            </button>
+
+            <button onClick={deleteHandler} className="fb2">
+              Delete
+            </button>
+          </div>
         </div>
       </Paper>
     </>
