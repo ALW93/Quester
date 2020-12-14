@@ -26,6 +26,7 @@ const Tasks = () => {
 
   const toggleLog = (open) => {
     setLog(open);
+    setTaskForm(false);
   };
 
   const showTaskForm = (open) => {

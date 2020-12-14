@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Tasks.css";
-import DateTime from "luxon/src/datetime.js";
+import { DateTime } from "luxon";
 import { questIcon } from "../assets/icons";
 
 import { TextField, Select, MenuItem } from "@material-ui/core";

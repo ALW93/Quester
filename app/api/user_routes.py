@@ -161,11 +161,12 @@ def create_habit(id):
         db.session.commit()
 
         latest = Habit.query.filter(Habit.user_id == id).order_by(Habit.id.desc()).first()
-        for cat in data["categories"]:
+
+        if data['category']:
             new_cat = Habit_Category(
-                habit_id=latest.id,
-                category_id=cat
-            )
+                    habit_id=latest.id,
+                    category_id=data['category']
+                )
             db.session.add(new_cat)
             db.session.commit()
         return new_habit.to_dict()
@@ -195,6 +196,17 @@ def new_category(id):
         db.session.add(new_cat)
         db.session.commit()
         return new_cat.to_dict()
+
+
+@user_routes.route('/<int:id>/categories/<int:catId>', methods=["DELETE"])
+@login_required
+def delete_category(id, catId):
+    """DELETE a new Category for a User"""
+    delete_cat = Category.query.get(catId)
+    if delete_cat:
+        db.session.delete(delete_cat)
+        db.session.commit()
+    return delete_cat.to_dict()
 
 
 @user_routes.route('/<int:id>/friends')
