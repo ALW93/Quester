@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Andika+New+Basic&family=Permanent+Marker&display=swap");
 
 .cat {
+  display: flex;
   padding: 5px;
-  background-color: rgb(255, 255, 255);
+
   width: fit-content;
+  border: 3px double black;
   height: fit-content;
-  margin: 5px;
+  margin: 1px;
   border-radius: 5px;
 }
 
@@ -26,7 +28,9 @@
 }
 
 .cat__container {
-  margin: 5px;
+  display: flex;
+  align-items: center;
+  place-content: center;
 }
 
 .stat__container {
@@ -35,4 +39,23 @@
   font-family: "Permanent Marker", "Andika New Basic", sans-serif;
   position: absolute;
   display: flex;
+}
+
+.category__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . .";
+  width: fit-content;
+}
+
+.category__content {
+  background-image: url("../assets/paper_texture.jpg");
+  padding: 10px;
+  margin: 2px;
+  border: 1px solid black;
+  text-align-last: center;
 }

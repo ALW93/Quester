@@ -4,7 +4,7 @@ import CategoryForm from "../Shared/CategoryForm";
 const Settings = () => {
   return (
     <>
-      <h1>Edit Categories</h1>
+      <h1 style={{ color: "white" }}>Edit Categories</h1>
       <CategoryForm />
     </>
   );

@@ -9,25 +9,6 @@ h1 {
   font-family: "Permanent Marker", "Andika New Basic", sans-serif;
 }
 
-.category__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    ". . . . ."
-    ". . . . .";
-  height: 14rem;
-  width: fit-content;
-  border: 1px solid red;
-}
-
-.category__content {
-  width: 10rem;
-  height: 7rem;
-  border: 1px solid blue;
-}
-
 .fadebutton {
   color: rgb(205, 255, 242);
   background-color: #292d3e;
