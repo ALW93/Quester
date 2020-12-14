@@ -1,11 +1,13 @@
 .social__container--friends {
   width: 50%;
   margin: 10px;
+  text-align: center;
 }
 
 .social__container--inbox {
   width: 50%;
   margin: 10px;
+  text-align: center;
 }
 
 .friend {
@@ -19,4 +21,13 @@
 .friendname {
   color: #292d3e;
   text-shadow: 0 0 4px rgb(212, 255, 244);
+}
+
+.letter {
+  background-image: url(../assets/paper_texture.jpg);
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px solid white;
+  margin: 3px;
+  text-align: center;
 }
