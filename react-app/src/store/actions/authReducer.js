@@ -19,6 +19,7 @@ export const authenticate = () => async (dispatch) => {
     dispatch(setAuth(true));
     dispatch(setUser(user));
   }
+  console.log(user);
   return user;
 };
 

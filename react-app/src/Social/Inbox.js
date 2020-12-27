@@ -6,6 +6,11 @@ import { DateTime } from "luxon";
 
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
+
+  const mailOpener = () => {
+    //
+  };
+
   return (
     <>
       <div className="social__container--inbox">
@@ -18,26 +23,43 @@ const Inbox = () => {
               return (
                 <>
                   <div elevation={3} className="letter">
-                    <div style={{ display: "flex", justifyContent: "center" }}>
+                    {e.status !== "read" ? (
                       <div>
                         {e.type === "potion" ? potionIcon() : mailIcon()}
+                        <div>
+                          <h5>
+                            {e.sender.username} sent you a {e.type}!
+                          </h5>
+                          <button onClick={mailOpener}>Click to Open</button>
+                        </div>
                       </div>
-                      <div>from {e.sender.username}</div>
-                    </div>
+                    ) : (
+                      <>
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <div>
+                            {e.type === "potion" ? potionIcon() : mailIcon()}
+                          </div>
+                          <div>from {e.sender.username}</div>
+                        </div>
 
-                    <Paper
-                      elevation={3}
-                      style={{
-                        width: "100%",
-                        padding: "12px",
-                        margin: "5px",
-                      }}
-                    >
-                      "{e.message}"
-                    </Paper>
-                    <div>
-                      Opened {DateTime.fromHTTP(e.received).toLocaleString()}
-                    </div>
+                        <Paper
+                          elevation={3}
+                          style={{
+                            width: "100%",
+                            padding: "12px",
+                            margin: "5px",
+                          }}
+                        >
+                          "{e.message}"
+                        </Paper>
+                        <div>
+                          Opened{" "}
+                          {DateTime.fromHTTP(e.received).toLocaleString()}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </>
               );
