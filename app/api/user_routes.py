@@ -224,6 +224,16 @@ def get_friends(id):
 def get_messages(id):
     """Returns List of User's Messages"""
     user_msg = db.session.query(messages).filter(messages.c.receiver_id == id).all()
-    msg_dict = [{"received": msg[1], "type": msg[2], "message": msg[3], "status": msg[4], "sender": User.query.get(msg[6]).short_dict()} for msg in user_msg]
+    msg_dict = [{"id": msg[0], "received": msg[1], "type": msg[2], "message": msg[3], "status": msg[4], "sender": User.query.get(msg[6]).short_dict()} for msg in user_msg]
     msg_json = jsonify({"messages": msg_dict})
     return msg_json
+
+
+@user_routes.route('/messages/<int:id>')
+@login_required
+def read_message(id):
+    """Update Message Status to Read"""
+    update = db.update(messages).values(status="read").where(messages.c.id==id)
+    db.engine.execute(update)
+
+    return {'message': 'mail updated!'}

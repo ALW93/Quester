@@ -7,8 +7,9 @@ import { DateTime } from "luxon";
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
 
-  const mailOpener = () => {
-    //
+  const mailOpener = async (msgId) => {
+    const data = await fetch(`api/users/messages/${msgId}`);
+    console.log(data);
   };
 
   return (
@@ -22,6 +23,7 @@ const Inbox = () => {
             mail.map((e) => {
               return (
                 <>
+                  {JSON.stringify(e)}
                   <div elevation={3} className="letter">
                     {e.status !== "read" ? (
                       <div>
@@ -30,7 +32,9 @@ const Inbox = () => {
                           <h5>
                             {e.sender.username} sent you a {e.type}!
                           </h5>
-                          <button onClick={mailOpener}>Click to Open</button>
+                          <button onClick={() => mailOpener(e.id)}>
+                            Click to Open
+                          </button>
                         </div>
                       </div>
                     ) : (
