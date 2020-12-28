@@ -1,15 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { mailIcon, potionIcon } from "../assets/icons";
 import { Paper } from "@material-ui/core";
 import { DateTime } from "luxon";
+import { mailOpener } from "../store/actions/userReducer";
 
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
+  const dispatch = useDispatch();
 
-  const mailOpener = async (msgId) => {
-    const data = await fetch(`api/users/messages/${msgId}`);
-    console.log(data);
+  const handleOpen = async (id) => {
+    await dispatch(mailOpener(id));
   };
 
   return (
@@ -23,7 +24,6 @@ const Inbox = () => {
             mail.map((e) => {
               return (
                 <>
-                  {JSON.stringify(e)}
                   <div elevation={3} className="letter">
                     {e.status !== "read" ? (
                       <div>
@@ -32,7 +32,7 @@ const Inbox = () => {
                           <h5>
                             {e.sender.username} sent you a {e.type}!
                           </h5>
-                          <button onClick={() => mailOpener(e.id)}>
+                          <button onClick={() => handleOpen(e.id)}>
                             Click to Open
                           </button>
                         </div>

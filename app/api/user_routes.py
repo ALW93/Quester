@@ -235,5 +235,7 @@ def read_message(id):
     """Update Message Status to Read"""
     update = db.update(messages).values(status="read").where(messages.c.id==id)
     db.engine.execute(update)
-
-    return {'message': 'mail updated!'}
+    user_msg = db.session.query(messages).filter(messages.c.receiver_id == id).all()
+    msg_dict = [{"id": msg[0], "received": msg[1], "type": msg[2], "message": msg[3], "status": msg[4], "sender": User.query.get(msg[6]).short_dict()} for msg in user_msg]
+    msg_json = jsonify({"messages": msg_dict})
+    return msg_json
