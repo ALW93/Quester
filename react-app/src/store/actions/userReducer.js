@@ -1,10 +1,8 @@
 const GET_FRIENDS = "Quester/user/GET_FRIENDS";
 const GET_MESSAGES = "Quester/user/GET_MESSAGES";
-const READ_MESSAGE = "Quester/user/READ_MESSAGE";
 
 const setFriends = (payload) => ({ type: GET_FRIENDS, payload });
 const setMessages = (payload) => ({ type: GET_MESSAGES, payload });
-const setRead = (payload) => ({ type: READ_MESSAGE, payload });
 
 export const getUserFriends = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/friends`);

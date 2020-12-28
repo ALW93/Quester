@@ -31,3 +31,8 @@
   margin: 3px;
   text-align: center;
 }
+
+.message_form {
+  padding: 20px;
+  background-color: white;
+}
