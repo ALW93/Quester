@@ -214,7 +214,6 @@ def delete_category(id, catId):
 def get_friends(id):
     """Returns List of User's Friends"""
     user_friends = db.session.query(friends).filter(friends.c.friend_a_id == id or friends.c.friend_b_id == id).all()
-    # friendlist = [User.query.get(friend[2]).to_dict() for friend in user_friends]
     friendlist = []
     for friend in user_friends:
         if friend[2] == id:

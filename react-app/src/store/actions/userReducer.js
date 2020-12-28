@@ -1,8 +1,10 @@
 const GET_FRIENDS = "Quester/user/GET_FRIENDS";
 const GET_MESSAGES = "Quester/user/GET_MESSAGES";
+const OPEN_MESSAGE = "Quester/user/OPEN_MESSAGE";
 
 const setFriends = (payload) => ({ type: GET_FRIENDS, payload });
 const setMessages = (payload) => ({ type: GET_MESSAGES, payload });
+const openMessage = (payload) => ({ type: OPEN_MESSAGE, payload });
 
 export const getUserFriends = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/friends`);
@@ -28,11 +30,9 @@ export const getUserMessages = (userId) => async (dispatch) => {
 
 export const mailOpener = (msgId) => async (dispatch) => {
   const response = await fetch(`api/users/messages/${msgId}`);
-  const data = await response.json();
-  if (data) {
-    console.log(data);
-    await dispatch(setMessages(data.messages));
-    return data;
+  if (response.ok) {
+    await dispatch(openMessage(msgId));
+    return "success";
   }
 };
 
@@ -43,6 +43,17 @@ export const userReducer = (state = { friends: [], messages: [] }, action) => {
     }
     case GET_MESSAGES: {
       return { ...state, messages: action.payload };
+    }
+    case OPEN_MESSAGE: {
+      return {
+        ...state,
+        messages: state.messages.map((msg) => {
+          if (msg.id === action.payload) {
+            msg.status = "read";
+          }
+          return msg;
+        }),
+      };
     }
     default:
       return state;
