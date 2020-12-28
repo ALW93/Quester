@@ -35,4 +35,8 @@
 .message_form {
   padding: 20px;
   background-color: white;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-image: url(../assets/paper_texture.jpg);
+  background-position: center;
 }

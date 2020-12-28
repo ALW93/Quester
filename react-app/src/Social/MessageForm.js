@@ -57,11 +57,11 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
               <img src={potionIcon} style={{ width: "50px" }} />
               <div>
                 <Checkbox
-                  checkedIcon={<Favorite />}
+                  checkedIcon={<Favorite style={{ fill: "pink" }} />}
                   icon={<FavoriteBorder />}
                   onClick={togglePotion}
                 />
-                Cost: 150 gold
+                Cost: 100 gold
               </div>
             </div>
           ) : null}
