@@ -26,6 +26,16 @@ export const getUserMessages = (userId) => async (dispatch) => {
   }
 };
 
+export const mailOpener = (msgId) => async (dispatch) => {
+  const response = await fetch(`api/users/messages/${msgId}`);
+  const data = await response.json();
+  if (data) {
+    console.log(data);
+    await dispatch(setMessages(data.messages));
+    return data;
+  }
+};
+
 export const userReducer = (state = { friends: [], messages: [] }, action) => {
   switch (action.type) {
     case GET_FRIENDS: {
