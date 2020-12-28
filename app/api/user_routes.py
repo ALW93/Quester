@@ -213,8 +213,13 @@ def delete_category(id, catId):
 @login_required
 def get_friends(id):
     """Returns List of User's Friends"""
-    user_friends = db.session.query(friends).filter(friends.c.friend_a_id == id).all()
-    friendlist = [User.query.get(friend[2]).to_dict() for friend in user_friends]
+    user_friends = db.session.query(friends).filter(friends.c.friend_a_id == id or friends.c.friend_b_id == id).all()
+    friendlist = []
+    for friend in user_friends:
+        if friend[2] == id:
+            friendlist.append(User.query.get(friend[1]).to_dict())
+        if friend[1] == id:
+            friendlist.append(User.query.get(friend[2]).to_dict())
     friend_json = jsonify({'friends': friendlist})
     return friend_json
 
@@ -248,12 +253,18 @@ def send_message(id):
     data = request.json
     created = date.today()
     user = User.query.get(id)
-    if data:
+    recipient = User.query.get(data['receiver_id'])
+
+    if data and user:
         newMail = messages.insert().values(created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
         db.session.execute(newMail)
         db.session.commit()
-        if data['type'] == 'potion' and user:
-            print('******\n\n', user.currency)
-            user.currency -= 150
+        if data['type'] == 'potion':
+            user.currency -= 100
+            if (recipient.health + 25) >= 100:
+                recipient.health = 100
+            else:
+                recipient.health += 25
+            db.session.commit()
 
     return "success"
