@@ -42,7 +42,9 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
       },
       body: JSON.stringify(newMail),
     });
-    return response;
+    if (response.ok) {
+      setOpen(false);
+    }
   };
 
   return (

@@ -247,9 +247,13 @@ def send_message(id):
     """Send a Message"""
     data = request.json
     created = date.today()
-    newMail = messages.insert().values(created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
-    db.session.execute(newMail)
-    db.session.commit()
-    # newMail = db.insert(messages).values(created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
-    # db.engine.execute(messsages.insert(), created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
+    user = User.query.get(id)
+    if data:
+        newMail = messages.insert().values(created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
+        db.session.execute(newMail)
+        db.session.commit()
+        if data['type'] == 'potion' and user:
+            print('******\n\n', user.currency)
+            user.currency -= 150
+
     return "success"
