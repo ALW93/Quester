@@ -239,3 +239,17 @@ def read_message(id):
     msg_dict = [{"id": msg[0], "received": msg[1], "type": msg[2], "message": msg[3], "status": msg[4], "sender": User.query.get(msg[6]).short_dict()} for msg in user_msg]
     msg_json = jsonify({"messages": msg_dict})
     return msg_json
+
+
+@user_routes.route('/<int:id>/messages', methods=["POST"])
+@login_required
+def send_message(id):
+    """Send a Message"""
+    data = request.json
+    created = date.today()
+    newMail = messages.insert().values(created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
+    db.session.execute(newMail)
+    db.session.commit()
+    # newMail = db.insert(messages).values(created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
+    # db.engine.execute(messsages.insert(), created_at=created, type=data['type'], message=data['message'], status="unread", receiver_id=data['receiver_id'], sender_id=id)
+    return "success"
