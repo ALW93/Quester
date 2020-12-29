@@ -4,16 +4,15 @@ import { parseLevel } from "../services/levels";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
 import { coinIcon, tempAvatar, expIcon, healthIcon } from "../assets/icons";
-import girl from "../characters/sword_girl.png";
-import boy from "../characters/bow_boy.png";
+import girl_1 from "../characters/new_girl.png";
+import boy_1 from "../characters/bow_boy.png";
+import animal_1 from "../characters/cat.png";
 import Stats from "./Stats";
-import newgirl from "../assets/new_girl.png";
-import { closeUpdate } from "../store/actions/utilityReducer";
 
 const User = () => {
   const info = useSelector((state) => state.session.user);
-  const update = useSelector((state) => state.utility.update);
-  const dispatch = useDispatch();
+  const avatar = useSelector((state) => state.avatar.avatar);
+  console.log(avatar);
 
   return (
     <>
@@ -30,8 +29,15 @@ const User = () => {
             {info.username} lv.{parseLevel(info.exp)}
           </h1>
         </div>
-
-        <img src={newgirl} style={{ width: "95%" }} />
+        {avatar.prebuilt === "animal_1" ? (
+          <img src={animal_1} style={{ width: "95%" }} />
+        ) : null}
+        {avatar.prebuilt === "boy_1" ? (
+          <img src={boy_1} style={{ width: "95%" }} />
+        ) : null}
+        {avatar.prebuilt === "girl_1" ? (
+          <img src={girl_1} style={{ width: "95%" }} />
+        ) : null}
 
         <div className="progress" style={{ height: "40px" }}>
           <div
