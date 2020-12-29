@@ -43,9 +43,10 @@ def create_avatar(id):
     if data:
         new_avatar = Avatar(
             user_id=id,
-            hair=data["hair"],
-            face=data["face"],
-            body=data["body"]
+            prebuilt=data["prebuilt"]
+            # hair=data["hair"],
+            # face=data["face"],
+            # body=data["body"]
         )
         db.session.add(new_avatar)
         db.session.commit()
@@ -180,6 +181,17 @@ def get_stats(id):
     stat_dicts = [stat.to_dict() for stat in stats]
     stat_json = jsonify({"stats": stat_dicts})
     return stat_json
+
+
+@user_routes.route('/<int:id>/stats', methods=["POST"])
+def create_stats(id):
+    """Post Base Stats for User"""
+    stats = ["Strength", "Magic", "Intelligence"]
+    for stat in stats:
+        info = Stat(user_id=id, name=stat, custom=false, color="red", points=0)
+        db.session.add(info)
+        db.session.commit()
+    return {"message": "stats successfully created"}
 
 
 @user_routes.route('/<int:id>/categories', methods=["POST"])
