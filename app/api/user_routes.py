@@ -43,9 +43,10 @@ def create_avatar(id):
     if data:
         new_avatar = Avatar(
             user_id=id,
-            hair=data["hair"],
-            face=data["face"],
-            body=data["body"]
+            prebuilt=data["prebuilt"]
+            # hair=data["hair"],
+            # face=data["face"],
+            # body=data["body"]
         )
         db.session.add(new_avatar)
         db.session.commit()

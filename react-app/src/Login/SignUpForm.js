@@ -13,7 +13,7 @@ const SignUpForm = ({ showSignup }) => {
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const authorized = useSelector((state) => state.session.auth);
-  const [beta, setBeta] = useState(true);
+  const [beta, setBeta] = useState(false);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ const SignUpForm = ({ showSignup }) => {
   };
 
   if (authorized) {
-    return <Redirect to="/" />;
+    return <Redirect to="/create-avatar" />;
   }
 
   return (

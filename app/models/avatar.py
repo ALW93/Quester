@@ -16,6 +16,7 @@ class Avatar(db.Model):
 
     def to_dict(self):
         return {
+            "prebuilt": self.prebuilt,
             "hair": self.hair,
             "face": self.face,
             "body": self.body,

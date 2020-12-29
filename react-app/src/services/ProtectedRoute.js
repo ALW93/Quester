@@ -6,12 +6,11 @@ const ProtectedRoute = (props) => {
   const authorized = useSelector((state) => state.session.auth);
   const avatar = useSelector((state) => state.avatar.avatar);
 
-  console.log(authorized);
   if (!authorized) {
     return <Redirect to="/login" />;
   }
 
-  // if (!avatar.hair) {
+  // if (!avatar) {
   //   return <Redirect to="/create-avatar" />;
   // }
 
