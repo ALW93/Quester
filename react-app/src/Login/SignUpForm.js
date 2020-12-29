@@ -15,7 +15,7 @@ import {
 } from "../store/actions/tasksReducer";
 import { getCategories } from "../store/actions/categoryReducer";
 import { getHabits } from "../store/actions/habitReducer";
-import { getStats } from "../store/actions/statReducer";
+import { getStats, createBase } from "../store/actions/statReducer";
 import { getUserFriends, getUserMessages } from "../store/actions/userReducer";
 
 const SignUpForm = ({ showSignup }) => {
@@ -37,6 +37,7 @@ const SignUpForm = ({ showSignup }) => {
       if (!user.errors) {
         let data = { prebuilt: prebuilt };
         await createAvatar(user.id, data);
+        await createBase(user.id);
         dispatch(setAuth(true));
         dispatch(setId(user.id));
         dispatch(setUser(user));

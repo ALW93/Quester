@@ -183,6 +183,17 @@ def get_stats(id):
     return stat_json
 
 
+@user_routes.route('/<int:id>/stats', methods=["POST"])
+def create_stats(id):
+    """Post Base Stats for User"""
+    stats = ["Strength", "Magic", "Intelligence"]
+    for stat in stats:
+        info = Stat(user_id=id, name=stat, custom=false, color="red", points=0)
+        db.session.add(info)
+        db.session.commit()
+    return {"message": "stats successfully created"}
+
+
 @user_routes.route('/<int:id>/categories', methods=["POST"])
 @login_required
 def new_category(id):
