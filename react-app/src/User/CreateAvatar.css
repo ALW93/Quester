@@ -1,6 +1,17 @@
 .creation__container {
   z-index: 999;
 
-  border: 1px solid black;
   background-color: white;
+}
+
+.unselected {
+  filter: grayscale(100%);
+}
+
+.unselected:hover {
+  filter: none;
+}
+
+.selected {
+  filter: none;
 }
