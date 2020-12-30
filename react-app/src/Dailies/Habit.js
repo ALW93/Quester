@@ -31,14 +31,15 @@ const Habit = () => {
         {habitForm ? (
           <HabitForm setHabitForm={setHabitForm} setHabits={setHabits} />
         ) : (
-          <Button
-            variant="contained"
+          <button
+            class="cute learn-more"
             onClick={() => {
               showHabitForm(true);
             }}
           >
+            {" "}
             Add Daily
-          </Button>
+          </button>
         )}
 
         <div>

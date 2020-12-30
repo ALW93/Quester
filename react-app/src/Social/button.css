@@ -9,13 +9,14 @@
 
 .cute {
   font-family: "Rubik";
+
   position: relative;
   display: inline-block;
   cursor: pointer;
   outline: none;
   border: 0;
-  width: 15%;
-  height: 43%;
+  width: 9rem;
+  height: 4rem;
   vertical-align: middle;
   text-decoration: none;
   font-size: inherit;

@@ -36,21 +36,15 @@ const Tasks = () => {
   return (
     <div className="taskpage__container">
       <div>
-        <Button variant="contained" onClick={() => toggleLog(false)}>
-          Active
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => {
-            showTaskForm(true);
-          }}
-        >
-          Add Task
-        </Button>
-
-        <Button variant="contained" onClick={() => toggleLog(true)}>
-          Log
-        </Button>
+        <button class="cute learn-more" onClick={() => toggleLog(false)}>
+          All Quests
+        </button>
+        <button class="cute learn-more" onClick={() => showTaskForm(true)}>
+          New Quest
+        </button>
+        <button class="cute learn-more" onClick={() => toggleLog(true)}>
+          Completed
+        </button>
       </div>
       {taskForm ? (
         <TaskForm setTaskForm={setTaskForm} setTasks={setTasks} />
@@ -68,7 +62,7 @@ const Tasks = () => {
           {reward ? <Reward rewards={reward} showReward={showReward} /> : null}
           {damage ? <Damage message={damage} showDamage={showDamage} /> : null}
 
-          {tasks &&
+          {tasks.length ? (
             tasks.map((t) => {
               return (
                 <Task
@@ -78,7 +72,13 @@ const Tasks = () => {
                   showReward={showReward}
                 />
               );
-            })}
+            })
+          ) : (
+            <div>
+              <h2 className="white">Click New Quest to add new Tasks!</h2>
+            </div>
+          )}
+
           {expired &&
             expired.map((e) => {
               return <ExpiredTask data={e} />;

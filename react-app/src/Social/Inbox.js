@@ -69,7 +69,9 @@ const Inbox = () => {
               );
             })
           ) : (
-            <h2 className="white">You have no mail.</h2>
+            <h2 className="white" style={{ marginTop: "50%" }}>
+              You have no mail.
+            </h2>
           )}
         </div>
       </div>
