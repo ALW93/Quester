@@ -3,9 +3,10 @@ import { TextField } from "@material-ui/core";
 import "./Social.css";
 import searchIcon from "../assets/search.svg";
 
-const SearchForm = () => {
+const SearchForm = ({ openSearch }) => {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState("");
+  const [start, setStart] = useState(false);
 
   const searchUsers = async () => {
     const response = await fetch(`/api/data/find_users`, {
@@ -13,8 +14,11 @@ const SearchForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ query: "zerber" }),
+      body: JSON.stringify({ query: query }),
     });
+    const data = await response.json();
+    setResults(data.results);
+    setStart(true);
   };
 
   const updateQuery = (e) => {
@@ -27,7 +31,14 @@ const SearchForm = () => {
       <img src={searchIcon} style={{ width: "35px" }} />
       <TextField value={query} onChange={updateQuery} type="text" />
       <button onClick={searchUsers}>Search</button>
-      {JSON.stringify(results)}
+      <ul>
+        {results &&
+          results.map((e) => {
+            return <li>{e.username}</li>;
+          })}
+        {start && !results.length ? "No Matches Found." : null}
+      </ul>
+      <button onClick={() => openSearch(false)}>Cancel</button>
     </div>
   );
 };

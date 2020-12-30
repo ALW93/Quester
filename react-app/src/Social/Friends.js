@@ -38,7 +38,7 @@ const Friends = () => {
           id={id}
           heal={heal}
         />
-        {search ? <SearchForm /> : null}
+        {search ? <SearchForm openSearch={openSearch} /> : null}
         <div>
           {friendlist.length ? (
             friendlist.map((e) => {

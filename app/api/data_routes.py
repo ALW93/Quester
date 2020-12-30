@@ -19,5 +19,5 @@ def find_users():
     data = request.json
     users = User.query.all()
     users_json = [user.to_dict() for user in users]
-    searchResult = [friend for friend in users_json if L.distance(friend["username"], data['query']) <= 3]  # noqa
-    return searchResult
+    result = [friend for friend in users_json if L.distance(friend["username"], data['query']) <= 3]  # noqa
+    return {'results': result}
