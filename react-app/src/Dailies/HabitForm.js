@@ -20,6 +20,7 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
       name: name,
       category: habitcat,
     };
+    console.log(new_habit);
     setNewHabit(new_habit);
   };
 
@@ -58,7 +59,7 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
         <div>
           <div>Category</div>
           <Select onChange={updateCat} value={habitcat}>
-            <MenuItem>--</MenuItem>
+            <MenuItem value={null}>--</MenuItem>
             {categories &&
               categories.map((e) => {
                 return <MenuItem value={e.id}>{e.name}</MenuItem>;

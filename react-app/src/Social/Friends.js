@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import mail from "../assets/letter_icon.svg";
 import MessageForm from "./MessageForm";
 import "./Social.css";
+import "./button.css";
 
 const Friends = () => {
   const friendlist = useSelector((state) => state.user.friends);
@@ -24,6 +25,7 @@ const Friends = () => {
         <div>
           <h1 className="white">Friends</h1>
         </div>
+        <button class="cute learn-more">Lookup User</button>
         <MessageForm
           open={open}
           setOpen={setOpen}

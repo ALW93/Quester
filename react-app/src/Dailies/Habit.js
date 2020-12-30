@@ -42,10 +42,15 @@ const Habit = () => {
         )}
 
         <div>
-          {habits &&
+          {habits.length ? (
             habits.map((habit, i) => {
               return <HabitContainer data={habit} key={`Habit${i}`} />;
-            })}
+            })
+          ) : (
+            <h2 className="white">
+              No Dailies Found, Click 'Add Daily' to Begin!
+            </h2>
+          )}
         </div>
       </div>
     </>

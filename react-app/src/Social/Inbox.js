@@ -20,7 +20,7 @@ const Inbox = () => {
           <h1 className="white">Inbox</h1>
         </div>
         <div>
-          {mail &&
+          {mail.length ? (
             mail.map((e) => {
               return (
                 <>
@@ -67,7 +67,10 @@ const Inbox = () => {
                   </div>
                 </>
               );
-            })}
+            })
+          ) : (
+            <h2 className="white">You have no mail.</h2>
+          )}
         </div>
       </div>
     </>

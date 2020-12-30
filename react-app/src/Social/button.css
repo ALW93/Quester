@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik:700&display=swap");
+* {
+  box-sizing: border-box;
+}
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.cute {
+  font-family: "Rubik";
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  width: 15%;
+  height: 43%;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+.cute.learn-more {
+  font-family: "Rubik";
+  font-weight: 600;
+  color: #3f7c96;
+  text-transform: uppercase;
+  background: #cefcfb;
+  border: 2px solid #3f7c96;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.cute.learn-more::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #95abb5;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #3c4a50;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.cute.learn-more:hover {
+  background: #cefcfb;
+  transform: translate(0, 0.25em);
+}
+.cute.learn-more:hover::before {
+  box-shadow: 0 0 0 2px #3c4a50;
+  transform: translate3d(0, 0.5em, -1em);
+}
+.cute.learn-more:active {
+  background: #cefcfb;
+  transform: translate(0em, 0.75em);
+}
+.cute.learn-more:active::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  transform: translate3d(0, 0, -1em);
+}

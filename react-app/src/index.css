@@ -3,6 +3,7 @@
 body {
   padding: 20px 200px 20px 200px;
   font-family: "Andika New Basic", sans-serif;
+  text-decoration: none;
 }
 
 h1 {
@@ -11,6 +12,10 @@ h1 {
 
 h2 {
   font-family: "Permanent Marker", "Andika New Basic", sans-serif;
+}
+
+button {
+  outline: none !important;
 }
 
 .white {
