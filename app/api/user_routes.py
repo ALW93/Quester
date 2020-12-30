@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Avatar, Task, Category, Task_Category, Habit, Stat, Habit_Category, friends, messages
 from datetime import date
+import Levenshtein as L
 
 user_routes = Blueprint('users', __name__)
 

@@ -7,8 +7,14 @@ const SearchForm = () => {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState("");
 
-  const searchUsers = () => {
-    //
+  const searchUsers = async () => {
+    const response = await fetch(`/api/data/find_users`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query: "zerber" }),
+    });
   };
 
   const updateQuery = (e) => {

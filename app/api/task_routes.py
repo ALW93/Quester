@@ -50,7 +50,7 @@ def expire_task(id):
 @task_routes.route('/<int:id>/restore', methods=["PUT"])
 @login_required
 def restore_task(id):
-    """Expire a Task"""
+    """Restore a Task"""
 
     data = request.json
     task = Task.query.get(id)
