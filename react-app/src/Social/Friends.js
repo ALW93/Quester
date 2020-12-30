@@ -24,7 +24,7 @@ const Friends = () => {
         <div>
           <h1 className="white">Friends</h1>
         </div>
-        <button class="cute learn-more">Find User</button>
+
         <MessageForm
           open={open}
           setOpen={setOpen}
@@ -66,6 +66,7 @@ const Friends = () => {
             </div>
           )}
         </div>
+        <button class="cute learn-more">Find User</button>
       </div>
     </>
   );

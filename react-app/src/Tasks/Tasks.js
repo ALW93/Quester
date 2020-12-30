@@ -62,27 +62,29 @@ const Tasks = () => {
           {reward ? <Reward rewards={reward} showReward={showReward} /> : null}
           {damage ? <Damage message={damage} showDamage={showDamage} /> : null}
 
-          {tasks.length ? (
-            tasks.map((t) => {
-              return (
-                <Task
-                  t={t}
-                  setTasks={setTasks}
-                  showDamage={showDamage}
-                  showReward={showReward}
-                />
-              );
-            })
-          ) : (
-            <div>
-              <h2 className="white">Click New Quest to add new Tasks!</h2>
-            </div>
-          )}
+          {tasks.length
+            ? tasks.map((t) => {
+                return (
+                  <Task
+                    t={t}
+                    setTasks={setTasks}
+                    showDamage={showDamage}
+                    showReward={showReward}
+                  />
+                );
+              })
+            : null}
 
           {expired &&
             expired.map((e) => {
               return <ExpiredTask data={e} />;
             })}
+
+          {!expired.length && !tasks.length ? (
+            <div style={{ margin: "100px" }}>
+              <h2 className="white">Click New Quest to begin!</h2>
+            </div>
+          ) : null}
         </>
       )}
     </div>
