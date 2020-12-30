@@ -237,6 +237,18 @@ def get_friends(id):
     return friend_json
 
 
+@user_routes.route('/<int:id>/friends', methods=["POST"])
+@login_required
+def accept_request(id):
+    """Accept a Friend Request"""
+    data = request.json
+    if data:
+        newFriend = friends.insert().values(friend_a_id=id, friend_b_id=data["friend_id"])  # noqa
+        db.session.execute(newFriend)
+        db.session.commit()
+        return {"message": "successfully added!"}
+
+
 @user_routes.route('/<int:id>/messages')
 @login_required
 def get_messages(id):
