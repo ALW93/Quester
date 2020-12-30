@@ -8,10 +8,10 @@ tomorrow = dt + timedelta(days=1)
 def seed_habits():
     habitObjects = [
       Habit(user_id=1, name="Morning Yoga", created_at=dt),
-      Habit(user_id=1, name="Call Mom", created_at=dt),
+      Habit(user_id=1, name="Drink Water", created_at=dt),
       Habit(user_id=2, name="Snack Tantrum", created_at=dt),
       Habit(user_id=3, name="Morning Bike Ride", created_at=dt),
-      Habit(user_id=3, name="Daily Kotlin Coding", created_at=dt),
+      Habit(user_id=3, name="Leetcode", created_at=dt),
     ]
 
     habit_categoriesObjects = [
