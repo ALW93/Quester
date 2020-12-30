@@ -4,7 +4,7 @@ import "./CreateAvatar.css";
 
 const CreateAvatar = ({ prebuilt, setPrebuilt, onSignUp }) => {
   const updatePrebuilt = (e) => {
-    setPrebuilt(e.target.value);
+    setPrebuilt(e.target.getAttribute("value"));
   };
   const selections = ["girl_1", "animal_1", "boy_1"];
 
@@ -28,11 +28,6 @@ const CreateAvatar = ({ prebuilt, setPrebuilt, onSignUp }) => {
             );
           })}
         </div>
-        <Select value={prebuilt} onChange={updatePrebuilt}>
-          <MenuItem value="girl_1">girl</MenuItem>
-          <MenuItem value="boy_1">boy</MenuItem>
-          <MenuItem value="animal_1">animal</MenuItem>
-        </Select>
         <Button type="submit">Create</Button>
       </form>
     </div>
