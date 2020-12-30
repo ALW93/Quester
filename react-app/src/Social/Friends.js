@@ -12,7 +12,6 @@ const Friends = () => {
   const [heal, setHeal] = useState(false);
 
   const handleClickOpen = (id, name, heal) => {
-    console.log(id);
     setOpen(true);
     setId(id);
     setRecipient(name);
@@ -33,7 +32,7 @@ const Friends = () => {
           heal={heal}
         />
         <div>
-          {friendlist &&
+          {friendlist.length ? (
             friendlist.map((e) => {
               let heal = false;
               if (e.health < 100) heal = true;
@@ -59,7 +58,10 @@ const Friends = () => {
                   </div>
                 </>
               );
-            })}
+            })
+          ) : (
+            <h2 className="white">No Friends Yet!</h2>
+          )}
         </div>
       </div>
     </>

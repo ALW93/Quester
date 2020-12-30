@@ -225,8 +225,9 @@ def delete_category(id, catId):
 @login_required
 def get_friends(id):
     """Returns List of User's Friends"""
-    user_friends = db.session.query(friends).filter(friends.c.friend_a_id == id or friends.c.friend_b_id == id).all()
+    user_friends = db.session.query(friends).filter((friends.c.friend_a_id == id) | (friends.c.friend_b_id == id)).all()
     friendlist = []
+
     for friend in user_friends:
         if friend[2] == id:
             friendlist.append(User.query.get(friend[1]).to_dict())
