@@ -28,14 +28,17 @@
 }
 
 .taskform__new {
+  display: flex;
+  justify-content: space-around;
   background-image: url(../assets/paper_texture.jpg);
   background-size: cover;
   background-position: center;
   color: rgb(0, 0, 0);
   margin: 10px;
   border: 1px dashed white;
+  align-items: center;
   border-radius: 3px;
-  padding: 10px 30px 10px 30px;
+  padding: 30px;
   text-align: center;
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import "./Tasks.css";
 import Category from "../Shared/Category";
 import { parseDifficulty, parseStarText, parseClass } from "../services/levels";
@@ -64,7 +64,6 @@ const Task = ({ t, showDamage, showReward }) => {
 
   return (
     <>
-      {/* <Paper className={`task ${parseClass(t.difficulty)}`} /> */}
       <Paper className="task">
         <div className="task__title">
           <h1>
@@ -98,11 +97,11 @@ const Task = ({ t, showDamage, showReward }) => {
               variant="contained"
               color="primary"
             >
-              Complete
+              COMPLETE
             </button>
 
             <button onClick={deleteHandler} className="fb2">
-              Delete
+              DELETE
             </button>
           </div>
         </div>

@@ -13,7 +13,7 @@ const Tasks = () => {
   const expired = useSelector((state) => state.tasks.expired);
   const complete = useSelector((state) => state.tasks.complete);
   const [tasks, setTasks] = useState([]);
-  const [taskForm, setTaskForm] = useState(false);
+  const [taskForm, setTaskForm] = useState(true);
   const [damage, showDamage] = useState(false);
   const [reward, showReward] = useState(false);
 

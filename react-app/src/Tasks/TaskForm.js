@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Tasks.css";
 import { DateTime } from "luxon";
 import { questIcon } from "../assets/icons";
-
 import { TextField, Select, MenuItem } from "@material-ui/core";
 import { newTask, getTasks } from "../store/actions/tasksReducer";
 
@@ -95,65 +94,100 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
   return (
     <>
       <div className="taskform__new">
-        {questIcon()}
-        <h1>New Quest</h1>
-        <form onSubmit={taskSubmit}>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <div>
+          <h1>New Quest</h1>
+          {questIcon()}
+        </div>
+        <form onSubmit={taskSubmit} style={{ display: "flex" }}>
+          <div>
             <div>
               Title
-              <TextField placeholder={name} onChange={updateName} />
+              <TextField
+                type="text"
+                fullWidth={true}
+                placeholder={name}
+                variant="filled"
+                onChange={updateName}
+              />
             </div>
             <div>
               Select Difficulty
-              <Select onChange={updateDifficulty} value={difficulty}>
+              <TextField
+                select
+                variant="filled"
+                fullWidth={true}
+                onChange={updateDifficulty}
+                value={difficulty}
+              >
                 <MenuItem value={1}>⭐</MenuItem>
                 <MenuItem value={2}>⭐ ⭐ </MenuItem>
                 <MenuItem value={3}>⭐ ⭐ ⭐ </MenuItem>
                 <MenuItem value={4}>⭐ ⭐ ⭐ ⭐ </MenuItem>
                 <MenuItem value={5}>⭐ ⭐ ⭐ ⭐ ⭐ </MenuItem>
-              </Select>
+              </TextField>
+            </div>
+
+            <div>
+              Deadline
+              <TextField
+                variant="filled"
+                fullWidth={true}
+                type="datetime-local"
+                onChange={updateDeadline}
+                value={deadline}
+              />
             </div>
           </div>
+          <div style={{ marginLeft: "50px" }}>
+            <div style={{ marginBottom: "20px" }}>
+              Category
+              <TextField
+                label="Category"
+                fullWidth={true}
+                variant="filled"
+                onChange={updateName}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                select
+                onChange={updateCat1}
+                value={cat1}
+              >
+                <MenuItem>--</MenuItem>
+                {categories &&
+                  categories.map((e) => {
+                    return <MenuItem value={e.id}>{e.name}</MenuItem>;
+                  })}
+              </TextField>
+              {"  "}
+              Category
+              <TextField
+                fullWidth={true}
+                label="Category"
+                variant="filled"
+                onChange={updateName}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                select
+                onChange={updateCat2}
+                value={cat2}
+              >
+                {categories &&
+                  categories.map((e) => {
+                    return <MenuItem value={e.id}>{e.name}</MenuItem>;
+                  })}
+              </TextField>
+            </div>
 
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            Deadline
-            <TextField
-              type="datetime-local"
-              onChange={updateDeadline}
-              value={deadline}
-            />
-            Repeat?
-            <Select onChange={updateFrequency} value={frequency}>
-              <MenuItem value={"Once"}>Once</MenuItem>
-              <MenuItem value={"Daily"}>Daily</MenuItem>
-              <MenuItem value={"Every Other Day"}>Every Other Day</MenuItem>
-              <MenuItem value={"Weekly"}>Weekly</MenuItem>
-            </Select>
+            <button type="submit" className="fadebutton">
+              SUBMIT
+            </button>
+            {"  "}
+            <button onClick={() => setTaskForm(false)} className="fb2">
+              CANCEL
+            </button>
           </div>
-          <div>
-            Category
-            <TextField select onChange={updateCat1} value={cat1}>
-              <MenuItem>--</MenuItem>
-              {categories &&
-                categories.map((e) => {
-                  return <MenuItem value={e.id}>{e.name}</MenuItem>;
-                })}
-            </TextField>
-            Category
-            <TextField select onChange={updateCat2} value={cat2}>
-              {categories &&
-                categories.map((e) => {
-                  return <MenuItem value={e.id}>{e.name}</MenuItem>;
-                })}
-            </TextField>
-          </div>
-
-          <button type="submit" className="fadebutton">
-            Submit
-          </button>
-          <button onClick={() => setTaskForm(false)} className="fb2">
-            Cancel
-          </button>
         </form>
       </div>
     </>
