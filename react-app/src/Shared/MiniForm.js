@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { newCategory } from "../store/actions/categoryReducer";
-import { TextField, Select, MenuItem } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 export const MiniForm = ({ num }) => {
   const user = useSelector((state) => state.session.user);
@@ -21,6 +22,9 @@ export const MiniForm = ({ num }) => {
     setName("");
     setStat("");
     setMini(false);
+    await dispatch(
+      setUpdate({ type: "Success", message: "Added New Category!" })
+    );
   };
 
   const updateName = (e) => {

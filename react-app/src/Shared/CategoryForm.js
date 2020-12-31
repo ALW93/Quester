@@ -5,6 +5,7 @@ import { Paper } from "@material-ui/core";
 import { removeCategory } from "../store/actions/categoryReducer";
 import { MiniForm } from "./MiniForm";
 import "./Category.css";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 const CategoryForm = () => {
   const cats = useSelector((state) => state.categories.categories);
@@ -25,6 +26,9 @@ const CategoryForm = () => {
 
   const deleteCat = async (userId, catId) => {
     await dispatch(removeCategory(userId, catId));
+    await dispatch(
+      setUpdate({ type: "Success", message: "Successfully Deleted!" })
+    );
   };
 
   if (!loaded) {

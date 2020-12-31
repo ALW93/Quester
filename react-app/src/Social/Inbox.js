@@ -8,7 +8,7 @@ import {
   acceptFriend,
   mailDeleter,
 } from "../store/actions/userReducer";
-import FiberNewIcon from "@material-ui/icons/FiberNew";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
@@ -27,6 +27,9 @@ const Inbox = () => {
   const handleAccept = async (msgId, friendId) => {
     await dispatch(acceptFriend(user.id, { friend_id: friendId }));
     await dispatch(mailDeleter(msgId, user.id));
+    await dispatch(
+      setUpdate({ type: "Success", message: "New Friend Added!" })
+    );
   };
 
   const handleReject = async (msgId) => {
