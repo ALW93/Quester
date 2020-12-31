@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { mailIcon, potionIcon, requestIcon } from "../assets/icons";
 import { Paper } from "@material-ui/core";
@@ -13,7 +13,12 @@ import FiberNewIcon from "@material-ui/icons/FiberNew";
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
   const user = useSelector((state) => state.session.user);
+  const [inbox, setInbox] = useState([]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setInbox(mail);
+  }, [mail]);
 
   const handleOpen = async (id) => {
     await dispatch(mailOpener(id));
@@ -24,8 +29,22 @@ const Inbox = () => {
     await dispatch(mailDeleter(msgId, user.id));
   };
 
-  const handleReject = async (msgId, friendId) => {
-    await dispatch(mailDeleter(msgId, user.id));
+  const handleReject = async (msgId) => {
+    await dispatch(mailDeleter(msgId));
+  };
+
+  const toggleView = (filter) => {
+    let letters = mail;
+    if (filter === "new") {
+      return setInbox(letters.filter((e) => e.status === "unread"));
+    }
+    if (filter === "request") {
+      return setInbox(letters.filter((e) => e.type === "request"));
+    }
+    if (filter === "read") {
+      return setInbox(letters.filter((e) => e.status === "read"));
+    }
+    console.log(letters);
   };
 
   return (
@@ -34,9 +53,18 @@ const Inbox = () => {
         <div>
           <h1 className="white">Inbox</h1>
         </div>
+        <button class="blue cute" onClick={() => toggleView("new")}>
+          NEW
+        </button>
+        <button class="yellow cute" onClick={() => toggleView("request")}>
+          FRIEND REQUESTS
+        </button>
+        <button class="pink cute" onClick={() => toggleView("read")}>
+          READ
+        </button>
         <div>
-          {mail.length ? (
-            mail.map((e) => {
+          {inbox.length &&
+            inbox.map((e) => {
               return (
                 <>
                   <div className="letter">
@@ -113,10 +141,7 @@ const Inbox = () => {
                   </div>
                 </>
               );
-            })
-          ) : (
-            <h2 className="white">You have no mail.</h2>
-          )}
+            })}
         </div>
       </div>
     </>

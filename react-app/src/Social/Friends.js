@@ -30,7 +30,9 @@ const Friends = () => {
         <div>
           <h1 className="white">Friends</h1>
         </div>
-
+        <button class="yellow cute" onClick={openFriendSearch}>
+          FIND USER
+        </button>
         <MessageForm
           open={open}
           setOpen={setOpen}
@@ -73,9 +75,6 @@ const Friends = () => {
             </div>
           )}
         </div>
-        <button class="yellow cute" onClick={openFriendSearch}>
-          Find User
-        </button>
       </div>
     </>
   );
