@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { newCategory } from "../store/actions/categoryReducer";
-import { Button, TextField, Select, MenuItem } from "@material-ui/core";
+import { TextField, Select, MenuItem } from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 export const MiniForm = ({ num }) => {
   const user = useSelector((state) => state.session.user);
@@ -17,7 +18,6 @@ export const MiniForm = ({ num }) => {
       name: name,
       stat_id: stat,
     };
-    console.log(new_category);
     await dispatch(newCategory(user.id, new_category));
     setName("");
     setStat("");
@@ -59,8 +59,12 @@ export const MiniForm = ({ num }) => {
 
   const addTask = () => {
     return (
-      <button onClick={() => setMini(true)} style={{ marginTop: "25px" }}>
-        Add Category
+      <button
+        className="fadebutton"
+        onClick={() => setMini(true)}
+        style={{ marginTop: "25px" }}
+      >
+        ADD CATEGORY
       </button>
     );
   };

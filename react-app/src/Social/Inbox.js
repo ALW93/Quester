@@ -8,6 +8,7 @@ import {
   acceptFriend,
   mailDeleter,
 } from "../store/actions/userReducer";
+import FiberNewIcon from "@material-ui/icons/FiberNew";
 
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);

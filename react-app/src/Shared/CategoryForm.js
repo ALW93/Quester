@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Category from "./Category";
-import { Button, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import { removeCategory } from "../store/actions/categoryReducer";
 import { MiniForm } from "./MiniForm";
 import "./Category.css";
@@ -41,10 +41,11 @@ const CategoryForm = () => {
                 <div className="category__content">
                   <Category data={c} key={`Category${i}`} />
                   <button
+                    className="fb2"
                     style={{ marginTop: "10px" }}
                     onClick={() => deleteCat(user.id, c.id)}
                   >
-                    Remove
+                    DELETE
                   </button>
                 </div>
               </>
