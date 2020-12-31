@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { deleteIcon } from "../assets/icons";
 import { removeExpired, restoreTask } from "../store/actions/tasksReducer";
-import { Button, Paper, TextField } from "@material-ui/core";
+import { Paper, TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { DateTime } from "luxon";
-import { parseDifficulty, parseClass } from "../services/levels";
+import { setUpdate } from "../store/actions/utilityReducer";
+import { parseDifficulty } from "../services/levels";
+import "./Tasks.css";
 
 const ExpiredTask = ({ data }) => {
   const dispatch = useDispatch();
@@ -24,16 +25,20 @@ const ExpiredTask = ({ data }) => {
     const current = DateTime.local();
     const chosen = DateTime.fromISO(e.target.value);
     if (chosen <= current) {
-      alert("Deadline must be later than current time!");
-      return;
+      return dispatch(
+        setUpdate({
+          type: "Warning",
+          message: "Deadline must be later than current time!",
+        })
+      );
     }
     setDeadline(e.target.value);
   };
 
   const reviveForm = () => {
     return (
-      <>
-        <div>Set Deadline *(Leave Blank for No Expiration)</div>
+      <div>
+        <h4>Set Deadline *(Leave Blank for No Expiration)</h4>
         <form>
           <TextField
             type="datetime-local"
@@ -41,12 +46,11 @@ const ExpiredTask = ({ data }) => {
             value={deadline}
           />
         </form>
-      </>
+      </div>
     );
   };
   return (
     <>
-      {/* <Paper className={`task ${parseClass(t.difficulty)}`}> */}
       <Paper className="expired__task">
         <div className="task__title">
           <h1 style={{ textDecoration: "line-through", filter: "blur(2px)" }}>
@@ -58,24 +62,32 @@ const ExpiredTask = ({ data }) => {
           <div>{parseDifficulty(data.difficulty)}</div>
         </div>
 
-        {form ? (
-          <>
-            {reviveForm()}
-            <div>
-              <Button onClick={reviveHandler}>Restore Task</Button>
-              <Button onClick={() => showForm(false)}>Cancel</Button>
+        <div className="restore__task">
+          {form ? (
+            <div className="revive__form">
+              {reviveForm()}
+              <div style={{ margin: "5px" }}>
+                <button className="fadebutton" onClick={reviveHandler}>
+                  Restore Task
+                </button>
+                {"  "}
+                <button className="fb2" onClick={() => showForm(false)}>
+                  Cancel
+                </button>
+              </div>
             </div>
-          </>
-        ) : (
-          <div>
-            <button onClick={() => showForm(true)} className="green cute">
-              Try Again
-            </button>
-            <button className="red cute" onClick={deleteHandler}>
-              {deleteIcon()}
-            </button>
-          </div>
-        )}
+          ) : (
+            <div>
+              <button onClick={() => showForm(true)} className="fadebutton">
+                TRY AGAIN
+              </button>
+              {"  "}
+              <button className="fb2" onClick={deleteHandler}>
+                DELETE
+              </button>
+            </div>
+          )}
+        </div>
       </Paper>
     </>
   );
