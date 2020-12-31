@@ -69,10 +69,6 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
     setDeadline(e.target.value);
   };
 
-  const updateFrequency = (e) => {
-    setFrequency(e.target.value);
-  };
-
   const updateCat1 = (e) => {
     if ([cat1, cat2].includes(e.target.value)) {
       alert("Category already selected!");

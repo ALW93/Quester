@@ -49,22 +49,36 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
 
   return (
     <div className="habitform__container">
-      <form onSubmit={habitSubmit}>
+      <form onSubmit={habitSubmit} style={{ width: "40%", margin: "auto" }}>
         {dailyIcon()}
         <h1>New Daily</h1>
         <div>
           <div>Name</div>
-          <TextField placeholder={name} onChange={updateName} />
+          <TextField
+            placeholder={name}
+            onChange={updateName}
+            type="text"
+            fullWidth={true}
+            variant="filled"
+          />
         </div>
         <div>
           <div>Category</div>
-          <Select onChange={updateCat} value={habitcat}>
+          <TextField
+            select
+            onChange={updateCat}
+            value={habitcat}
+            type="text"
+            fullWidth={true}
+            placeholder={habitcat}
+            variant="filled"
+          >
             <MenuItem value={null}>--</MenuItem>
             {categories &&
               categories.map((e) => {
                 return <MenuItem value={e.id}>{e.name}</MenuItem>;
               })}
-          </Select>
+          </TextField>
         </div>
         <div style={{ marginTop: "10px" }}>
           <button type="submit" style={{ marginRight: "2px" }}>
