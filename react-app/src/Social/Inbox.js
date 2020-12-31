@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { mailIcon, potionIcon } from "../assets/icons";
+import { mailIcon, potionIcon, requestIcon } from "../assets/icons";
 import { Paper } from "@material-ui/core";
 import { DateTime } from "luxon";
 import { mailOpener } from "../store/actions/userReducer";
@@ -24,18 +24,41 @@ const Inbox = () => {
             mail.map((e) => {
               return (
                 <>
-                  <div elevation={3} className="letter">
+                  <div className="letter">
                     {e.status !== "read" ? (
                       <div>
-                        {e.type === "potion" ? potionIcon() : mailIcon()}
-                        <div>
-                          <h5>
-                            {e.sender.username} sent you a {e.type}!
-                          </h5>
-                          <button onClick={() => handleOpen(e.id)}>
-                            Click to Open
-                          </button>
-                        </div>
+                        {e.type === "potion" ? (
+                          <>
+                            {potionIcon()}{" "}
+                            <h5>
+                              {e.sender.username} healed you with a {e.type}!
+                            </h5>
+                            <button onClick={() => handleOpen(e.id)}>
+                              Click to Read Message
+                            </button>
+                          </>
+                        ) : null}
+                        {e.type === "mail" ? (
+                          <>
+                            {mailIcon()}{" "}
+                            <h5>
+                              {e.sender.username} healed you with a {e.type}!
+                            </h5>
+                            <button onClick={() => handleOpen(e.id)}>
+                              Click to Read Message
+                            </button>
+                          </>
+                        ) : null}
+                        {e.type === "request" ? (
+                          <>
+                            {requestIcon()}{" "}
+                            <h5>
+                              {e.sender.username} sent you a friend request!
+                            </h5>
+                            <button>Accept</button>
+                            <button>Delete</button>
+                          </>
+                        ) : null}
                       </div>
                     ) : (
                       <>

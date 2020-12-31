@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import "./Social.css";
 import searchIcon from "../assets/search.svg";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const SearchForm = ({ openSearch }) => {
   const [results, setResults] = useState([]);
   const [query, setQuery] = useState("");
   const [start, setStart] = useState(false);
+  const friends = useSelector((state) => state.user.friends);
 
   const searchUsers = async () => {
     const response = await fetch(`/api/data/find_users`, {
@@ -31,13 +35,27 @@ const SearchForm = ({ openSearch }) => {
       <img src={searchIcon} style={{ width: "35px" }} />
       <TextField value={query} onChange={updateQuery} type="text" />
       <button onClick={searchUsers}>Search</button>
-      <ul>
-        {results &&
-          results.map((e) => {
-            return <li>{e.username}</li>;
-          })}
-        {start && !results.length ? "No Matches Found." : null}
-      </ul>
+
+      {results &&
+        results.map((e) => {
+          console.log(e);
+          return (
+            <li>
+              {e.username}
+              {JSON.stringify(friends).includes(JSON.stringify(e)) ? (
+                <button>
+                  <CheckCircleIcon style={{ fill: "green" }} /> Added{" "}
+                </button>
+              ) : (
+                <button>
+                  <PersonAddIcon />
+                </button>
+              )}
+            </li>
+          );
+        })}
+      {start && !results.length ? "No Matches Found." : null}
+
       <button onClick={() => openSearch(false)}>Cancel</button>
     </div>
   );
