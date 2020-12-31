@@ -34,6 +34,7 @@ const Task = ({ t, showDamage, showReward }) => {
       if (time.days <= 0 && time.hours <= 0) {
         showDamage(`${t.name} has expired! You lost ${payload.health} HP!`);
         await dispatch(expire(t.id, payload, t));
+        await dispatch(setUserInfo());
       }
       setTime(time);
     };

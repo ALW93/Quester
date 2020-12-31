@@ -4,11 +4,12 @@ import mail from "../assets/letter_icon.svg";
 import MessageForm from "./MessageForm";
 import SearchForm from "./SearchForm";
 import "./Social.css";
+import HealthBar from "../Shared/HealthBar";
 
 const Friends = () => {
   const friendlist = useSelector((state) => state.user.friends);
   const [open, setOpen] = useState(false);
-  const [search, openSearch] = useState(true);
+  const [search, openSearch] = useState(false);
   const [recipient, setRecipient] = useState("");
   const [id, setId] = useState("");
   const [heal, setHeal] = useState(false);
@@ -58,13 +59,7 @@ const Friends = () => {
                       />
                     </h1>
 
-                    <div
-                      className="progress-bar bg-success"
-                      role="progressbar"
-                      style={{ width: `${e.health}%` }}
-                    >
-                      {e.health}/100 HP
-                    </div>
+                    <HealthBar health={e.health} />
                   </div>
                 </>
               );

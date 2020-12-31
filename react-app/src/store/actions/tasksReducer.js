@@ -1,3 +1,5 @@
+import { setUserInfo } from "./authReducer";
+
 const SET_TASKS = "Quester/tasks/SET_TASKS";
 const ADD_TASK = "Quest/tasks/ADD_TASK";
 const EXPIRE_TASK = "Quest/tasks/EXPIRE_TASK";
