@@ -75,8 +75,6 @@ const Task = ({ t, showDamage, showReward }) => {
           <div>{parseDifficulty(t.difficulty)}</div>
         </div>
 
-        {/* <li>repeat: {t.frequency}</li> */}
-
         <div className="task__bottom">
           {t.deadline ? (
             <div>

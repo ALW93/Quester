@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button } from "@material-ui/core";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 import Damage from "../Shared/Damage";

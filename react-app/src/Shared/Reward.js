@@ -1,10 +1,14 @@
 import React from "react";
 import { coinIcon, expIcon, healthIcon } from "../assets/icons";
 import "./Reward.css";
+import { Snackbar } from "@material-ui/core";
 
 const Reward = ({ rewards, showReward }) => {
   return (
-    <>
+    <Snackbar
+      open={rewards}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+    >
       <div className="reward__notice">
         <div className="reward__inner">
           <h1>Rewards</h1>
@@ -22,7 +26,7 @@ const Reward = ({ rewards, showReward }) => {
           <button onClick={() => showReward(false)}>Collect</button>
         </div>
       </div>
-    </>
+    </Snackbar>
   );
 };
 
