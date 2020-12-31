@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { newCategory } from "../store/actions/categoryReducer";
 import { TextField, Select, MenuItem } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 export const MiniForm = ({ num }) => {
   const user = useSelector((state) => state.session.user);
@@ -38,17 +37,28 @@ export const MiniForm = ({ num }) => {
         <div>Name</div>
         <TextField
           required={true}
-          placeholder="Category Name"
+          type="text"
+          fullWidth={true}
+          placeholder={name}
+          variant="filled"
           onChange={updateName}
           value={name}
         />
         <div>Stat</div>
-        <Select onChange={updateStat} value={stat}>
+        <TextField
+          type="text"
+          fullWidth={true}
+          placeholder={name}
+          variant="filled"
+          select
+          onChange={updateStat}
+          value={stat}
+        >
           {stats &&
             stats.map((s) => {
               return <MenuItem value={s.id}>{s.name}</MenuItem>;
             })}
-        </Select>
+        </TextField>
         <div style={{ marginTop: "10px" }}>
           <button type="submit">Submit</button>
           <button onClick={() => setMini(false)}>Cancel</button>

@@ -83,7 +83,7 @@ const LoginForm = () => {
       <div className="login__center">
         <h1 style={{ fontSize: "100px", color: "rgb(12,17,33)" }}>Quester</h1>
         <div className="form__container">
-          {!form ? (
+          {form ? (
             <SignUpForm showSignup={showSignup} />
           ) : (
             <>
