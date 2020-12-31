@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import "./Social.css";
@@ -40,7 +40,12 @@ const SearchForm = ({ openSearch }) => {
       },
       body: JSON.stringify(newRequest),
     });
-    if (response.ok) {
+
+    const data = await response.json();
+
+    if (data.errors) {
+      alert(data.errors);
+    } else {
       openSearch(false);
     }
   };
