@@ -27,3 +27,8 @@
   border: 1px dashed rgb(255, 255, 255);
   text-align: center;
 }
+
+.habit__detail {
+  display: flex;
+  justify-content: space-between;
+}

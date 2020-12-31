@@ -57,13 +57,17 @@ const HabitContainer = ({ data }) => {
 
   return (
     <div className="habit__container">
-      <div className="habit__detail" style={{ display: "flex " }}>
-        <h1>{data.name}</h1>
-        {categories &&
-          categories.map((c, i) => {
-            return <Category data={c} key={`habitCategory${i}`} />;
-          })}
-        <Button onClick={deleteHandler}>{deleteIcon()}</Button>
+      <div className="habit__detail">
+        <div style={{ display: "flex", alignSelf: "center" }}>
+          <h1>{data.name}</h1>
+          {categories &&
+            categories.map((c, i) => {
+              return <Category data={c} key={`habitCategory${i}`} />;
+            })}
+        </div>
+        <button className="red cute" onClick={deleteHandler}>
+          DELETE
+        </button>
       </div>
 
       <div className="habit__calendar" style={{ display: "flex" }}>

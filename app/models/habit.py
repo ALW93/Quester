@@ -8,8 +8,7 @@ class Habit(db.Model):
     created_at = c(db.Date, nullable=False)
     user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = c(db.String(50), nullable=False)
-    checks = db.relationship('Check', backref="habit", lazy=True)
-
+    checks = db.relationship('Check', backref="habit", lazy="joined", cascade="all, delete-orphan")
     categories = db.relationship('Habit_Category', backref="habit", lazy="joined", cascade="all, delete-orphan")
 
     def to_dict(self):
