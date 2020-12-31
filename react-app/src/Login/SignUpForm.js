@@ -26,7 +26,6 @@ const SignUpForm = ({ showSignup }) => {
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const authorized = useSelector((state) => state.session.auth);
-  const [beta, setBeta] = useState(false);
   const [prebuilt, setPrebuilt] = useState("");
   const [creation, showCreation] = useState(false);
 

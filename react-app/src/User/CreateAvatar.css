@@ -6,13 +6,12 @@
 .hero__selector {
   display: flex;
   align-items: flex-end;
-  margin-left: -350px;
   width: fit-content;
 }
 
 .unselected {
   filter: grayscale(100%);
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .unselected:hover {
@@ -22,4 +21,11 @@
 
 .selected {
   filter: none;
+}
+
+.kitty {
+  margin-left: -200px;
+  z-index: 999;
+  width: 300px;
+  height: 100%;
 }
