@@ -13,7 +13,6 @@ const ExpiredTask = ({ data }) => {
 
   const reviveHandler = async () => {
     const payload = { deadline: deadline || null };
-    console.log(payload);
     await dispatch(restoreTask(data.id, payload));
   };
 
@@ -69,10 +68,12 @@ const ExpiredTask = ({ data }) => {
           </>
         ) : (
           <div>
-            <Button onClick={() => showForm(true)} variant="contained">
+            <button onClick={() => showForm(true)} className="green cute">
               Try Again
-            </Button>
-            <Button onClick={deleteHandler}>{deleteIcon()}</Button>
+            </button>
+            <button className="red cute" onClick={deleteHandler}>
+              {deleteIcon()}
+            </button>
           </div>
         )}
       </Paper>

@@ -73,7 +73,7 @@ const Friends = () => {
             </div>
           )}
         </div>
-        <button class="cute learn-more" onClick={openFriendSearch}>
+        <button class="yellow cute" onClick={openFriendSearch}>
           Find User
         </button>
       </div>

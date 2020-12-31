@@ -32,7 +32,7 @@ const Habit = () => {
           <HabitForm setHabitForm={setHabitForm} setHabits={setHabits} />
         ) : (
           <button
-            class="cute learn-more"
+            class="yellow cute"
             onClick={() => {
               showHabitForm(true);
             }}

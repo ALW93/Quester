@@ -35,13 +35,13 @@ const Tasks = () => {
   return (
     <div className="taskpage__container">
       <div>
-        <button class="cute learn-more" onClick={() => toggleLog(false)}>
+        <button class="blue cute" onClick={() => toggleLog(false)}>
           All Quests
         </button>
-        <button class="cute learn-more" onClick={() => showTaskForm(true)}>
+        <button class="yellow cute" onClick={() => showTaskForm(true)}>
           New Quest
         </button>
-        <button class="cute learn-more" onClick={() => toggleLog(true)}>
+        <button class="pink cute" onClick={() => toggleLog(true)}>
           Completed
         </button>
       </div>
