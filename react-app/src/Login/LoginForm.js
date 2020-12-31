@@ -3,12 +3,12 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth, setId, setUser, login } from "../store/actions/authReducer";
 import { showForm } from "../store/actions/utilityReducer";
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import SignUpForm from "./SignUpForm";
 import "./LoginForm.css";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import { setAvatar, getAvatar } from "../store/actions/avatarReducer";
-import { setUserInfo, authenticate } from "../store/actions/authReducer";
+import { setUserInfo } from "../store/actions/authReducer";
 import {
   getTasks,
   getComplete,
@@ -93,23 +93,31 @@ const LoginForm = () => {
                     <div>{error}</div>
                   ))}
                 </div>
-                <div>
-                  <TextField
-                    name="email"
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={updateEmail}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={updatePassword}
-                  />
+                <div style={{ margin: "30px 0 30px 0" }}>
+                  <div>
+                    <h1>Email</h1>
+                    <TextField
+                      variant="outlined"
+                      type="text"
+                      fullWidth={true}
+                      label="Email"
+                      value={email}
+                      onChange={updateEmail}
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  </div>
+                  <div>
+                    <h1>Password</h1>
+                    <TextField
+                      type="password"
+                      fullWidth={true}
+                      variant="outlined"
+                      label="Password"
+                      InputLabelProps={{ shrink: true }}
+                      value={password}
+                      onChange={updatePassword}
+                    />
+                  </div>
                 </div>
                 <div>
                   <button type="submit" className="fadebutton">
@@ -121,7 +129,10 @@ const LoginForm = () => {
                   </button>
                 </div>
               </form>
-              <div onClick={() => showSignup(true)}>
+              <div
+                onClick={() => showSignup(true)}
+                style={{ marginTop: "20px" }}
+              >
                 Sign up Here <DoubleArrowIcon />
               </div>
             </>

@@ -33,3 +33,8 @@ body {
   width: 50%;
   height: 100vh;
 }
+
+.form__container {
+  width: 55%;
+  margin: auto;
+}

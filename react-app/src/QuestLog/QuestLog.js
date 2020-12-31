@@ -9,7 +9,7 @@ import { swordIcon, fantasyIcon, hatIcon, bookIcon } from "../assets/icons";
 
 const QuestLog = () => {
   const [showQ, setShowQ] = useState(true);
-  const [showD, setShowD] = useState(true);
+  const [showD, setShowD] = useState(false);
   const [showS, setShowS] = useState(false);
   const [settings, showSettings] = useState(false);
 
