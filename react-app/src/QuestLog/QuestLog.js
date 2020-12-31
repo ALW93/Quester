@@ -10,8 +10,8 @@ import { swordIcon, fantasyIcon, hatIcon, bookIcon } from "../assets/icons";
 const QuestLog = () => {
   const [showQ, setShowQ] = useState(true);
   const [showD, setShowD] = useState(false);
-  const [showS, setShowS] = useState(false);
-  const [settings, showSettings] = useState(true);
+  const [showS, setShowS] = useState(true);
+  const [settings, showSettings] = useState(false);
 
   const toggleQuest = () => {
     setShowQ(true);

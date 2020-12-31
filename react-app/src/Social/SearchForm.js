@@ -59,32 +59,45 @@ const SearchForm = ({ openSearch }) => {
   return (
     <div className="message_form">
       <h1>User Lookup</h1>
-      <img src={searchIcon} style={{ width: "35px" }} />
-      <TextField value={query} onChange={updateQuery} type="text" />
+      <div style={{ width: "70%", margin: "auto", marginBottom: "10px" }}>
+        <TextField
+          value={query}
+          onChange={updateQuery}
+          type="text"
+          fullWidth={true}
+          placeholder={query}
+          variant="filled"
+          InputProps={{
+            startAdornment: <img src={searchIcon} style={{ width: "35px" }} />,
+          }}
+        />
+      </div>
       <button onClick={searchUsers}>Search</button>
-
-      {results &&
-        results.map((e) => {
-          console.log(JSON.stringify(e));
-          return (
-            <li>
-              {e.username}
-              {JSON.stringify(friends).includes(JSON.stringify(e)) ? (
-                <button>
-                  <CheckCircleIcon style={{ fill: "green" }} />
-                  Friends{" "}
-                </button>
-              ) : (
-                <button onClick={() => addUser(e.id)}>
-                  <PersonAddIcon />
-                </button>
-              )}
-            </li>
-          );
-        })}
-      {start && !results.length ? "No Matches Found." : null}
-
+      {"  "}
       <button onClick={() => openSearch(false)}>Cancel</button>
+
+      <div style={{ margin: "20px" }} className="grid__container">
+        {results &&
+          results.map((e) => {
+            return (
+              <div>
+                <h2>{e.username}</h2>
+                {"  "}
+                {JSON.stringify(friends).includes(JSON.stringify(e)) ? (
+                  <button>
+                    <CheckCircleIcon style={{ fill: "green" }} />
+                    Friends{" "}
+                  </button>
+                ) : (
+                  <button onClick={() => addUser(e.id)}>
+                    <PersonAddIcon /> Add Friend
+                  </button>
+                )}
+              </div>
+            );
+          })}
+      </div>
+      {start && !results.length ? "No Matches Found." : null}
     </div>
   );
 };

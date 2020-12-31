@@ -8,7 +8,7 @@ import "./Social.css";
 const Friends = () => {
   const friendlist = useSelector((state) => state.user.friends);
   const [open, setOpen] = useState(false);
-  const [search, openSearch] = useState(false);
+  const [search, openSearch] = useState(true);
   const [recipient, setRecipient] = useState("");
   const [id, setId] = useState("");
   const [heal, setHeal] = useState(false);
