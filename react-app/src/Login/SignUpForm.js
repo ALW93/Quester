@@ -99,55 +99,71 @@ const SignUpForm = ({ showSignup }) => {
         />
       ) : (
         <>
-          <h2>Create an Account</h2>
+          <h1>Create an Account</h1>
           <form>
             <div>
+              <h2>Username</h2>
               <TextField
                 type="text"
-                name="username"
-                placeholder="Username"
+                variant="outlined"
+                fullWidth={true}
+                label="Username"
+                InputLabelProps={{ shrink: true }}
                 onChange={updateUsername}
                 value={username}
               />
             </div>
             <div>
+              <h2>Email</h2>
               <TextField
                 type="text"
-                name="email"
-                placeholder="Email"
+                variant="outlined"
+                fullWidth={true}
+                label="Email"
+                InputLabelProps={{ shrink: true }}
                 onChange={updateEmail}
                 value={email}
               />
             </div>
             <div>
+              <h2>Password</h2>
               <TextField
                 type="password"
-                name="password"
-                placeholder="Password"
+                variant="outlined"
+                fullWidth={true}
+                label="Password"
+                InputLabelProps={{ shrink: true }}
                 onChange={updatePassword}
                 value={password}
               />
             </div>
             <div>
+              <h2>Confirm Password</h2>
               <TextField
                 type="password"
-                name="repeat_password"
-                placeholder="Confirm Password"
+                variant="outlined"
+                fullWidth={true}
+                label="Confirm Password"
+                InputLabelProps={{ shrink: true }}
                 onChange={updateRepeatPassword}
                 value={repeatPassword}
                 required={true}
               />
             </div>
-            <button className="fadebutton" onClick={redirectCreation}>
+            <button
+              className="fadebutton"
+              onClick={redirectCreation}
+              style={{ marginTop: "20px" }}
+            >
               Continue
             </button>
           </form>
         </>
       )}
-      <div onClick={() => showSignup(false)}>
+      <h2 onClick={() => showSignup(false)}>
         Return to Login
         <DoubleArrowIcon />
-      </div>
+      </h2>
     </>
   );
 };

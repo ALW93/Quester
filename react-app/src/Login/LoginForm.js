@@ -83,7 +83,7 @@ const LoginForm = () => {
       <div className="login__center">
         <h1 style={{ fontSize: "100px", color: "rgb(12,17,33)" }}>Quester</h1>
         <div className="form__container">
-          {form ? (
+          {!form ? (
             <SignUpForm showSignup={showSignup} />
           ) : (
             <>
@@ -101,9 +101,9 @@ const LoginForm = () => {
                       type="text"
                       fullWidth={true}
                       label="Email"
+                      InputLabelProps={{ shrink: true }}
                       value={email}
                       onChange={updateEmail}
-                      InputLabelProps={{ shrink: true }}
                     />
                   </div>
                   <div>
@@ -121,20 +121,20 @@ const LoginForm = () => {
                 </div>
                 <div>
                   <button type="submit" className="fadebutton">
-                    Login
+                    LOGIN
                   </button>
                   {"  "}
                   <button className="fadebutton" onClick={setCreds}>
-                    Demo
+                    DEMO
                   </button>
                 </div>
               </form>
-              <div
+              <h2
                 onClick={() => showSignup(true)}
                 style={{ marginTop: "20px" }}
               >
                 Sign up Here <DoubleArrowIcon />
-              </div>
+              </h2>
             </>
           )}
         </div>
