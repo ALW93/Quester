@@ -11,6 +11,7 @@ const SearchForm = ({ openSearch }) => {
   const [query, setQuery] = useState("");
   const [start, setStart] = useState(false);
   const friends = useSelector((state) => state.user.friends);
+  const user = useSelector((state) => state.session.user);
 
   const searchUsers = async () => {
     const response = await fetch(`/api/data/find_users`, {
@@ -23,6 +24,25 @@ const SearchForm = ({ openSearch }) => {
     const data = await response.json();
     setResults(data.results);
     setStart(true);
+  };
+
+  const addUser = async (userId) => {
+    const newRequest = {
+      type: "request",
+      message: "Let's be friends!",
+      receiver_id: userId,
+      sender_id: user.id,
+    };
+    const response = await fetch(`api/users/${user.id}/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRequest),
+    });
+    if (response.ok) {
+      openSearch(false);
+    }
   };
 
   const updateQuery = (e) => {
@@ -38,7 +58,7 @@ const SearchForm = ({ openSearch }) => {
 
       {results &&
         results.map((e) => {
-          console.log(e);
+          console.log(JSON.stringify(e));
           return (
             <li>
               {e.username}
@@ -48,7 +68,7 @@ const SearchForm = ({ openSearch }) => {
                   Friends{" "}
                 </button>
               ) : (
-                <button>
+                <button onClick={() => addUser(e.id)}>
                   <PersonAddIcon />
                 </button>
               )}

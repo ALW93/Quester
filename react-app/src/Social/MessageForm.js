@@ -34,7 +34,6 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
       receiver_id: id,
       sender_id: 1,
     };
-    console.log(newMail);
     const response = await fetch(`api/users/${userId}/messages`, {
       method: "POST",
       headers: {
