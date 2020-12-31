@@ -1,10 +1,8 @@
 const GET_FRIENDS = "Quester/user/GET_FRIENDS";
-const ADD_FRIEND = "Quest/user/ADD_FRIEND";
 const GET_MESSAGES = "Quester/user/GET_MESSAGES";
 const OPEN_MESSAGE = "Quester/user/OPEN_MESSAGE";
 
 const setFriends = (payload) => ({ type: GET_FRIENDS, payload });
-const addFriend = (payload) => ({ type: ADD_FRIEND, payload });
 const setMessages = (payload) => ({ type: GET_MESSAGES, payload });
 const openMessage = (payload) => ({ type: OPEN_MESSAGE, payload });
 
@@ -35,6 +33,13 @@ export const mailOpener = (msgId) => async (dispatch) => {
   if (response.ok) {
     await dispatch(openMessage(msgId));
     return "success";
+  }
+};
+
+export const mailDeleter = (msgId, userId) => async (dispatch) => {
+  const response = await fetch(`api/users/delete_messages/${msgId}`);
+  if (response.ok) {
+    await dispatch(getUserMessages(userId));
   }
 };
 

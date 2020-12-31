@@ -294,3 +294,12 @@ def send_message(id):
             db.session.commit()
 
     return "success"
+
+
+@user_routes.route('/delete_messages/<int:id>')
+@login_required
+def delete_message(id):
+    """Delete Message"""
+    db.engine.execute('DELETE FROM messages WHERE id=(%s)', (id))
+    db.session.commit()
+    return {'Message': 'Successfully Deleted!'}
