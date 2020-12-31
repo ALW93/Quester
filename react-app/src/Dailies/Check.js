@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Habit.css";
+import { setUpdate } from "../store/actions/utilityReducer";
 import { DateTime } from "luxon";
 import { postCheck, removeCheck } from "../store/actions/habitReducer";
 import { ribbon, noribbon, calIcon } from "../assets/icons";
@@ -9,6 +10,9 @@ const Check = ({ data, display, parsed, value }) => {
   const user = useSelector((state) => state.session.user);
   const [check, showCheck] = useState(false);
   const dispatch = useDispatch();
+  const today = DateTime.local()
+    .toLocaleString({ weekday: "long" })
+    .toUpperCase();
 
   useEffect(() => {
     if (
@@ -25,6 +29,14 @@ const Check = ({ data, display, parsed, value }) => {
   }, [data, value, parsed]);
 
   const checkHandler = async (value) => {
+    if (today !== display) {
+      return dispatch(
+        setUpdate({
+          type: "Warning",
+          message: `Checks only open for ${today}`,
+        })
+      );
+    }
     const new_check = {
       date: value,
       user_id: user.id,
@@ -35,16 +47,16 @@ const Check = ({ data, display, parsed, value }) => {
   };
 
   const checkRemover = async (display) => {
+    if (today !== display) {
+      return alert("Wrong day!");
+    }
     await dispatch(removeCheck(data.id, { date: value }));
     showCheck(false);
   };
 
-  const today = DateTime.local().toLocaleString({ weekday: "long" });
-  console.log(today, display);
-
   return (
     <div className="calendar__day">
-      {today.toUpperCase() === display ? (
+      {today === display ? (
         <>
           <div
             style={{
