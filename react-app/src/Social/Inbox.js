@@ -3,14 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { mailIcon, potionIcon, requestIcon } from "../assets/icons";
 import { Paper } from "@material-ui/core";
 import { DateTime } from "luxon";
-import { mailOpener } from "../store/actions/userReducer";
+import { mailOpener, acceptFriend } from "../store/actions/userReducer";
 
 const Inbox = () => {
   const mail = useSelector((state) => state.user.messages);
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const handleOpen = async (id) => {
     await dispatch(mailOpener(id));
+  };
+
+  const handleAccept = async (friendId) => {
+    await dispatch(acceptFriend(user.id, { friend_id: friendId }));
+  };
+
+  const handleReject = async (id) => {
+    //
   };
 
   return (
@@ -55,7 +64,9 @@ const Inbox = () => {
                             <h5>
                               {e.sender.username} sent you a friend request!
                             </h5>
-                            <button>Accept</button>
+                            <button onClick={() => handleAccept(e.sender.id)}>
+                              Accept
+                            </button>
                             <button>Delete</button>
                           </>
                         ) : null}

@@ -44,7 +44,8 @@ const SearchForm = ({ openSearch }) => {
               {e.username}
               {JSON.stringify(friends).includes(JSON.stringify(e)) ? (
                 <button>
-                  <CheckCircleIcon style={{ fill: "green" }} /> Added{" "}
+                  <CheckCircleIcon style={{ fill: "green" }} />
+                  Friends{" "}
                 </button>
               ) : (
                 <button>
