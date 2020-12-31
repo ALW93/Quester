@@ -1,15 +1,23 @@
 .creation__container {
   z-index: 999;
-
   background-color: white;
+}
+
+.hero__selector {
+  display: flex;
+  align-items: flex-end;
+  margin-left: -350px;
+  width: fit-content;
 }
 
 .unselected {
   filter: grayscale(100%);
+  opacity: 0.5;
 }
 
 .unselected:hover {
   filter: none;
+  opacity: 1;
 }
 
 .selected {

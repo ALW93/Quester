@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Select, MenuItem, Button } from "@material-ui/core";
 import "./CreateAvatar.css";
 
 const CreateAvatar = ({ prebuilt, setPrebuilt, onSignUp }) => {
@@ -10,25 +9,42 @@ const CreateAvatar = ({ prebuilt, setPrebuilt, onSignUp }) => {
 
   return (
     <div className="creation__container">
-      <h1>Select a Character</h1>
+      <h1>Select a Hero</h1>
       <form onSubmit={onSignUp}>
-        <div style={{ display: "flex", alignItems: "flex-end" }}>
+        <div className="hero__selector">
           {selections.map((e) => {
-            return (
-              <img
-                value={e}
-                onClick={updatePrebuilt}
-                src={require(`../characters/${e}.png`)}
-                style={{
-                  width: "400px",
-                  height: "100%",
-                }}
-                className="unselected"
-              />
-            );
+            if (e === prebuilt) {
+              return (
+                <img
+                  value={e}
+                  onClick={updatePrebuilt}
+                  src={require(`../characters/${e}.png`)}
+                  style={{
+                    width: "400px",
+                    height: "100%",
+                  }}
+                  className="selected"
+                />
+              );
+            } else {
+              return (
+                <img
+                  value={e}
+                  onClick={updatePrebuilt}
+                  src={require(`../characters/${e}.png`)}
+                  style={{
+                    width: "400px",
+                    height: "100%",
+                  }}
+                  className="unselected"
+                />
+              );
+            }
           })}
         </div>
-        <Button type="submit">Create</Button>
+        <button className="blue cute" type="submit" style={{ margin: "20px" }}>
+          Create Character
+        </button>
       </form>
     </div>
   );
