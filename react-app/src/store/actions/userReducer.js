@@ -36,6 +36,26 @@ export const mailOpener = (msgId) => async (dispatch) => {
   }
 };
 
+export const mailDeleter = (msgId, userId) => async (dispatch) => {
+  const response = await fetch(`api/users/delete_messages/${msgId}`);
+  if (response.ok) {
+    await dispatch(getUserMessages(userId));
+  }
+};
+
+export const acceptFriend = (userId, payload) => async (dispatch) => {
+  const response = await fetch(`api/users/${userId}/friends`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    await dispatch(getUserFriends(userId));
+  }
+};
+
 export const userReducer = (state = { friends: [], messages: [] }, action) => {
   switch (action.type) {
     case GET_FRIENDS: {

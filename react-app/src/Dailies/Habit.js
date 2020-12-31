@@ -31,21 +31,27 @@ const Habit = () => {
         {habitForm ? (
           <HabitForm setHabitForm={setHabitForm} setHabits={setHabits} />
         ) : (
-          <Button
-            variant="contained"
+          <button
+            class="cute learn-more"
             onClick={() => {
               showHabitForm(true);
             }}
           >
+            {" "}
             Add Daily
-          </Button>
+          </button>
         )}
 
         <div>
-          {habits &&
+          {habits.length ? (
             habits.map((habit, i) => {
               return <HabitContainer data={habit} key={`Habit${i}`} />;
-            })}
+            })
+          ) : (
+            <h2 className="white">
+              No Dailies Found, Click 'Add Daily' to Begin!
+            </h2>
+          )}
         </div>
       </div>
     </>

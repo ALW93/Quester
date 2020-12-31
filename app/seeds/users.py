@@ -5,7 +5,7 @@ from app.models import db, User, time
 def seed_users():
 
     userObjects = [
-        User(username='Admin', email='admin@aa.io',
+        User(username='Alycia', email='alycia@aa.io',
              password='password', currency=1000, exp=100, health=100, created_at=time),
         User(username='Berber', email='berber@catmail.com',
              password='password', currency=1000, exp=100, health=80, created_at=time),

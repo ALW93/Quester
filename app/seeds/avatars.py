@@ -7,7 +7,7 @@ def seed_avatars():
     avatarObjects = [
         Avatar(user_id=1, prebuilt="girl_1", hair="pink", face="type-1", body="type-1"),
         Avatar(user_id=2, prebuilt="animal_1", hair="brown", face="type-2", body="type-2"),
-        Avatar(user_id=3, prebuilt="boy1_1", hair="black", face="type-3", body="type-3")]
+        Avatar(user_id=3, prebuilt="boy_1", hair="black", face="type-3", body="type-3")]
 
     statObjects = [
         Stat(user_id=1, name="Strength", custom=False, color="/str.png", points=10),  # noqa

@@ -4,9 +4,9 @@ import { parseLevel } from "../services/levels";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
 import { coinIcon, tempAvatar, expIcon, healthIcon } from "../assets/icons";
-import girl_1 from "../characters/new_girl.png";
-import boy_1 from "../characters/bow_boy.png";
-import animal_1 from "../characters/cat.png";
+import girl_1 from "../characters/girl_1.png";
+import boy_1 from "../characters/boy_1.png";
+import animal_1 from "../characters/animal_1.png";
 import Stats from "./Stats";
 
 const User = () => {

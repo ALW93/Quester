@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Avatar, Task, Category, Task_Category, Habit, Stat, Habit_Category, friends, messages
 from datetime import date
+import Levenshtein as L
 
 user_routes = Blueprint('users', __name__)
 
@@ -225,8 +226,9 @@ def delete_category(id, catId):
 @login_required
 def get_friends(id):
     """Returns List of User's Friends"""
-    user_friends = db.session.query(friends).filter(friends.c.friend_a_id == id or friends.c.friend_b_id == id).all()
+    user_friends = db.session.query(friends).filter((friends.c.friend_a_id == id) | (friends.c.friend_b_id == id)).all()
     friendlist = []
+
     for friend in user_friends:
         if friend[2] == id:
             friendlist.append(User.query.get(friend[1]).to_dict())
@@ -234,6 +236,18 @@ def get_friends(id):
             friendlist.append(User.query.get(friend[2]).to_dict())
     friend_json = jsonify({'friends': friendlist})
     return friend_json
+
+
+@user_routes.route('/<int:id>/friends', methods=["POST"])
+@login_required
+def accept_request(id):
+    """Accept a Friend Request"""
+    data = request.json
+    if data:
+        newFriend = friends.insert().values(friend_a_id=id, friend_b_id=data["friend_id"])  # noqa
+        db.session.execute(newFriend)
+        db.session.commit()
+        return {"message": "successfully added!"}
 
 
 @user_routes.route('/<int:id>/messages')
@@ -280,3 +294,12 @@ def send_message(id):
             db.session.commit()
 
     return "success"
+
+
+@user_routes.route('/delete_messages/<int:id>')
+@login_required
+def delete_message(id):
+    """Delete Message"""
+    db.engine.execute('DELETE FROM messages WHERE id=(%s)', (id))
+    db.session.commit()
+    return {'Message': 'Successfully Deleted!'}

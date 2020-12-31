@@ -82,50 +82,51 @@ const LoginForm = () => {
 
       <div className="login__center">
         <h1 style={{ fontSize: "100px", color: "rgb(12,17,33)" }}>Quester</h1>
-
-        {form ? (
-          <SignUpForm showSignup={showSignup} />
-        ) : (
-          <>
-            <form onSubmit={onLogin}>
-              <div>
-                {errors.map((error) => (
-                  <div>{error}</div>
-                ))}
+        <div className="form__container">
+          {form ? (
+            <SignUpForm showSignup={showSignup} />
+          ) : (
+            <>
+              <form onSubmit={onLogin}>
+                <div>
+                  {errors.map((error) => (
+                    <div>{error}</div>
+                  ))}
+                </div>
+                <div>
+                  <TextField
+                    name="email"
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={updateEmail}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={updatePassword}
+                  />
+                </div>
+                <div>
+                  <button type="submit" className="fadebutton">
+                    Login
+                  </button>
+                  {"  "}
+                  <button className="fadebutton" onClick={setCreds}>
+                    Demo
+                  </button>
+                </div>
+              </form>
+              <div onClick={() => showSignup(true)}>
+                Sign up Here <DoubleArrowIcon />
               </div>
-              <div>
-                <TextField
-                  name="email"
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={updateEmail}
-                />
-              </div>
-              <div>
-                <TextField
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={updatePassword}
-                />
-              </div>
-              <div>
-                <button type="submit" className="fadebutton">
-                  Login
-                </button>
-                {"  "}
-                <button className="fadebutton" onClick={setCreds}>
-                  Demo
-                </button>
-              </div>
-            </form>
-            <div onClick={() => showSignup(true)}>
-              Sign up Here <DoubleArrowIcon />
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
 
       <div className="login__left flip__x" />

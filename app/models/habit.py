@@ -7,7 +7,7 @@ class Habit(db.Model):
     id = c(db.Integer, primary_key=True)
     created_at = c(db.Date, nullable=False)
     user_id = c(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    name = c(db.String(50), nullable=False, unique=True)
+    name = c(db.String(50), nullable=False)
     checks = db.relationship('Check', backref="habit", lazy=True)
 
     categories = db.relationship('Habit_Category', backref="habit", lazy="joined", cascade="all, delete-orphan")

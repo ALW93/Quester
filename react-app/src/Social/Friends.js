@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import mail from "../assets/letter_icon.svg";
 import MessageForm from "./MessageForm";
+import SearchForm from "./SearchForm";
 import "./Social.css";
 
 const Friends = () => {
   const friendlist = useSelector((state) => state.user.friends);
   const [open, setOpen] = useState(false);
+  const [search, openSearch] = useState(true);
   const [recipient, setRecipient] = useState("");
   const [id, setId] = useState("");
   const [heal, setHeal] = useState(false);
 
   const handleClickOpen = (id, name, heal) => {
-    console.log(id);
     setOpen(true);
     setId(id);
     setRecipient(name);
     setHeal(heal);
+  };
+
+  const openFriendSearch = () => {
+    openSearch(true);
   };
 
   return (
@@ -25,6 +30,7 @@ const Friends = () => {
         <div>
           <h1 className="white">Friends</h1>
         </div>
+
         <MessageForm
           open={open}
           setOpen={setOpen}
@@ -32,8 +38,9 @@ const Friends = () => {
           id={id}
           heal={heal}
         />
+        {search ? <SearchForm openSearch={openSearch} /> : null}
         <div>
-          {friendlist &&
+          {friendlist.length ? (
             friendlist.map((e) => {
               let heal = false;
               if (e.health < 100) heal = true;
@@ -59,8 +66,16 @@ const Friends = () => {
                   </div>
                 </>
               );
-            })}
+            })
+          ) : (
+            <div>
+              <h2 className="white">No Friends Yet!</h2>
+            </div>
+          )}
         </div>
+        <button class="cute learn-more" onClick={openFriendSearch}>
+          Find User
+        </button>
       </div>
     </>
   );
