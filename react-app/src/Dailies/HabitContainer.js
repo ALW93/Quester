@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Info, DateTime } from "luxon";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@material-ui/core";
-import { deleteIcon } from "../assets/icons";
+import { useDispatch } from "react-redux";
 import Check from "./Check.js";
 import {
   getHabitCategory,
   getHabitChecks,
-  postCheck,
-  removeCheck,
 } from "../store/actions/habitReducer";
-
 import Category from "../Shared/Category";
 import { removeHabit } from "../store/actions/habitReducer";
 import "./Habit.css";
@@ -18,7 +13,6 @@ import "./Habit.css";
 const HabitContainer = ({ data }) => {
   const [checks, setChecks] = useState([]);
   const [parsed, setParsed] = useState([]);
-
   const [categories, setCategories] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
@@ -85,9 +79,7 @@ const HabitContainer = ({ data }) => {
             <>
               <Check
                 data={data}
-                checks={checks}
-                setChecks={setChecks}
-                display={display}
+                display={display.toUpperCase()}
                 parsed={parsed}
                 value={value}
               />

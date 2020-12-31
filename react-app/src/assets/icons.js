@@ -17,6 +17,7 @@ import fairy from "./fairy-tale.svg";
 import check from "./check.svg";
 import uncheck from "./uncheck.svg";
 import bell from "./bell.svg";
+import calendar from "./calendar.svg";
 
 export const deleteIcon = () => <DeleteOutlineIcon style={{ fill: "red" }} />;
 export const editIcon = () => <EditIcon />;
@@ -39,3 +40,4 @@ export const bookIcon = () => <img src={book2} style={{ width: "25px" }} />;
 
 export const ribbon = () => <img src={check} style={{ width: "50px" }} />;
 export const noribbon = () => <img src={uncheck} style={{ width: "50px" }} />;
+export const calIcon = () => <img src={calendar} style={{ width: "32px" }} />;

@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import "./Habit.css";
-import {
-  getHabitChecks,
-  postCheck,
-  removeCheck,
-} from "../store/actions/habitReducer";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import { ribbon, noribbon } from "../assets/icons";
+import { DateTime } from "luxon";
+import { postCheck, removeCheck } from "../store/actions/habitReducer";
+import { ribbon, noribbon, calIcon } from "../assets/icons";
 
-const Check = ({ data, display, parsed, value, checks, setChecks }) => {
+const Check = ({ data, display, parsed, value }) => {
   const user = useSelector((state) => state.session.user);
   const [check, showCheck] = useState(false);
   const dispatch = useDispatch();
@@ -30,7 +25,6 @@ const Check = ({ data, display, parsed, value, checks, setChecks }) => {
   }, [data, value, parsed]);
 
   const checkHandler = async (value) => {
-    console.log("checked!");
     const new_check = {
       date: value,
       user_id: user.id,
@@ -45,9 +39,28 @@ const Check = ({ data, display, parsed, value, checks, setChecks }) => {
     showCheck(false);
   };
 
+  const today = DateTime.local().toLocaleString({ weekday: "long" });
+  console.log(today, display);
+
   return (
     <div className="calendar__day">
-      <div>{display}</div>
+      {today.toUpperCase() === display ? (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              marginTop: "-32px",
+              marginLeft: "23px",
+            }}
+          >
+            {calIcon()}
+          </div>
+          <div>{display}</div>
+        </>
+      ) : (
+        <div>{display}</div>
+      )}
+
       <div>
         {check ? (
           <div onClick={() => checkRemover(display)}> {ribbon()}</div>
