@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { coinIcon } from "../assets/icons";
 import girl_1 from "../characters/girl_1.png";
 import boy_1 from "../characters/boy_1.png";
-import animal_1 from "../characters/animal_1.png";
+import animal_1 from "../characters/cat_inner.png";
 import Stats from "./Stats";
 import HealthBar from "../Shared/HealthBar";
 
