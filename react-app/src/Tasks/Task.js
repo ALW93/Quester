@@ -6,7 +6,7 @@ import { parseDifficulty, parseStarText, parseClass } from "../services/levels";
 import { useDispatch, useSelector } from "react-redux";
 import { expire, getTaskCategory } from "../store/actions/tasksReducer";
 import { removeTask, completeTask } from "../store/actions/tasksReducer";
-
+import { setUpdate } from "../store/actions/utilityReducer";
 import { DateTime } from "luxon";
 import { gacha } from "../services/gacha";
 import { setUserInfo } from "../store/actions/authReducer";
@@ -57,6 +57,9 @@ const Task = ({ t, showDamage, showReward }) => {
 
   const deleteHandler = async () => {
     await dispatch(removeTask(t.id));
+    await dispatch(
+      setUpdate({ type: "Success", message: "Successfully Deleted Quest!" })
+    );
   };
 
   if (!loaded) {

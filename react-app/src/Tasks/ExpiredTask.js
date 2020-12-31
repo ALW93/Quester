@@ -15,10 +15,22 @@ const ExpiredTask = ({ data }) => {
   const reviveHandler = async () => {
     const payload = { deadline: deadline || null };
     await dispatch(restoreTask(data.id, payload));
+    await dispatch(
+      setUpdate({
+        type: "Success",
+        message: "Successfully Restored Expired Task!",
+      })
+    );
   };
 
   const deleteHandler = async () => {
     await dispatch(removeExpired(data.id));
+    await dispatch(
+      setUpdate({
+        type: "Success",
+        message: "Successfully Deleted Expired Task!",
+      })
+    );
   };
 
   const updateDeadline = (e) => {

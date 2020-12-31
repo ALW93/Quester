@@ -49,6 +49,12 @@ const SearchForm = ({ openSearch }) => {
       dispatch(setUpdate({ type: "Error", message: data.errors }));
     } else {
       openSearch(false);
+      await dispatch(
+        setUpdate({
+          type: "Success",
+          message: "Friend Request Sent!",
+        })
+      );
     }
   };
 

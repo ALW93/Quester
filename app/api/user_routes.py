@@ -279,7 +279,7 @@ def send_message(id):
     data = request.json
 
     if data:
-        check = db.session.query(messages).filter(messages.c.receiver_id == data['receiver_id'], messages.c.sender_id == id).all()  # noqa
+        check = db.session.query(messages).filter(messages.c.receiver_id == data['receiver_id'], messages.c.sender_id == id, messages.c.type == "request").all()  # noqa
         if check:
             return {"errors": "You have already sent a request!"}
 

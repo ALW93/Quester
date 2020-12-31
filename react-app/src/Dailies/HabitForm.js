@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { TextField, MenuItem, Select } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { getHabits, newHabit } from "../store/actions/habitReducer";
 import "./Habit.css";
 import { dailyIcon } from "../assets/icons";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 const HabitForm = ({ setHabitForm, setHabits }) => {
   const user = useSelector((state) => state.session.user);
@@ -14,14 +15,19 @@ const HabitForm = ({ setHabitForm, setHabits }) => {
   const [newhabit, setNewHabit] = useState({});
   const dispatch = useDispatch();
 
-  const habitSubmit = (e) => {
+  const habitSubmit = async (e) => {
     e.preventDefault();
     const new_habit = {
       name: name,
       category: habitcat,
     };
-    console.log(new_habit);
     setNewHabit(new_habit);
+    await dispatch(
+      setUpdate({
+        type: "Success",
+        message: "Successfully Created Habit!",
+      })
+    );
   };
 
   useEffect(() => {

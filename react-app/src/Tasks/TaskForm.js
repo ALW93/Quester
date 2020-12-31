@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Tasks.css";
 import { DateTime } from "luxon";
 import { questIcon } from "../assets/icons";
-import { TextField, Select, MenuItem } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import { newTask, getTasks } from "../store/actions/tasksReducer";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 const TaskForm = ({ setTaskForm, setTasks }) => {
   const user = useSelector((state) => state.session.user);
@@ -34,7 +35,13 @@ const TaskForm = ({ setTaskForm, setTasks }) => {
       categories: catIds,
     };
     await setNewTask(new_task);
-    setTaskForm(false);
+    await setTaskForm(false);
+    await dispatch(
+      setUpdate({
+        type: "Success",
+        message: "Successfully Created Task!",
+      })
+    );
   };
 
   useEffect(() => {

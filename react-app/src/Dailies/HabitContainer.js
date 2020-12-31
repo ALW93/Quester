@@ -9,6 +9,7 @@ import {
 import Category from "../Shared/Category";
 import { removeHabit } from "../store/actions/habitReducer";
 import "./Habit.css";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 const HabitContainer = ({ data }) => {
   const [checks, setChecks] = useState([]);
@@ -43,6 +44,12 @@ const HabitContainer = ({ data }) => {
 
   const deleteHandler = async () => {
     await dispatch(removeHabit(data.id));
+    await dispatch(
+      setUpdate({
+        type: "Success",
+        message: "Successfully Deleted Habit!",
+      })
+    );
   };
 
   if (!loaded) {

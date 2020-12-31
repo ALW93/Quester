@@ -4,12 +4,15 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import potionIcon from "../assets/potion_icon.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUpdate } from "../store/actions/utilityReducer";
+import { getUserFriends } from "../store/actions/userReducer";
 
 const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
   const [potion, sendPotion] = useState(false);
   const [message, setMessage] = useState("");
-  const userId = useSelector((state) => state.session.user.id);
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setOpen(false);
@@ -32,9 +35,9 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
       type: type,
       message: message,
       receiver_id: id,
-      sender_id: 1,
+      sender_id: user.id,
     };
-    const response = await fetch(`api/users/${userId}/messages`, {
+    const response = await fetch(`api/users/${user.id}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +45,14 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
       body: JSON.stringify(newMail),
     });
     if (response.ok) {
+      await getUserFriends(user.id);
       setOpen(false);
+      await dispatch(
+        setUpdate({
+          type: "Success",
+          message: "Message Successfully Sent!",
+        })
+      );
     }
   };
 
@@ -67,6 +77,7 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
           <TextField
             autoFocus
             id="name"
+            variant="filled"
             label={`Message to ${recipient}`}
             multiline
             fullWidth
@@ -80,12 +91,17 @@ const MessageForm = ({ open, setOpen, id, recipient, heal }) => {
             }}
           />
 
-          <Button onClick={verifyMessage} color="primary">
+          <button
+            className="fadebutton"
+            onClick={verifyMessage}
+            color="primary"
+          >
             Send
-          </Button>
-          <Button onClick={handleClose} color="primary">
+          </button>
+          {"  "}
+          <button className="fb2" onClick={handleClose} color="primary">
             Cancel
-          </Button>
+          </button>
         </div>
       ) : null}
     </>
