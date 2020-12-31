@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Social.css";
 import searchIcon from "../assets/search.svg";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { setUpdate } from "../store/actions/utilityReducer";
 
 const SearchForm = ({ openSearch }) => {
   const [results, setResults] = useState([]);
@@ -12,6 +13,7 @@ const SearchForm = ({ openSearch }) => {
   const [start, setStart] = useState(false);
   const friends = useSelector((state) => state.user.friends);
   const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
   const searchUsers = async () => {
     const response = await fetch(`/api/data/find_users`, {
@@ -44,7 +46,7 @@ const SearchForm = ({ openSearch }) => {
     const data = await response.json();
 
     if (data.errors) {
-      alert(data.errors);
+      dispatch(setUpdate({ type: "Error", message: data.errors }));
     } else {
       openSearch(false);
     }

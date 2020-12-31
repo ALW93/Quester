@@ -39,7 +39,7 @@ export default function AlertSnackBar() {
     <div className={classes.root}>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={alertData.type}>
-          This is a success message!
+          {alertData.message}
         </Alert>
       </Snackbar>
     </div>
