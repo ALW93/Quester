@@ -4,6 +4,7 @@ import User from "../User/User";
 import QuestLog from "../QuestLog/QuestLog";
 import LogoutButton from "../Shared/LogoutButton";
 import Clock from "../Shared/Clock";
+import Alert from "../Shared/Alert";
 
 const Homepage = () => {
   return (
@@ -24,6 +25,7 @@ const Homepage = () => {
           <QuestLog />
         </div>
       </div>
+      <Alert />
     </>
   );
 };

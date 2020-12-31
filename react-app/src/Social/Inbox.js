@@ -19,12 +19,12 @@ const Inbox = () => {
   };
 
   const handleAccept = async (msgId, friendId) => {
-    // await dispatch(acceptFriend(user.id, { friend_id: friendId }));
+    await dispatch(acceptFriend(user.id, { friend_id: friendId }));
     await dispatch(mailDeleter(msgId, user.id));
   };
 
-  const handleReject = async (id) => {
-    //
+  const handleReject = async (msgId, friendId) => {
+    await dispatch(mailDeleter(msgId, user.id));
   };
 
   return (
@@ -74,7 +74,11 @@ const Inbox = () => {
                             >
                               Accept
                             </button>
-                            <button>Delete</button>
+                            <button
+                              onClick={() => handleReject(e.id, e.sender.id)}
+                            >
+                              Delete
+                            </button>
                           </>
                         ) : null}
                       </div>

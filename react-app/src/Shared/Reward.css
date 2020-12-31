@@ -2,13 +2,13 @@
   background-image: url("../assets/paper_texture.jpg");
   background-size: cover;
   background-position: center;
-  margin-top: 10px;
+  margin-top: 200px;
   color: white;
   border: 2px dashed black;
 }
 
 .reward__inner {
-  padding: 0 20px 10px 20px;
+  padding: 50px;
   text-align: center;
 }
 

@@ -79,20 +79,20 @@ There is a layer in the Dockerfile that will install psycopg2 (not binary) for u
    This will build the dockerfile and push the image to your heroku container registry
 
    ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
+   heroku container:push web -a quester-productivity-rpg
    ```
 
 8. Release your docker container to heroku
 
    ```bash
-   heroku container:release web -a {NAME_OF_HEROKU_APP}
+   heroku container:release web -a quester-productivity-rpg
    ```
 
 9. set up your database:
 
    ```bash
-   heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-   heroku run -a {NAME_OF_HEROKU_APP} flask seed all
+   heroku run -a quester-productivity-rpg flask db upgrade
+   heroku run -a quester-productivity-rpg flask seed all
    ```
 
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.

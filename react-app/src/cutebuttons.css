@@ -1,0 +1,310 @@
+.blue {
+  font-family: "Rubik";
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  width: 9rem;
+  margin: 15px;
+  height: 4rem;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+/* #region Blue Button*/
+.blue.cute {
+  font-family: "Rubik";
+  font-weight: 600;
+  color: #3f7c96;
+  text-transform: uppercase;
+  background: #cefcfb;
+  border: 2px solid #3f7c96;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.blue.cute::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #95abb5;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #3c4a50;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.blue.cute:hover {
+  background: #cefcfb;
+  transform: translate(0, 0.25em);
+}
+.blue.cute:hover::before {
+  box-shadow: 0 0 0 2px #3c4a50;
+  transform: translate3d(0, 0.5em, -1em);
+}
+.blue.cute:active {
+  background: #cefcfb;
+  transform: translate(0em, 0.75em);
+}
+.blue.cute:active::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  transform: translate3d(0, 0, -1em);
+}
+
+/* #endregion */
+
+.red {
+  font-family: "Rubik";
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  width: 9rem;
+  margin: 15px;
+  height: 4rem;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+/* #region Red Button*/
+.red.cute {
+  font-family: "Rubik";
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: #b54c6c;
+  border: 2px solid #491323;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.red.cute::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #794755;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #491323;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.red.cute:hover {
+  background: #b54c6c;
+  transform: translate(0, 0.25em);
+}
+.red.cute:hover::before {
+  box-shadow: 0 0 0 2px #3c4a50;
+  transform: translate3d(0, 0.5em, -1em);
+}
+.red.cute:active {
+  background: #b54c6c;
+  transform: translate(0em, 0.75em);
+}
+.red.cute:active::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  transform: translate3d(0, 0, -1em);
+}
+/* #endregion */
+
+.green {
+  font-family: "Rubik";
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  width: 9rem;
+  margin: 15px;
+  height: 4rem;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+/* #region Green Button*/
+.green.cute {
+  font-family: "Rubik";
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: #358e3c;
+  border: 2px solid #154519;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.green.cute::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #3c6a40;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #154519;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.green.cute:hover {
+  background: #358e3c;
+  transform: translate(0, 0.25em);
+}
+.green.cute:hover::before {
+  box-shadow: 0 0 0 2px #154519;
+  transform: translate3d(0, 0.5em, -1em);
+}
+.green.cute:active {
+  background: #358e3c;
+  transform: translate(0em, 0.75em);
+}
+.green.cute:active::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  transform: translate3d(0, 0, -1em);
+}
+/* #endregion */
+
+.yellow {
+  font-family: "Rubik";
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  width: 9rem;
+  margin: 15px;
+  height: 4rem;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+/* #region Yellow Button*/
+.yellow.cute {
+  font-family: "Rubik";
+  font-weight: 600;
+  color: #9b6e37;
+  text-transform: uppercase;
+  background: #f9dc7e;
+  border: 2px solid #9b6e37;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.yellow.cute::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #af9c5c;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #9b6e37;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.yellow.cute:hover {
+  background: #f9dc7e;
+  transform: translate(0, 0.25em);
+}
+.yellow.cute:hover::before {
+  box-shadow: 0 0 0 2px #9b6e37;
+  transform: translate3d(0, 0.5em, -1em);
+}
+.yellow.cute:active {
+  background: #f9dc7e;
+  transform: translate(0em, 0.75em);
+}
+.yellow.cute:active::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  transform: translate3d(0, 0, -1em);
+}
+/* #endregion */
+
+.pink {
+  font-family: "Rubik";
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  width: 9rem;
+  margin: 15px;
+  height: 4rem;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+/* #region Pink Button*/
+.pink.cute {
+  font-family: "Rubik";
+  font-weight: 600;
+  color: #664251;
+  text-transform: uppercase;
+  background: #ffcade;
+  border: 2px solid #b18597;
+  border-radius: 0.75em;
+  transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    background 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.pink.cute::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #c9a1b1;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #b18597;
+  transform: translate3d(0, 0.75em, -1em);
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+}
+.pink.cute:hover {
+  background: #ffcade;
+  transform: translate(0, 0.25em);
+}
+.pink.cute:hover::before {
+  box-shadow: 0 0 0 2px #b18597;
+  transform: translate3d(0, 0.5em, -1em);
+}
+.pink.cute:active {
+  background: #ffcade;
+  transform: translate(0em, 0.75em);
+}
+.pink.cute:active::before {
+  box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+  transform: translate3d(0, 0, -1em);
+}
+/* #endregion */

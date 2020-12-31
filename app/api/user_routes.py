@@ -277,6 +277,12 @@ def read_message(id):
 def send_message(id):
     """Send a Message"""
     data = request.json
+
+    if data:
+        check = db.session.query(messages).filter(messages.c.receiver_id == data['receiver_id'], messages.c.sender_id == id).all()  # noqa
+        if check:
+            return {"errors": "You have already sent a request!"}
+
     created = date.today()
     user = User.query.get(id)
     recipient = User.query.get(data['receiver_id'])
@@ -293,7 +299,7 @@ def send_message(id):
                 recipient.health += 25
             db.session.commit()
 
-    return "success"
+    return {"message": "Request Sent Successfully!"}
 
 
 @user_routes.route('/delete_messages/<int:id>')
