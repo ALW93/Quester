@@ -87,9 +87,7 @@ const Inbox = () => {
                         {e.type === "mail" ? (
                           <>
                             {mailIcon()}{" "}
-                            <h5>
-                              {e.sender.username} healed you with a {e.type}!
-                            </h5>
+                            <h5>{e.sender.username} sent you a letter!</h5>
                             <button onClick={() => handleOpen(e.id)}>
                               Click to Read Message
                             </button>
