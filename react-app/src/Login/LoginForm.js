@@ -68,7 +68,7 @@ const LoginForm = () => {
 
   const setCreds = (e) => {
     e.preventDefault();
-    setEmail("admin@aa.io");
+    setEmail("alycia@aa.io");
     setPassword("password");
   };
 
